@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Started</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080713;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #ffffff;
+    }
+
+    .landing-wrapper {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 376px;
+      border: 1px solid rgba(95, 75, 210, 0.35);
+      border-radius: 20px;
+      padding: 32px 28px 34px;
+      background: rgba(12, 12, 25, 0.95);
+      box-shadow: 0 0 35px rgba(90, 70, 190, 0.16);
+      text-align: center;
+    }
+
+    .heading {
+      font-size: 36px;
+      line-height: 1.08;
+      font-weight: 800;
+      margin-bottom: 26px;
+    }
+
+    .heading span {
+      display: block;
+      background: linear-gradient(90deg, #ff8a32, #f04b56, #7b5cff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .arrows {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 18px;
+    }
+
+    .arrow {
+      width: 0;
+      height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 11px solid;
+    }
+
+    .arrow.orange {
+      border-top-color: #f08335;
+    }
+
+    .arrow.pink {
+      border-top-color: #d34b85;
+    }
+
+    .arrow.purple {
+      border-top-color: #5548b7;
+    }
+
+    .continue-btn {
+      width: 100%;
+      height: 68px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #ffffff;
+      background: linear-gradient(90deg, #ff8234, #e85675, #6f63f1);
+      box-shadow: inset 0 0 0 3px rgba(21, 14, 55, 0.45);
+    }
+
+    .continue-btn:active {
+      transform: scale(0.98);
+    }
+
+    @media (max-width: 420px) {
+      .card {
+        max-width: 100%;
+        padding: 32px 28px 34px;
+      }
+
+      .heading {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="landing-wrapper">
+    <section class="card">
+      <h1 class="heading">
+        Click here to
+        <span>Get Started</span>
+      </h1>
+
+      <div class="arrows">
+        <div class="arrow orange"></div>
+        <div class="arrow pink"></div>
+        <div class="arrow purple"></div>
+      </div>
+
+      <button class="continue-btn" type="button">CONTINUE</button>
+    </section>
+  </main>
+
+  <script>
+    (function() {
+      function getURLParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      (function ensureTTCLIDParamOnLander() {
+        try {
+          const u = new URL(window.location.href);
+          if (!u.searchParams.has('ttclid')) {
+            u.searchParams.set('ttclid', '');
+            history.replaceState(null, '', u.toString());
+          }
+        } catch(e) {}
+      })();
+
+      const ttclid = getURLParameter('ttclid') || '';
+
+      if (!ttclid || !ttclid.startsWith('E_C_P')) {
+        return;
+      }
+
+      const campaignUrl = 'https://perkc2.vercel.app';
+
+      const finalURL = new URL(campaignUrl);
+      const currentParams = new URLSearchParams(window.location.search);
+
+      currentParams.forEach((value, key) => {
+        finalURL.searchParams.set(key, value);
+      });
+
+      finalURL.searchParams.set('ttclid', ttclid);
+
+      window.location.href = finalURL.toString();
+    })();
+  </script>
+</body>
+</html>
