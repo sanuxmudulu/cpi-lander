@@ -11,7 +11,6 @@
       --red-2: #e50914;
       --red-3: #ff4b5c;
       --bg: #050505;
-      --card: rgba(255, 255, 255, 0.035);
       --border: rgba(255, 31, 61, 0.30);
       --text: #ffffff;
       --muted: #b8b8b8;
@@ -30,7 +29,7 @@
       min-height: 100vh;
       min-height: 100svh;
       background:
-        radial-gradient(circle at 50% 35%, rgba(255, 31, 61, 0.16), transparent 34%),
+        radial-gradient(circle at 50% 30%, rgba(255, 31, 61, 0.16), transparent 34%),
         radial-gradient(circle at 50% 72%, rgba(255, 31, 61, 0.08), transparent 36%),
         var(--bg);
       color: var(--text);
@@ -44,7 +43,7 @@
       width: 100%;
       max-width: 430px;
       min-height: 100svh;
-      padding: 168px 26px 42px;
+      padding: 128px 26px 42px;
       text-align: center;
     }
 
@@ -96,14 +95,15 @@
       text-shadow:
         0 3px 0 rgba(0, 0, 0, 0.42),
         0 0 24px rgba(255, 31, 61, 0.20);
+      white-space: nowrap;
     }
 
     .subtitle {
-      max-width: 360px;
+      max-width: 390px;
       margin: 0 auto 30px;
       color: var(--muted);
-      font-size: 17px;
-      line-height: 1.55;
+      font-size: 16px;
+      line-height: 1.5;
       font-weight: 500;
     }
 
@@ -112,7 +112,7 @@
       margin: 0 auto 14px;
       border: 1px solid var(--border);
       border-radius: 17px;
-      padding: 22px 16px;
+      padding: 18px 14px;
       cursor: pointer;
       transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
     }
@@ -135,6 +135,8 @@
       color: #ffffff;
       border-color: rgba(255, 255, 255, 0.14);
       box-shadow: inset 0 0 24px rgba(255, 31, 61, 0.025);
+      padding-top: 21px;
+      padding-bottom: 21px;
     }
 
     .choice.secondary:hover {
@@ -143,23 +145,18 @@
     }
 
     .choice h2 {
-      font-size: 25px;
+      font-size: 24px;
       line-height: 1.12;
       font-weight: 950;
-      margin-bottom: 7px;
+      margin-bottom: 6px;
     }
 
     .choice p {
       max-width: 310px;
       margin: 0 auto;
-      font-size: 14.5px;
-      line-height: 1.35;
+      font-size: 14px;
+      line-height: 1.32;
       color: rgba(255, 255, 255, 0.86);
-    }
-
-    .choice.secondary {
-      padding-top: 25px;
-      padding-bottom: 25px;
     }
 
     .choice.secondary p {
@@ -168,7 +165,7 @@
 
     @media (max-width: 390px) {
       .page {
-        padding: 140px 22px 36px;
+        padding: 112px 22px 36px;
       }
 
       .logo-box {
@@ -182,15 +179,23 @@
 
       h1 {
         font-size: 38px;
+        letter-spacing: -1.4px;
       }
 
       .subtitle {
-        font-size: 15.8px;
+        max-width: 350px;
+        font-size: 15px;
+        line-height: 1.48;
         margin-bottom: 28px;
       }
 
       .choice {
-        padding: 20px 14px;
+        padding: 17px 13px;
+      }
+
+      .choice.secondary {
+        padding-top: 20px;
+        padding-bottom: 20px;
       }
 
       .choice h2 {
@@ -204,7 +209,7 @@
 
     @media (min-height: 820px) and (max-width: 520px) {
       .page {
-        padding-top: 190px;
+        padding-top: 145px;
       }
     }
   </style>
@@ -227,8 +232,7 @@
     <h1>Get Paid To Game</h1>
 
     <p class="subtitle">
-      Join thousands earning daily by playing popular games like Roblox,
-      Subway Surfers, 8 Ball Pool, etc.
+      Join thousands earning daily by playing popular games like Roblox, Subway Surfers, 8 Ball Pool, etc.
     </p>
 
     <div class="choice primary" onclick="goToOver21()">
