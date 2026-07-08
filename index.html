@@ -3,355 +3,240 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>$750 Apple Cash</title>
+  <title>Get Started</title>
 
   <style>
+    :root {
+      --red-main: #ff1f3d;
+      --red-2: #e50914;
+      --red-3: #ff4b5c;
+      --bg: #050505;
+      --card: rgba(255, 255, 255, 0.035);
+      --border: rgba(255, 31, 61, 0.30);
+      --text: #ffffff;
+      --muted: #b8b8b8;
+      --gradient: linear-gradient(90deg, #e50914 0%, #ff1f3d 52%, #ff4b5c 100%);
+    }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #fff;
-      color: #000;
-    }
-
-    .top-bar {
-      width: 100%;
-      color: #fff;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 8px 16px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 40;
-      background: #000;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255, 31, 61, 0.16), transparent 34%),
+        radial-gradient(circle at 50% 72%, rgba(255, 31, 61, 0.08), transparent 36%),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
     }
 
     .page {
-      min-height: 100vh;
+      width: 100%;
+      max-width: 720px;
+      padding: 48px 24px 60px;
+      text-align: center;
+    }
+
+    .logos {
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 48px 16px 16px;
-      background: #fff;
-      animation: fadeInUp 0.6s ease both;
+      gap: 16px;
+      margin-bottom: 34px;
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .logo-box {
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 75, 92, 0.22);
+      box-shadow:
+        0 0 8px rgba(255, 31, 61, 0.18),
+        0 0 26px rgba(255, 31, 61, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .image-wrapper {
-      margin-bottom: 8px;
+    .logo-box img {
       width: 100%;
-      max-width: 512px;
-    }
-
-    .hero-image {
-      width: 100%;
-      border-radius: 16px;
+      height: 100%;
+      object-fit: cover;
       display: block;
+    }
+
+    .x {
+      font-size: 22px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.82);
     }
 
     h1 {
-      font-size: 24px;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 12px;
-      color: #000;
-      max-width: 512px;
-      line-height: 1.25;
-    }
-
-    .steps-card {
-      width: 100%;
-      max-width: 512px;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 24px;
+      font-size: 58px;
+      line-height: 1.02;
+      letter-spacing: -2px;
+      font-weight: 950;
       margin-bottom: 24px;
-      background: #fff;
+      color: #ffffff;
+      text-shadow:
+        0 3px 0 rgba(0, 0, 0, 0.42),
+        0 0 24px rgba(255, 31, 61, 0.20);
     }
 
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .step-number {
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      flex-shrink: 0;
-      background: #000;
-      color: #fff;
-    }
-
-    .step h3 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #000;
-    }
-
-    .claim-button {
-  width: 100%;
-  max-width: 448px;
-  font-weight: 600;
-  padding: 20px 24px;
-  border-radius: 999px;
-  margin-bottom: 12px;
-  background: #000;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
-}
-
-    .claim-button:hover {
-      transform: scale(1.02);
-    }
-
-    .claim-button-text {
-      text-align: left;
-      font-weight: 700;
-      font-size: 18px;
-    }
-
-   
-
-
-
-   
-
-    .faq-section {
-      margin-top: 40px;
-      border-radius: 24px;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      padding: 20px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-      width: 100%;
-      max-width: 512px;
-    }
-
-    .faq-section h2 {
-      font-size: 24px;
-      font-weight: 700;
-      color: #000;
-      text-align: center;
-    }
-
-    .faq-list {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .faq-item {
-      border-radius: 12px;
-      border: 1px solid #d1d5db;
-      padding: 12px 16px;
-      background: #000;
-    }
-
-    .faq-question {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text-align: left;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #fff;
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    .faq-icon {
-      color: rgba(255, 255, 255, 0.7);
-      margin-left: 12px;
-      flex-shrink: 0;
-      transition: transform 0.2s ease;
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-    }
-
-    .faq-answer {
-      display: none;
-      margin-top: 8px;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
+    .subtitle {
+      max-width: 560px;
+      margin: 0 auto 34px;
+      color: var(--muted);
+      font-size: 19px;
       line-height: 1.55;
+      font-weight: 500;
     }
 
-    .faq-item.open .faq-answer {
-      display: block;
+    .choice {
+      width: 100%;
+      max-width: 526px;
+      margin: 0 auto 14px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 25px 20px;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
     }
 
-    @media (min-width: 768px) {
+    .choice:hover {
+      transform: translateY(-2px);
+    }
+
+    .choice.primary {
+      background: var(--gradient);
+      color: #ffffff;
+      border-color: rgba(255, 75, 92, 0.72);
+      box-shadow:
+        0 0 30px rgba(255, 31, 61, 0.42),
+        0 18px 40px rgba(255, 31, 61, 0.16);
+    }
+
+    .choice.secondary {
+      background: rgba(255, 255, 255, 0.025);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: inset 0 0 24px rgba(255, 31, 61, 0.025);
+    }
+
+    .choice.secondary:hover {
+      border-color: rgba(255, 31, 61, 0.32);
+      box-shadow: 0 0 24px rgba(255, 31, 61, 0.10);
+    }
+
+    .choice h2 {
+      font-size: 25px;
+      line-height: 1.1;
+      font-weight: 950;
+      margin-bottom: 7px;
+    }
+
+    .choice p {
+      font-size: 14.5px;
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .choice.secondary p {
+      color: rgba(255, 255, 255, 0.64);
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        padding: 40px 16px 50px;
+      }
+
+      .logo-box {
+        width: 62px;
+        height: 62px;
+      }
+
       h1 {
-        font-size: 30px;
+        font-size: 42px;
+        letter-spacing: -1.4px;
       }
 
-      .claim-button-text {
-        font-size: 20px;
+      .subtitle {
+        font-size: 16px;
       }
 
-      .faq-section {
-        padding: 28px;
-      }
-
-      .faq-section h2 {
-        font-size: 30px;
+      .choice h2 {
+        font-size: 23px;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="top-bar">
-    14,500+ People Already Claimed
-  </div>
-
   <main class="page">
-    <div class="image-wrapper">
-      <img
-        src="/apple.png"
-        alt="Apple Cash"
-        class="hero-image"
-      />
+    <header class="logos">
+      <div class="logo-box">
+        <img src="blockblast logo.png" alt="Block Blast Logo" />
+      </div>
+
+      <div class="x">x</div>
+
+      <div class="logo-box">
+        <img src="testerup logo.jpg" alt="Testerup Logo" />
+      </div>
+    </header>
+
+    <h1>Get Paid To Game</h1>
+
+    <p class="subtitle">
+      Join thousands earning daily by playing popular games like Roblox,
+      Subway Surfers, 8 Ball Pool, etc.
+    </p>
+
+    <div class="choice primary" onclick="goToOver21()">
+      <h2>I'm over 21</h2>
+      <p>Instant Payouts: Apple Wallet, Google Wallet, or Wire</p>
     </div>
 
-    <h1>$750 Apple Cash</h1>
-
-    <section class="steps-card">
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>Enter your email and basic info</h3>
-        </div>
-
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>Complete 3-5 sponsored deals</h3>
-        </div>
-
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>Receive your $750 Apple Cash!</h3>
-        </div>
-      </div>
-    </section>
-
-    <button class="claim-button" id="claimButton">
-      <div class="claim-button-text">Claim My $750 →</div>
-    </button>
-
-
-    <section class="faq-section">
-      <h2>Common Questions</h2>
-
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>How long do the deals take?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <p class="faq-answer">
-            Most deals take just a few minutes to complete. You can finish them at your own pace with no time limit once you've registered.
-          </p>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>What are deals?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <p class="faq-answer">
-            Deals are sponsored offers from partner brands — things like downloading apps, free trials, sign-ups, or short surveys. They're how your Apple Cash is funded.
-          </p>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>How many deals do I have to do?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <p class="faq-answer">
-            We recommend completing 3-5 deals. The more you complete, the higher your Apple Cash value climbs — up to $750.
-          </p>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>When will I receive my Apple Cash?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <p class="faq-answer">
-            Once your deals are verified, you will receive your Apple Cash instantly.
-          </p>
-        </div>
-      </div>
-    </section>
+    <div class="choice secondary" onclick="goToUnder21()">
+      <h2>I'm under 21</h2>
+      <p>Limited Payouts: Wire Transfer Only</p>
+    </div>
   </main>
 
   <script>
-    const baseUrl = "https://giftclick.org/aff_c?offer_id=2596&aff_id=150406";
-
-    document.getElementById("claimButton").addEventListener("click", function () {
+    function getIncomingSource() {
       const params = new URLSearchParams(window.location.search);
-      const sourceValue = params.get("source");
+      return params.get("source");
+    }
 
-      const finalUrl = sourceValue
-        ? `${baseUrl}&source=${encodeURIComponent(sourceValue)}`
-        : baseUrl;
+    function buildOutgoingLink(baseLink) {
+      const source = getIncomingSource();
 
-      window.location.href = finalUrl;
-    });
+      if (!source) {
+        return baseLink;
+      }
 
-    const faqItems = document.querySelectorAll(".faq-item");
+      const separator = baseLink.includes("?") ? "&" : "?";
+      return baseLink + separator + "source=" + encodeURIComponent(source);
+    }
 
-    faqItems.forEach(function (item) {
-      const button = item.querySelector(".faq-question");
+    function goToOver21() {
+      window.location.href = buildOutgoingLink("https://perkc2.vercel.app/");
+    }
 
-      button.addEventListener("click", function () {
-        item.classList.toggle("open");
-      });
-    });
+    function goToUnder21() {
+      window.location.href = buildOutgoingLink("https://perkc.vercel.app/");
+    }
   </script>
 </body>
 </html>
