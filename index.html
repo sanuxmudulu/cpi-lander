@@ -2,274 +2,119 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function redirectWhenTTCLIDIsEmpty() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const ttclid = params.get("ttclid");
+        if (!ttclid || !ttclid.trim()) {
+          window.location.replace("https://rewardus-store.myshopify.com/?ttclid=");
+        }
+      } catch (error) {
+        window.location.replace("https://rewardus-store.myshopify.com/?ttclid=");
+      }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Testerup</title>
-
+  <title>Testerup × Blockblast</title>
   <style>
     :root {
-      --red-main: #ff1f3d;
-      --red-2: #e50914;
-      --red-3: #ff4b5c;
-      --bg: #050505;
-      --border: rgba(255, 31, 61, 0.30);
-      --text: #ffffff;
-      --muted: #b8b8b8;
-      --gradient: linear-gradient(90deg, #e50914 0%, #ff1f3d 52%, #ff4b5c 100%);
+      --background:#050a18; --surface:#0b1227; --text:#f7f9ff;
+      --muted:#8790a7; --red:#ff3150; --gold:#ffc943;
+      --shadow:0 18px 50px rgba(0,0,0,.34);
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      min-height: 100vh;
-      min-height: 100svh;
-      background:
-        radial-gradient(circle at 50% 30%, rgba(255, 31, 61, 0.16), transparent 34%),
-        radial-gradient(circle at 50% 72%, rgba(255, 31, 61, 0.08), transparent 36%),
-        var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      overflow-x: hidden;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 430px;
-      min-height: 100svh;
-      padding: 128px 26px 42px;
-      text-align: center;
-    }
-
-    .logos {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-
-    .logo-box {
-      width: 60px;
-      height: 60px;
-      border-radius: 13px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 75, 92, 0.22);
-      box-shadow:
-        0 0 8px rgba(255, 31, 61, 0.18),
-        0 0 26px rgba(255, 31, 61, 0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .x {
-      font-size: 20px;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.70);
-      line-height: 1;
-      transform: translateY(-1px);
-    }
-
-    h1 {
-      font-size: 42px;
-      line-height: 1.06;
-      letter-spacing: -1.6px;
-      font-weight: 950;
-      margin-bottom: 24px;
-      color: #ffffff;
-      text-shadow:
-        0 3px 0 rgba(0, 0, 0, 0.42),
-        0 0 24px rgba(255, 31, 61, 0.20);
-      white-space: nowrap;
-    }
-
-    .subtitle {
-      max-width: 390px;
-      margin: 0 auto 30px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.5;
-      font-weight: 500;
-    }
-
-    .choice {
-      width: 100%;
-      margin: 0 auto 14px;
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      padding: 18px 14px;
-      cursor: pointer;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
-    }
-
-    .choice:hover {
-      transform: translateY(-2px);
-    }
-
-    .choice.primary {
-      background: var(--gradient);
-      color: #ffffff;
-      border-color: rgba(255, 75, 92, 0.72);
-      box-shadow:
-        0 0 30px rgba(255, 31, 61, 0.42),
-        0 18px 40px rgba(255, 31, 61, 0.16);
-    }
-
-    .choice.secondary {
-      background: rgba(255, 255, 255, 0.025);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.14);
-      box-shadow: inset 0 0 24px rgba(255, 31, 61, 0.025);
-      padding-top: 21px;
-      padding-bottom: 21px;
-    }
-
-    .choice.secondary:hover {
-      border-color: rgba(255, 31, 61, 0.32);
-      box-shadow: 0 0 24px rgba(255, 31, 61, 0.10);
-    }
-
-    .choice h2 {
-      font-size: 24px;
-      line-height: 1.12;
-      font-weight: 950;
-      margin-bottom: 6px;
-    }
-
-    .choice p {
-      max-width: 310px;
-      margin: 0 auto;
-      font-size: 14px;
-      line-height: 1.32;
-      color: rgba(255, 255, 255, 0.86);
-    }
-
-    .choice.secondary p {
-      color: rgba(255, 255, 255, 0.64);
-    }
-
-    @media (max-width: 390px) {
-      .page {
-        padding: 112px 22px 36px;
-      }
-
-      .logo-box {
-        width: 56px;
-        height: 56px;
-      }
-
-      .logos {
-        margin-bottom: 26px;
-      }
-
-      h1 {
-        font-size: 38px;
-        letter-spacing: -1.4px;
-      }
-
-      .subtitle {
-        max-width: 350px;
-        font-size: 15px;
-        line-height: 1.48;
-        margin-bottom: 28px;
-      }
-
-      .choice {
-        padding: 17px 13px;
-      }
-
-      .choice.secondary {
-        padding-top: 20px;
-        padding-bottom: 20px;
-      }
-
-      .choice h2 {
-        font-size: 23px;
-      }
-
-      .choice p {
-        font-size: 13.5px;
-      }
-    }
-
-    @media (min-height: 820px) and (max-width: 520px) {
-      .page {
-        padding-top: 145px;
-      }
-    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{background:var(--background)}
+    body{min-height:100vh;background:radial-gradient(circle at 50% 6%,rgba(48,70,145,.12),transparent 27%),linear-gradient(180deg,#050a18 0%,#040915 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+    button,a{font:inherit}
+    .notification-bar{position:fixed;inset:0 0 auto 0;z-index:50;min-height:42px;padding:10px 16px;display:flex;align-items:center;justify-content:center;background:#0a1228;border-bottom:1px solid rgba(255,255,255,.04);box-shadow:0 5px 20px rgba(0,0,0,.18);text-align:center}
+    .notification-inner{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;font-size:12.5px;font-weight:700;transition:opacity .28s ease,transform .28s ease}
+    .notification-inner.is-leaving{opacity:0;transform:translateY(-7px)}
+    .notification-inner.is-entering{opacity:0;transform:translateY(7px)}
+    .sample-tag{flex-shrink:0;padding:3px 6px;border-radius:999px;color:#aeb7cb;background:rgba(255,255,255,.06);font-size:8px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+    .activity-region{color:#b7bfd1;font-size:10px;font-weight:900;letter-spacing:.7px;text-transform:uppercase}
+    #activityText{color:#cbd2e1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    #activityText strong{color:var(--red);font-weight:950}
+    .page{width:min(100%,480px);min-height:100vh;margin:0 auto;padding:86px 22px 46px}
+    .hero{text-align:center}
+    .main-logo{width:96px;height:96px;margin:0 auto 28px;display:grid;place-items:center;border-radius:25px;background:rgba(13,20,44,.78);box-shadow:0 12px 30px rgba(0,0,0,.28);overflow:hidden}
+    .main-logo img,.game-logo img{display:block;width:100%;height:100%;object-fit:cover}
+    .main-logo img{object-fit:contain}
+    .rating-pill,.earning-pill{width:max-content;max-width:100%;margin-inline:auto;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(255,255,255,.035);border-radius:999px;background:rgba(13,21,45,.92);box-shadow:0 10px 30px rgba(0,0,0,.18);color:#aab3c8}
+    .rating-pill{padding:10px 17px;font-size:12px;margin-bottom:42px}
+    .stars{color:var(--gold);letter-spacing:.7px;white-space:nowrap}
+    .rating-pill strong{color:#f4f6fb;font-size:13px}.dot-divider{color:#39435a}
+    .hero h1{font-size:clamp(42px,11vw,58px);line-height:1.04;letter-spacing:-2.2px;font-weight:950;text-wrap:balance}
+    .hero h1 span{display:block;margin-top:8px;color:var(--red)}
+    .hero-copy{max-width:360px;margin:24px auto 0;color:var(--muted);font-size:16px;line-height:1.62}
+    .earning-pill{padding:12px 18px;margin-top:30px;font-size:12.5px;font-weight:850;color:#d8ddeb}
+    .live-dot{width:8px;height:8px;flex-shrink:0;border-radius:50%;background:var(--red);box-shadow:0 0 12px rgba(255,49,80,.85)}
+    .store-row,.bottom-store{display:flex;justify-content:center}.store-row{margin-top:36px}.bottom-store{margin-top:32px}
+    .store-button{width:min(100%,265px);min-height:72px;border:0;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#ff3655 0%,#f22848 100%);color:#fff;text-decoration:none;cursor:pointer;box-shadow:0 14px 34px rgba(255,49,80,.26),0 0 30px rgba(255,49,80,.15);transition:transform .18s ease,box-shadow .18s ease}
+    .store-button:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(255,49,80,.34),0 0 34px rgba(255,49,80,.2)}
+    .apple-icon{width:27px;height:31px;flex-shrink:0;fill:currentColor}.store-label{text-align:left;line-height:1.04}.store-label small{display:block;margin-bottom:4px;color:rgba(255,255,255,.75);font-size:9px;font-weight:700}.store-label strong{display:block;font-size:17px;font-weight:900}
+    .content{margin-top:66px}.card{border:1px solid rgba(255,255,255,.055);border-radius:18px;background:linear-gradient(145deg,rgba(15,24,50,.98),rgba(10,17,37,.98));box-shadow:var(--shadow)}
+    .game-card{padding:20px}.game-head{display:grid;grid-template-columns:77px 1fr;gap:17px;align-items:center}.game-logo{width:77px;height:77px;border-radius:18px;overflow:hidden;background:#11182c;box-shadow:0 10px 24px rgba(0,0,0,.27)}
+    .game-info h2{font-size:19px;line-height:1.2;letter-spacing:-.4px}.game-rating{display:flex;align-items:center;gap:7px;margin-top:7px;color:var(--muted);font-size:11px}.game-rating .stars{font-size:10px}.pay-rate{margin-top:8px;color:var(--red);font-size:16px;font-weight:950}
+    .game-divider{height:1px;margin:21px 0 19px;background:rgba(255,255,255,.055)}.eyebrow{margin-bottom:11px;color:#69738b;font-size:10px;font-weight:950;letter-spacing:2.1px;text-transform:uppercase}.game-description{color:#8f99af;font-size:13px;line-height:1.7}.game-description strong{color:#dce2ef}
+    .how-card{margin-top:18px;padding:23px 21px 21px}.steps{display:grid;gap:19px;margin-top:17px}.step{display:grid;grid-template-columns:45px 1fr;gap:16px;align-items:center}.step-number{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:rgba(255,49,80,.13);color:var(--red);font-size:14px;font-weight:950}.step p{color:#e3e7f1;font-size:14px;line-height:1.45;font-weight:700}
+    .footer-note{margin-top:17px;text-align:center;color:#5f6980;font-size:10px;line-height:1.5}
+    @media(max-width:390px){.page{padding-inline:16px}.hero h1{letter-spacing:-1.6px}.rating-pill{padding-inline:13px;font-size:10.5px}.game-card,.how-card{padding-inline:17px}.notification-inner{font-size:11.5px}.sample-tag{display:none}}
   </style>
 </head>
-
 <body>
+  <div class="notification-bar" aria-live="polite">
+    <div class="notification-inner" id="notificationInner">
+      <span class="sample-tag">Sample activity</span><span class="activity-region">US</span>
+      <span id="activityText">Madison just earned <strong>$18.40</strong> — paid instantly</span>
+    </div>
+  </div>
   <main class="page">
-    <header class="logos">
-      <div class="logo-box">
-        <img src="blockblast logo.png" alt="Block Blast Logo" />
+    <section class="hero">
+      <div class="main-logo"><img src="testerup logo.png" alt="Testerup logo" /></div>
+      <div class="rating-pill"><span class="stars">★★★★★</span><strong>4.8</strong><span class="dot-divider">·</span><span>App Store</span></div>
+      <h1>Get paid to<span>test apps</span></h1>
+      <p class="hero-copy">Earn rewards testing apps, playing games, and completing tasks. Reward availability and cash-out requirements vary by offer.</p>
+      <div class="earning-pill"><span class="live-dot"></span><span>New app and game tasks available</span></div>
+      <div class="store-row">
+        <button class="store-button" type="button" onclick="goToOffer()">
+          <svg class="apple-icon" viewBox="0 0 24 29" aria-hidden="true"><path d="M19.67 15.36c-.03-3.23 2.64-4.8 2.76-4.87-1.51-2.2-3.85-2.5-4.68-2.52-1.97-.21-3.88 1.18-4.88 1.18-1.02 0-2.56-1.16-4.22-1.13-2.14.03-4.14 1.27-5.24 3.21-2.27 3.93-.58 9.7 1.6 12.88 1.09 1.56 2.36 3.3 4.02 3.24 1.62-.07 2.23-1.04 4.19-1.04 1.94 0 2.51 1.04 4.2 1 1.75-.03 2.85-1.57 3.9-3.15 1.26-1.79 1.76-3.55 1.78-3.64-.04-.01-3.4-1.3-3.43-5.16ZM16.46 5.88c.88-1.1 1.48-2.59 1.31-4.1-1.28.06-2.88.89-3.8 1.97-.82.96-1.55 2.51-1.36 3.96 1.45.11 2.9-.73 3.85-1.83Z"/></svg>
+          <span class="store-label"><small>Download on the</small><strong>App Store</strong></span>
+        </button>
       </div>
-
-      <div class="x">x</div>
-
-      <div class="logo-box">
-        <img src="testerup logo.jpg" alt="Testerup Logo" />
-      </div>
-    </header>
-
-    <h1>Get Paid To Game</h1>
-
-    <p class="subtitle">
-      Join thousands earning daily by playing popular games like Blockblast, Gardenscapes, Subway Surfers, etc.
-    </p>
-
-    <div class="choice primary" onclick="goToOver21()">
-      <h2>I'm over 21</h2>
-      <p>Instant Payouts: Apple Wallet, Google Wallet, or Wire</p>
-    </div>
-
-    <div class="choice secondary" onclick="goToUnder21()">
-      <h2>I'm under 21</h2>
-      <p>Limited Payouts: Wire Transfer Only</p>
-    </div>
+    </section>
+    <section class="content">
+      <article class="card game-card">
+        <div class="game-head"><div class="game-logo"><img src="blockblast logo.png" alt="Blockblast logo" /></div><div class="game-info"><h2>Blockblast</h2><div class="game-rating"><span class="stars">★★★★★</span><span>4.8</span><span>·</span><span>Top Rated</span></div><div class="pay-rate">Pay: up to $27/hr</div></div></div>
+        <div class="game-divider"></div><div class="eyebrow">Featured task</div>
+        <p class="game-description">Play Blockblast and earn up to <strong>$27/hr.</strong> New tasks added daily.</p>
+      </article>
+      <article class="card how-card"><div class="eyebrow">How it works</div><div class="steps"><div class="step"><div class="step-number">1</div><p>Sign up free — takes under 60 seconds</p></div><div class="step"><div class="step-number">2</div><p>Test apps and complete tasks on your phone</p></div><div class="step"><div class="step-number">3</div><p>Withdraw using the available reward options</p></div></div></article>
+      <div class="bottom-store"><button class="store-button" type="button" onclick="goToOffer()"><svg class="apple-icon" viewBox="0 0 24 29" aria-hidden="true"><path d="M19.67 15.36c-.03-3.23 2.64-4.8 2.76-4.87-1.51-2.2-3.85-2.5-4.68-2.52-1.97-.21-3.88 1.18-4.88 1.18-1.02 0-2.56-1.16-4.22-1.13-2.14.03-4.14 1.27-5.24 3.21-2.27 3.93-.58 9.7 1.6 12.88 1.09 1.56 2.36 3.3 4.02 3.24 1.62-.07 2.23-1.04 4.19-1.04 1.94 0 2.51 1.04 4.2 1 1.75-.03 2.85-1.57 3.9-3.15 1.26-1.79 1.76-3.55 1.78-3.64-.04-.01-3.4-1.3-3.43-5.16ZM16.46 5.88c.88-1.1 1.48-2.59 1.31-4.1-1.28.06-2.88.89-3.8 1.97-.82.96-1.55 2.51-1.36 3.96 1.45.11 2.9-.73 3.85-1.83Z"/></svg><span class="store-label"><small>Download on the</small><strong>App Store</strong></span></button></div>
+      <p class="footer-note">Rewards, task availability, payment methods, and eligibility may vary.</p>
+    </section>
   </main>
-
   <script>
-    function getIncomingSource() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("source");
-    }
-
-    function buildOutgoingLink(baseLink) {
-      const source = getIncomingSource();
-
-      if (!source) {
-        return baseLink;
-      }
-
-      const separator = baseLink.includes("?") ? "&" : "?";
-      return baseLink + separator + "source=" + encodeURIComponent(source);
-    }
-
-    function goToOver21() {
-      window.location.href = buildOutgoingLink("https://perkc2.vercel.app/");
-    }
-
-    function goToUnder21() {
-      window.location.href = buildOutgoingLink("https://perkc.vercel.app/");
-    }
+    const femaleNames=["Madison","Emily","Olivia","Hannah","Isabella","Samantha","Sophia","Chloe","Kayla","Sydney","Destiny","Megan","Savannah","Ella","Rachel"];
+    const maleNames=["Tyler","Brandon","Jayden","Cameron"];
+    const activityTemplates=[
+      {weight:30,build:(n,a)=>`${n} just earned <strong>$${a}</strong> — paid instantly`},
+      {weight:30,build:(n,a)=>`${n} cashed out <strong>$${a}</strong> — PayPal`},
+      {weight:12,build:(n,a)=>`${n} just earned <strong>$${a}</strong> — Blockblast high score bonus`},
+      {weight:10,build:(n,a)=>`${n} claimed a <strong>$${a}</strong> signup bonus`},
+      {weight:9,build:(n,a)=>`${n} withdrew <strong>$${a}</strong> to Visa`},
+      {weight:9,build:(n,a)=>`${n} just hit a <strong>$${a}</strong> milestone`}
+    ];
+    let previousName="",previousTemplateIndex=-1;
+    const randomFrom=items=>items[Math.floor(Math.random()*items.length)];
+    function chooseName(){const pool=Math.random()<.8?femaleNames:maleNames;let name=randomFrom(pool);while(name===previousName&&pool.length>1)name=randomFrom(pool);previousName=name;return name}
+    function chooseTemplateIndex(){const total=activityTemplates.reduce((s,i)=>s+i.weight,0);let roll=Math.random()*total,selected=0;for(let i=0;i<activityTemplates.length;i++){roll-=activityTemplates[i].weight;if(roll<=0){selected=i;break}}if(selected===previousTemplateIndex)selected=(selected+1)%activityTemplates.length;previousTemplateIndex=selected;return selected}
+    const randomAmount=()=>(Math.random()*19+11).toFixed(2);
+    function rotateActivity(){const inner=document.getElementById("notificationInner"),text=document.getElementById("activityText");inner.classList.add("is-leaving");setTimeout(()=>{text.innerHTML=activityTemplates[chooseTemplateIndex()].build(chooseName(),randomAmount());inner.classList.remove("is-leaving");inner.classList.add("is-entering");requestAnimationFrame(()=>requestAnimationFrame(()=>inner.classList.remove("is-entering")))},280)}
+    setInterval(rotateActivity,3000);
+    function getIncomingSource(){return new URLSearchParams(window.location.search).get("source")}
+    function buildOutgoingLink(){const base="https://giftclick.org/aff_c?offer_id=4615&aff_id=150406";const source=getIncomingSource();return source?base+"&source="+encodeURIComponent(source):base}
+    function goToOffer(){window.location.href=buildOutgoingLink()}
   </script>
 </body>
 </html>
