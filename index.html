@@ -110,7 +110,7 @@
     function chooseTemplateIndex(){const total=activityTemplates.reduce((s,i)=>s+i.weight,0);let roll=Math.random()*total,selected=0;for(let i=0;i<activityTemplates.length;i++){roll-=activityTemplates[i].weight;if(roll<=0){selected=i;break}}if(selected===previousTemplateIndex)selected=(selected+1)%activityTemplates.length;previousTemplateIndex=selected;return selected}
     const randomAmount=()=>(Math.random()*19+11).toFixed(2);
     function rotateActivity(){const inner=document.getElementById("notificationInner"),text=document.getElementById("activityText");inner.classList.add("is-leaving");setTimeout(()=>{text.innerHTML=activityTemplates[chooseTemplateIndex()].build(chooseName(),randomAmount());inner.classList.remove("is-leaving");inner.classList.add("is-entering");requestAnimationFrame(()=>requestAnimationFrame(()=>inner.classList.remove("is-entering")))},280)}
-    setInterval(rotateActivity,3000);
+    setInterval(rotateActivity,4000);
     function getIncomingSource(){return new URLSearchParams(window.location.search).get("source")}
     function buildOutgoingLink(){const base="https://giftclick.org/aff_c?offer_id=4615&aff_id=150406";const source=getIncomingSource();return source?base+"&source="+encodeURIComponent(source):base}
     function goToOffer(){window.location.href=buildOutgoingLink()}
