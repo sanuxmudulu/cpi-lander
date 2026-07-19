@@ -1,1 +1,402 @@
-<html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Freecash Rewards</title> <style> :root { --green: #01D676; --green-dark: #00a95c; --bg: #050807; --card: #0b1110; --card-2: #101715; --border: rgba(1, 214, 118, 0.25); --text: #ffffff; --muted: #a7b4ad; --red: #ff3b3b; } * { margin: 0; padding: 0; box-sizing: border-box; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; } body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; justify-content: center; overflow-x: hidden; } .page { width: 100%; max-width: 430px; min-height: 100vh; padding: 28px 16px 28px; } .logo { display: flex; align-items: center; justify-content: center; margin-top: 0px; margin-bottom: 2px; } .logo img { width: 180px; max-width: 65%; height: auto; display: block; filter: none; } .hero { text-align: center; padding: 6px 0 18px; } .hero h1 { font-size: 34px; line-height: 1.06; letter-spacing: -1.4px; font-weight: 950; text-shadow: 0 0 28px rgba(1, 214, 118, 0.45); } .hero h1 span { color: var(--green); display: block; } .hero p { margin: 14px auto 12px; max-width: 360px; color: var(--muted); font-size: 15px; line-height: 1.45; } .pill { display: inline-flex; align-items: center; gap: 7px; padding: 8px 15px; border-radius: 999px; background: rgba(1, 214, 118, 0.09); border: 1px solid var(--border); color: var(--green); font-size: 13px; font-weight: 800; margin-top: 4px; } .cta { width: 100%; border: none; margin-top: 22px; padding: 18px 20px; border-radius: 15px; background: var(--green); color: #03100b; font-size: 17px; font-weight: 950; cursor: pointer; box-shadow: 0 0 24px rgba(1, 214, 118, 0.55), 0 12px 30px rgba(1, 214, 118, 0.2); transition: transform 0.15s ease, box-shadow 0.15s ease; } .cta:hover { transform: translateY(-2px); box-shadow: 0 0 34px rgba(1, 214, 118, 0.75), 0 16px 36px rgba(1, 214, 118, 0.26); } .trust { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 10px; color: var(--muted); font-size: 11.5px; } .trust span::before { content: "✓ "; color: var(--green); font-weight: 900; } .earn-card, .steps-card, .important-card { background: linear-gradient(180deg, rgba(16, 23, 21, 0.98), rgba(8, 13, 12, 0.98)); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 0 30px rgba(1, 214, 118, 0.08); } .earn-card { padding: 24px 18px; margin-top: 16px; text-align: center; } .earn-card h2 { font-size: 19px; line-height: 1.25; margin-bottom: 6px; } .earn-card h2 span { color: var(--green); text-shadow: 0 0 16px rgba(1, 214, 118, 0.5); } .earn-card p { color: var(--muted); font-size: 12.5px; line-height: 1.4; max-width: 320px; margin: 0 auto 18px; } .earn-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; } .earn-box { border: 1px solid rgba(1, 214, 118, 0.22); background: #080c0b; border-radius: 12px; padding: 17px 10px; } .earn-box small { display: block; color: #78877f; font-size: 10px; letter-spacing: 2px; font-weight: 800; margin-bottom: 6px; text-transform: uppercase; } .earn-box strong { font-size: 25px; line-height: 1; color: #ffffff; } .earn-box.highlight { border-color: rgba(1, 214, 118, 0.65); box-shadow: inset 0 0 20px rgba(1, 214, 118, 0.06); } .earn-box.highlight strong { color: var(--green); text-shadow: 0 0 16px rgba(1, 214, 118, 0.45); } .slider-wrap { padding: 0 4px; } input[type="range"] { width: 100%; accent-color: var(--green); cursor: pointer; } .slider-values { display: flex; justify-content: space-between; color: #738078; font-size: 11px; margin-top: 5px; } .steps-card { margin-top: 18px; overflow: hidden; } .steps-title { padding: 18px 18px 8px; color: var(--green); font-size: 12px; letter-spacing: 2.2px; text-align: center; font-weight: 950; text-transform: uppercase; } .step { display: grid; grid-template-columns: 42px 1fr; gap: 10px; padding: 17px 18px; border-top: 1px solid rgba(1, 214, 118, 0.12); } .num { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--green); color: #03100b; font-weight: 950; box-shadow: 0 0 18px rgba(1, 214, 118, 0.6); margin-top: 2px; } .step h3 { font-size: 15px; margin-bottom: 5px; } .step p { color: var(--muted); font-size: 12.5px; line-height: 1.45; } .important-card { margin-top: 16px; padding: 18px; display: grid; grid-template-columns: 32px 1fr; gap: 12px; position: relative; border-color: rgba(255, 59, 59, 0.38); background: radial-gradient(circle at 88% 0%, rgba(255, 59, 59, 0.16), transparent 40%), linear-gradient(180deg, rgba(18, 11, 11, 0.98), rgba(10, 8, 8, 0.98)); } .badge { position: absolute; top: 0; right: 18px; transform: translateY(-50%); background: var(--red); color: #ffffff; font-size: 10px; letter-spacing: 1.7px; font-weight: 950; padding: 7px 12px; border-radius: 0 0 8px 8px; box-shadow: 0 0 18px rgba(255, 59, 59, 0.45); text-transform: uppercase; } .lock { font-size: 23px; margin-top: 4px; filter: drop-shadow(0 0 8px rgba(255, 59, 59, 0.35)); } .important-card small { color: #9fdabf; font-size: 10.5px; font-weight: 950; letter-spacing: 1.8px; text-transform: uppercase; } .important-card p { margin-top: 6px; color: #ffffff; font-size: 14px; line-height: 1.4; } .important-card p span { color: var(--green); font-weight: 950; } .stats { display: flex; justify-content: center; gap: 18px; margin: 18px 0; color: var(--muted); font-size: 12px; } .bottom-cta { margin-top: 8px; margin-bottom: 4px; } @media (max-width: 360px) { .hero h1 { font-size: 30px; } .trust { gap: 8px; font-size: 10.5px; } .stats { gap: 10px; font-size: 11px; } .logo img { width: 160px; } } </style> </head> <body> <main class="page"> <header class="logo"> <img src="fc logo new.png" alt="Freecash Logo" /> </header> <section class="hero"> <h1> Get Paid For Testing <span>Apps & Games</span> </h1> <p> Play games, complete simple offers, and earn real cash rewards — PayPal, crypto, gift cards and more. </p> <div class="pill">● Real cash — not game coins or boosters.</div> <button class="cta" onclick="goToOffer()">Download Now →</button> <div class="trust"> <span>Free</span> <span>Fast Payouts</span> <span>Quick Signup</span> </div> </section> <section class="earn-card"> <h2>See what you could <span>earn back</span></h2> <p> Drag the slider — based on real average payouts from apps, games, surveys and reward milestones. </p> <div class="earn-boxes"> <div class="earn-box"> <small>You Spend</small> <strong id="spendAmount">$40</strong> </div> <div class="earn-box highlight"> <small>You Earn</small> <strong id="earnAmount">$320</strong> </div> </div> <div class="slider-wrap"> <input type="range" id="earnSlider" min="20" max="200" value="40" step="10" /> <div class="slider-values"> <span>$20</span> <span>$200</span> </div> </div> </section> <section class="steps-card"> <div class="steps-title">Your Earning Journey</div> <div class="step"> <div class="num">1</div> <div> <h3>Join Freecash & Claim Your Bonus</h3> <p>Available on iOS, Android and desktop. Signup takes less than 60 seconds.</p> </div> </div> <div class="step"> <div class="num">2</div> <div> <h3>Complete Apps, Games & Offers</h3> <p>Test apps, play games, answer surveys, watch videos and unlock milestones.</p> </div> </div> <div class="step"> <div class="num">3</div> <div> <h3>Cash Out Your Earnings</h3> <p>Withdraw with PayPal, crypto, gift cards, bank options and more.</p> </div> </div> </section> <section class="important-card"> <div class="badge">Important</div> <div class="lock">🔒</div> <div> <small>Activation Required</small> <p> New users: Complete <span>2 quick offers</span> to unlock full access and start earning. </p> </div> </section> <div class="stats"> <span>50M+ Players</span> <span>$100M+ Paid Out</span> <span>🇺🇸 US</span> </div> <div class="bottom-cta"> <button class="cta" onclick="goToOffer()">Download Now →</button> </div> </main> <script> const slider = document.getElementById("earnSlider"); const spendAmount = document.getElementById("spendAmount"); const earnAmount = document.getElementById("earnAmount"); function updateEarnings() { const spend = Number(slider.value); const earn = spend * 8; spendAmount.textContent = $${spend}; earnAmount.textContent = $${earn}; } slider.addEventListener("input", updateEarnings); updateEarnings(); function getIncomingSource() { const params = new URLSearchParams(window.location.search); return params.get("source"); } function buildOutgoingLink() { const baseLink = "https://freecash.com/?ref=YOUR_REF_HERE"; const source = getIncomingSource(); if (!source) { return baseLink; } return baseLink + "&source=" + encodeURIComponent(source); } function goToOffer() { window.location.href = buildOutgoingLink(); } </script> </body> </html>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$750 Sephora Gift Card</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0d0d0d;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px 32px;
+  text-align: center;
+}
+
+.icon-circle {
+  width: 72px;
+  height: 72px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+.icon-circle .dollar {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+}
+
+.hero h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ff5ca8;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+@media (min-width: 768px) { .hero h1 { font-size: 36px; } }
+
+.hero .sub {
+  font-size: 15px;
+  color: #ccc;
+  margin-bottom: 28px;
+}
+
+.cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #ff5ca8;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 18px 28px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 4px 16px rgba(255,92,168,0.3);
+  animation: pulse 3s ease-in-out infinite;
+  transition: transform 0.1s;
+}
+.cta-btn:hover { transform: scale(1.02); }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(255,92,168,0.3); }
+  50%       { box-shadow: 0 4px 28px rgba(255,92,168,0.5); }
+}
+
+.cta-icon {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 900;
+  color: #ff5ca8;
+  font-size: 16px;
+}
+
+.cta-text { text-align: center; line-height: 1.3; }
+.cta-text .line1 { font-size: 16px; font-weight: 800; }
+.cta-text .line2 { font-size: 12px; font-weight: 500; opacity: 0.9; }
+
+.steps-card {
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin: 28px auto 0;
+  width: 100%;
+  max-width: 540px;
+}
+
+.step-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.step-row + .step-row { margin-top: 24px; }
+
+.step-num {
+  width: 38px;
+  height: 38px;
+  background: #ff5ca8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.step-content { padding-top: 2px; padding-left: 0; }
+.step-title { font-weight: 700; font-size: 15px; color: #fff; margin-bottom: 3px; text-align: left; }
+.step-desc  { font-size: 13px; color: #aaa; text-align: left; }
+
+.steps-disclaimer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+  font-style: italic;
+}
+
+.section {
+  padding: 32px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .section { padding: 48px 20px; }
+}
+
+.proof-section { text-align: center; }
+
+.proof-section h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ff5ca8;
+  margin-bottom: 6px;
+}
+@media (min-width: 768px) { .proof-section h2 { font-size: 26px; } }
+
+.proof-section .proof-sub {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 6px;
+}
+
+.swipe-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+.swipe-dot {
+  width: 10px;
+  height: 10px;
+  background: #ff5ca8;
+  border-radius: 50%;
+}
+
+.proof-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+.proof-scroll::-webkit-scrollbar { display: none; }
+
+.proof-card {
+  flex: 0 0 220px;
+  scroll-snap-align: center;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #333;
+  background: #111;
+}
+.proof-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ccc;
+  flex-wrap: wrap;
+}
+.stats-bar .sep { color: #555; }
+.stat { display: flex; align-items: center; gap: 6px; }
+.stat-icon { font-size: 16px; }
+
+.faq-section {
+  background: #1c1c1c;
+  border-radius: 16px;
+  padding: 28px 20px;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.faq-section h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ff5ca8;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.faq-list { display: flex; flex-direction: column; gap: 10px; }
+
+details {
+  background: #2a2a2a;
+  border-radius: 10px;
+  padding: 14px 16px;
+  border: 1px solid #333;
+}
+
+summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+}
+summary::-webkit-details-marker { display: none; }
+
+.faq-plus {
+  color: #aaa;
+  font-size: 20px;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+details[open] .faq-plus { transform: rotate(45deg); }
+
+details p {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+.disclaimer {
+  text-align: center;
+  font-size: 12px;
+  color: #555;
+  padding: 12px 20px 24px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="icon-circle">
+      <span class="dollar">$</span>
+    </div>
+
+    <h1>Claim Your Gift Card Now!</h1>
+    <p class="sub">Higher value deals = faster rewards!</p>
+
+    <a class="cta-btn" id="cta-link" href="#">
+      <div class="cta-icon">S</div>
+      <div class="cta-text">
+        <div class="line1">$750 Sephora Gift Card</div>
+        <div class="line2">(Enter Email &amp; Complete Deals)</div>
+      </div>
+    </a>
+
+    <div class="steps-card">
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Click The Button Above 👆</div>
+          <div class="step-desc">Start your gift card claim process</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Enter Your Email &amp; Basic Info</div>
+          <div class="step-desc">We need this to send your gift card</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Complete 4-6 Deals</div>
+          <div class="step-desc">Simple tasks: product reviews and surveys</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Claim Your Gift Card!</div>
+          <div class="step-desc">Your reward is waiting for you!</div>
+        </div>
+      </div>
+      <p class="steps-disclaimer">Higher value deals = higher payout</p>
+    </div>
+  </div>
+
+  <!-- PROOF -->
+  <div class="section proof-section">
+    <h2>Sephora Top Claims of the Week</h2>
+    <p class="proof-sub">Real results from real people! 💕</p>
+    <div class="swipe-hint">
+      <span class="swipe-dot"></span>
+      Swipe to see more
+    </div>
+    <div class="proof-scroll">
+      <div class="proof-card"><img src="proof1.jpeg" alt="Proof 1" /></div>
+      <div class="proof-card"><img src="proof2.jpeg" alt="Proof 2" /></div>
+      <div class="proof-card"><img src="proof3.jpeg" alt="Proof 3" /></div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat"><span class="stat-icon">👥</span> 25,000+ Vouchers Claimed</div>
+      <span class="sep">•</span>
+      <div class="stat"><span class="stat-icon">⭐</span> 4.8★ average rating</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section" style="padding-top:0;">
+    <div class="faq-section">
+      <h2>Common Questions</h2>
+      <div class="faq-list">
+        <details>
+          <summary>How long does it take? <span class="faq-plus">+</span></summary>
+          <p>Most deals take just a few minutes. You can complete them at your own pace — no time limit once you've registered.</p>
+        </details>
+        <details>
+          <summary>What are 'deals'? <span class="faq-plus">+</span></summary>
+          <p>Deals are simple tasks where you provide your opinion about products. They're how the gift card is funded.</p>
+        </details>
+        <details>
+          <summary>Is this really free? <span class="faq-plus">+</span></summary>
+          <p>Yes. The deals are free and come from our sponsors. You are rewarded for participating.</p>
+        </details>
+        <details>
+          <summary>Why do I need to enter my email? <span class="faq-plus">+</span></summary>
+          <p>Your email is how we send you the Sephora gift card code once your deals are verified.</p>
+        </details>
+        <details>
+          <summary>When do I get the Sephora gift card? <span class="faq-plus">+</span></summary>
+          <p>Once your deals are verified, your gift card code will be delivered to your email within 24–48 hours.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <p class="disclaimer">© 2026 Sephora Gift Card. All rights reserved.</p>
+<script>
+  const BASE_URL = 'https://giftclick.org/aff_c?offer_id=4331&aff_id=150406';
+
+  document.getElementById('cta-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    const ad = new URLSearchParams(window.location.search).get('ad');
+    window.location.href = BASE_URL + (ad ? '&source=' + encodeURIComponent(ad) : '');
+  });
+</script>
+</body>
+</html>
