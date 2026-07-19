@@ -2,1084 +2,567 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
   <script>
-    (function redirectInvalidTraffic() {
-      try {
-        const params = new URLSearchParams(window.location.search);
-        const ttclid = (params.get("ttclid") || "").trim();
+    (function redirectWhenTTCLIDIsEmpty() {
+      const params = new URLSearchParams(window.location.search);
+      const ttclid = params.get("ttclid");
 
-        if (!ttclid.startsWith("E_C_P")) {
-          const redirectURL = new URL("https://infotim.vercel.app");
-
-          params.forEach((value, key) => {
-            redirectURL.searchParams.set(key, value);
-          });
-
-          window.location.replace(redirectURL.toString());
-        }
-      } catch (error) {
-        window.location.replace("https://infotim.vercel.app");
+      if (!ttclid || !ttclid.trim()) {
+        window.location.replace("https://rewardus-store.myshopify.com/?ttclid=");
       }
     })();
   </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Testerup × Blockblast</title>
+  <title>Testerup</title>
 
   <style>
     :root {
-      --background: #000000;
-      --surface: #080808;
-      --surface-light: #101010;
-
+      --red-main: #ff1f3d;
+      --red-2: #e50914;
+      --red-3: #ff4b5c;
+      --red-soft: #ffb3bb;
+      --bg: #050505;
+      --card: #0d0d0d;
+      --card-2: #141414;
+      --border: rgba(255, 31, 61, 0.30);
       --text: #ffffff;
-      --muted: #a4a4aa;
-
-      --red: #ff2344;
-      --red-bright: #ff425d;
-      --red-dark: #df0c29;
-
-      --gold: #ffc943;
-
-      --red-border: rgba(255, 35, 68, 0.42);
-      --red-border-strong: rgba(255, 35, 68, 0.58);
-
-      --card-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.75),
-        0 0 18px rgba(255, 35, 68, 0.11),
-        0 0 36px rgba(255, 35, 68, 0.055);
+      --muted: #b8b8b8;
+      --gold: #f4c552;
+      --gradient: linear-gradient(90deg, #e50914 0%, #ff1f3d 52%, #ff4b5c 100%);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-
-    html {
-      background: #000000;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body {
-      min-height: 100vh;
       background:
-        radial-gradient(
-          circle at 50% 18%,
-          rgba(255, 20, 52, 0.13),
-          transparent 27%
-        ),
-        radial-gradient(
-          circle at 50% 62%,
-          rgba(255, 20, 52, 0.035),
-          transparent 32%
-        ),
-        #000000;
+        radial-gradient(circle at 50% 16%, rgba(255, 31, 61, 0.14), transparent 32%),
+        radial-gradient(circle at 20% 36%, rgba(229, 9, 20, 0.08), transparent 26%),
+        radial-gradient(circle at 85% 28%, rgba(255, 75, 92, 0.08), transparent 24%),
+        var(--bg);
       color: var(--text);
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
       overflow-x: hidden;
     }
 
-    button,
-    a {
-      font: inherit;
-    }
-
-    .notification-bar {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 50;
-
-      min-height: 42px;
-      padding: 10px 16px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: rgba(5, 5, 5, 0.98);
-      border-bottom: 1px solid rgba(255, 35, 68, 0.28);
-
-      box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.8),
-        0 0 14px rgba(255, 35, 68, 0.08);
-
-      text-align: center;
-    }
-
-    .notification-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-
-      min-width: 0;
-
-      font-size: 12.5px;
-      font-weight: 700;
-
-      transition:
-        opacity 0.28s ease,
-        transform 0.28s ease;
-    }
-
-    .notification-inner.is-leaving {
-      opacity: 0;
-      transform: translateY(-7px);
-    }
-
-    .notification-inner.is-entering {
-      opacity: 0;
-      transform: translateY(7px);
-    }
-
-    .activity-region {
-      color: #d4d4d8;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 0.7px;
-      text-transform: uppercase;
-    }
-
-    #activityText {
-      color: #f3f3f5;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    #activityText strong {
-      color: var(--red-bright);
-      font-weight: 950;
-
-      text-shadow:
-        0 0 8px rgba(255, 35, 68, 0.45),
-        0 0 16px rgba(255, 35, 68, 0.22);
-    }
-
     .page {
-      width: min(100%, 480px);
+      width: 100%;
+      max-width: 430px;
       min-height: 100vh;
-      margin: 0 auto;
-      padding: 64px 22px 36px;
+      padding: 24px 16px 28px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    .brand-item {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 75, 92, 0.22);
+  box-shadow:
+    0 0 8px rgba(255, 31, 61, 0.18),
+    0 0 14px rgba(255, 31, 61, 0.10);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.brand-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+    .brand-x {
+      font-size: 16px;
+      font-weight: 900;
+      color: #ffffff;
+      opacity: 0.9;
+      line-height: 1;
+      transform: translateY(-1px);
     }
 
     .hero {
-      position: relative;
       text-align: center;
-      isolation: isolate;
+      padding: 8px 0 18px;
+      position: relative;
     }
 
     .hero::before {
       content: "";
       position: absolute;
-      z-index: -1;
-
-      top: 100px;
+      width: 92%;
+      height: 120px;
       left: 50%;
-
-      width: 125%;
-      height: 260px;
-
-      pointer-events: none;
-
-      background: radial-gradient(
-        ellipse at center,
-        rgba(255, 26, 59, 0.22) 0%,
-        rgba(255, 26, 59, 0.105) 30%,
-        rgba(255, 26, 59, 0.035) 50%,
-        transparent 72%
-      );
-
-      filter: blur(20px);
+      top: 18px;
       transform: translateX(-50%);
-    }
-
-    .main-logo {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto 16px;
-
-      display: grid;
-      place-items: center;
-
-      border: 1px solid rgba(255, 35, 68, 0.42);
-      border-radius: 50%;
-
-      background: #080808;
-
-      box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.7),
-        0 0 12px rgba(255, 35, 68, 0.18),
-        0 0 26px rgba(255, 35, 68, 0.1);
-
-      overflow: hidden;
-    }
-
-    .main-logo img,
-    .game-logo img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .main-logo img {
-      object-fit: contain;
+      background: radial-gradient(circle, rgba(255, 31, 61, 0.17), transparent 68%);
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .hero h1 {
-      position: relative;
-
-      font-size: clamp(42px, 11vw, 58px);
-      line-height: 1.04;
-      letter-spacing: -2.2px;
+      font-size: 34px;
+      line-height: 1.06;
+      letter-spacing: -1.4px;
       font-weight: 950;
-      text-wrap: balance;
-
-      color: #ffffff;
-
       text-shadow:
-        0 0 8px rgba(255, 255, 255, 0.08),
-        0 0 17px rgba(255, 35, 68, 0.28),
-        0 0 34px rgba(255, 35, 68, 0.17);
-    }
-
-    .hero h1::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-
-      left: 50%;
-      top: 50%;
-
-      width: 95%;
-      height: 125%;
-
-      background: radial-gradient(
-        ellipse,
-        rgba(255, 35, 68, 0.17),
-        transparent 67%
-      );
-
-      filter: blur(18px);
-      transform: translate(-50%, -50%);
-      pointer-events: none;
+        0 0 16px rgba(255, 31, 61, 0.18),
+        0 0 28px rgba(255, 31, 61, 0.14);
     }
 
     .hero h1 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
       display: block;
-      margin-top: 4px;
-
-      color: var(--red-bright);
-
-      text-shadow:
-        0 0 10px rgba(255, 35, 68, 0.46),
-        0 0 22px rgba(255, 35, 68, 0.27),
-        0 0 42px rgba(255, 35, 68, 0.16);
     }
 
-    .hero-copy {
+    .hero p {
+      margin: 14px auto 12px;
       max-width: 360px;
-      margin: 14px auto 0;
-
-      color: #b6b6bc;
-
-      font-size: 16px;
-      line-height: 1.62;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
     }
 
-    .earning-pill {
-      width: max-content;
-      max-width: 100%;
-      margin: 18px auto 0;
-      padding: 10px 18px;
-
-      display: flex;
+    .pill {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-
-      border: 1px solid rgba(255, 35, 68, 0.42);
+      gap: 7px;
+      padding: 8px 15px;
       border-radius: 999px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(18, 18, 18, 0.98),
-          rgba(6, 6, 6, 0.98)
-        );
-
+      background: rgba(255, 31, 61, 0.13);
+      border: 1px solid var(--border);
       color: #ffffff;
-
-      font-size: 12.5px;
-      font-weight: 850;
-
-      box-shadow:
-        0 10px 28px rgba(0, 0, 0, 0.55),
-        0 0 13px rgba(255, 35, 68, 0.15),
-        inset 0 0 12px rgba(255, 35, 68, 0.035);
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 4px;
+      box-shadow: 0 0 14px rgba(255, 31, 61, 0.13);
     }
 
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      flex-shrink: 0;
-
-      border-radius: 50%;
-      background: var(--red-bright);
-
-      box-shadow:
-        0 0 7px rgba(255, 35, 68, 1),
-        0 0 15px rgba(255, 35, 68, 0.62);
-    }
-
-    .store-row,
-    .bottom-store {
-      display: flex;
-      justify-content: center;
-    }
-
-    .store-row {
+    .cta {
+      width: 100%;
+      border: none;
       margin-top: 22px;
+      padding: 18px 20px;
+      border-radius: 15px;
+      background: var(--gradient);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 950;
+      cursor: pointer;
+      box-shadow:
+        0 0 22px rgba(255, 31, 61, 0.40),
+        0 12px 28px rgba(255, 31, 61, 0.17);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .bottom-store {
-      margin-top: 18px;
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 30px rgba(255, 31, 61, 0.52),
+        0 16px 34px rgba(255, 31, 61, 0.22);
     }
 
-    .store-button {
-      width: min(100%, 265px);
-      min-height: 66px;
-
-      border: 1px solid rgba(255, 105, 124, 0.38);
-      border-radius: 18px;
-
+    .trust {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-
-      background: linear-gradient(
-        100deg,
-        #f20d32 0%,
-        #ff2447 48%,
-        #ff4962 100%
-      );
-
-      color: #ffffff;
-      text-decoration: none;
-      cursor: pointer;
-
-      box-shadow:
-        0 0 20px rgba(255, 35, 68, 0.45),
-        0 0 42px rgba(255, 35, 68, 0.2),
-        0 15px 32px rgba(255, 21, 55, 0.24),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-
-      transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease;
+      gap: 14px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 11.5px;
+      flex-wrap: wrap;
     }
 
-    .store-button:hover {
-      transform: translateY(-2px);
-
-      box-shadow:
-        0 0 25px rgba(255, 35, 68, 0.58),
-        0 0 50px rgba(255, 35, 68, 0.27),
-        0 18px 38px rgba(255, 21, 55, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.24);
-    }
-
-    .store-button:active {
-      transform: translateY(0);
-    }
-
-    .apple-icon {
-      width: 27px;
-      height: 31px;
-      flex-shrink: 0;
-      fill: currentColor;
-    }
-
-    .store-label {
-      text-align: left;
-      line-height: 1.04;
-    }
-
-    .store-label small {
-      display: block;
-      margin-bottom: 4px;
-
-      color: rgba(255, 255, 255, 0.82);
-
-      font-size: 9px;
-      font-weight: 700;
-    }
-
-    .store-label strong {
-      display: block;
-      font-size: 17px;
+    .trust span::before {
+      content: "✓ ";
+      color: var(--red-3);
       font-weight: 900;
     }
 
-    .content {
-      margin-top: 28px;
-    }
-
-    .card {
-      border: 1px solid var(--red-border);
+    .earn-card,
+    .steps-card,
+    .important-card {
+      background: linear-gradient(180deg, rgba(20, 20, 20, 0.98), rgba(7, 7, 7, 0.98));
+      border: 1px solid var(--border);
       border-radius: 18px;
-
-      background:
-        radial-gradient(
-          circle at 100% 0%,
-          rgba(255, 35, 68, 0.065),
-          transparent 36%
-        ),
-        linear-gradient(
-          145deg,
-          rgba(15, 15, 15, 0.99),
-          rgba(4, 4, 4, 0.99)
-        );
-
-      box-shadow:
-        var(--card-shadow),
-        inset 0 0 22px rgba(255, 35, 68, 0.028);
+      box-shadow: 0 0 26px rgba(255, 31, 61, 0.09);
     }
 
-    .game-card {
-      padding: 18px;
+    .earn-card {
+      padding: 24px 18px;
+      margin-top: 16px;
+      text-align: center;
     }
 
-    .game-head {
-      display: grid;
-      grid-template-columns: 77px 1fr;
-      gap: 17px;
-      align-items: center;
-    }
-
-    .game-logo {
-      width: 77px;
-      height: 77px;
-
-      border: 1px solid rgba(255, 35, 68, 0.42);
-      border-radius: 18px;
-
-      overflow: hidden;
-      background: #090909;
-
-      box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.55),
-        0 0 13px rgba(255, 35, 68, 0.14);
-    }
-
-    .game-info h2 {
+    .earn-card h2 {
       font-size: 19px;
-      line-height: 1.2;
-      letter-spacing: -0.4px;
+      line-height: 1.25;
+      margin-bottom: 6px;
     }
 
-    .game-rating {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      margin-top: 7px;
-
-      color: #aaaab0;
-      font-size: 11px;
+    .earn-card h2 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .game-rating .stars {
-      color: var(--gold);
+    .earn-card p {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.4;
+      max-width: 320px;
+      margin: 0 auto 18px;
+    }
+
+    .earn-boxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .earn-box {
+      border: 1px solid rgba(255, 31, 61, 0.26);
+      background: #080808;
+      border-radius: 12px;
+      padding: 17px 10px;
+    }
+
+    .earn-box small {
+      display: block;
+      color: #8d8d8d;
       font-size: 10px;
-      letter-spacing: 0.7px;
-      white-space: nowrap;
-    }
-
-    .pay-rate {
-      margin-top: 8px;
-
-      color: var(--red-bright);
-
-      font-size: 16px;
-      font-weight: 950;
-
-      text-shadow:
-        0 0 10px rgba(255, 35, 68, 0.32),
-        0 0 20px rgba(255, 35, 68, 0.13);
-    }
-
-    .game-divider {
-      height: 1px;
-      margin: 16px 0 14px;
-
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 35, 68, 0.3),
-        transparent
-      );
-    }
-
-    .eyebrow {
-      margin-bottom: 11px;
-
-      color: #8e8e96;
-
-      font-size: 10px;
-      font-weight: 950;
-      letter-spacing: 2.1px;
+      letter-spacing: 2px;
+      font-weight: 800;
+      margin-bottom: 6px;
       text-transform: uppercase;
     }
 
-    .game-description {
-      color: #aaaab1;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .game-description strong {
+    .earn-box strong {
+      font-size: 25px;
+      line-height: 1;
       color: #ffffff;
     }
 
-    .how-card {
-      margin-top: 14px;
-      padding: 20px 21px 18px;
+    .earn-box.highlight {
+      border-color: rgba(255, 75, 92, 0.54);
+      box-shadow: inset 0 0 18px rgba(255, 31, 61, 0.08);
     }
 
-    .steps {
-      display: grid;
-      gap: 15px;
-      margin-top: 14px;
+    .earn-box.highlight strong {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .slider-wrap {
+      padding: 0 4px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--red-main);
+      cursor: pointer;
+    }
+
+    .slider-values {
+      display: flex;
+      justify-content: space-between;
+      color: #8d8d8d;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .steps-card {
+      margin-top: 18px;
+      overflow: hidden;
+    }
+
+    .steps-title {
+      padding: 18px 18px 8px;
+      color: #ffffff;
+      font-size: 12px;
+      letter-spacing: 2.2px;
+      text-align: center;
+      font-weight: 950;
+      text-transform: uppercase;
     }
 
     .step {
       display: grid;
-      grid-template-columns: 45px 1fr;
-      gap: 16px;
-      align-items: center;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      padding: 17px 18px;
+      border-top: 1px solid rgba(255, 31, 61, 0.13);
     }
 
-    .step-number {
-      width: 43px;
-      height: 43px;
-
+    .num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
       display: grid;
       place-items: center;
-
-      border: 1px solid rgba(255, 35, 68, 0.52);
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255, 35, 68, 0.18),
-          rgba(255, 35, 68, 0.07)
-        );
-
-      color: var(--red-bright);
-
-      font-size: 14px;
+      background: var(--gradient);
+      color: #ffffff;
       font-weight: 950;
+      box-shadow: 0 0 14px rgba(255, 31, 61, 0.36);
+      margin-top: 2px;
+    }
 
-      box-shadow:
-        0 0 12px rgba(255, 35, 68, 0.13),
-        inset 0 0 14px rgba(255, 35, 68, 0.09);
+    .step h3 {
+      font-size: 15px;
+      margin-bottom: 5px;
     }
 
     .step p {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    .important-card {
+      margin-top: 16px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 12px;
+      position: relative;
+      border-color: rgba(255, 75, 92, 0.32);
+      background:
+        radial-gradient(circle at 88% 0%, rgba(255, 31, 61, 0.15), transparent 40%),
+        linear-gradient(180deg, rgba(20, 11, 12, 0.98), rgba(8, 8, 8, 0.98));
+    }
+
+    .badge {
+      position: absolute;
+      top: 0;
+      right: 18px;
+      transform: translateY(-50%);
+      background: linear-gradient(90deg, #e50914, #ff1f3d);
+      color: #ffffff;
+      font-size: 10px;
+      letter-spacing: 1.7px;
+      font-weight: 950;
+      padding: 7px 12px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 0 14px rgba(255, 31, 61, 0.26);
+      text-transform: uppercase;
+    }
+
+    .lock {
+      font-size: 23px;
+      margin-top: 4px;
+      filter: drop-shadow(0 0 6px rgba(255, 31, 61, 0.26));
+    }
+
+    .important-card small {
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 950;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .important-card p {
+      margin-top: 6px;
       color: #ffffff;
       font-size: 14px;
-      line-height: 1.45;
-      font-weight: 700;
+      line-height: 1.4;
     }
 
-    .stats-card {
-      position: relative;
-
-      margin-top: 16px;
-      padding: 25px 10px 23px;
-
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      align-items: center;
-
-      overflow: hidden;
-
-      border: 1px solid var(--red-border-strong);
-      border-radius: 18px;
-
-      background:
-        radial-gradient(
-          circle at 50% 115%,
-          rgba(255, 35, 68, 0.18),
-          transparent 52%
-        ),
-        linear-gradient(
-          145deg,
-          rgba(15, 15, 15, 0.99),
-          rgba(4, 4, 4, 0.99)
-        );
-
-      box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.7),
-        0 0 18px rgba(255, 35, 68, 0.15),
-        0 0 38px rgba(255, 35, 68, 0.07),
-        inset 0 0 24px rgba(255, 35, 68, 0.035);
-    }
-
-    .stats-card::before {
-      content: "";
-      position: absolute;
-
-      right: 7%;
-      bottom: -38px;
-      left: 7%;
-
-      height: 75px;
-
-      background: rgba(255, 35, 68, 0.22);
-      filter: blur(30px);
-
-      pointer-events: none;
-    }
-
-    .stat-item {
-      position: relative;
-      z-index: 1;
-
-      min-width: 0;
-      padding: 0 8px;
-
-      text-align: center;
-    }
-
-    .stat-item + .stat-item {
-      border-left: 1px solid rgba(255, 35, 68, 0.2);
-    }
-
-    .stat-value {
-      display: block;
-
-      color: #ffffff;
-
-      font-size: clamp(21px, 6.4vw, 28px);
-      line-height: 1;
-      letter-spacing: -0.8px;
+    .important-card p span {
+      color: #ff4b5c;
       font-weight: 950;
-      white-space: nowrap;
-
-      text-shadow:
-        1px 1px 0 rgba(255, 35, 68, 0.5),
-        0 0 12px rgba(255, 35, 68, 0.25),
-        0 0 24px rgba(255, 35, 68, 0.12);
     }
 
-    .stat-label {
-      display: block;
-
-      margin-top: 10px;
-
-      color: #b0b0b5;
-
-      font-size: 9px;
-      font-weight: 850;
-      letter-spacing: 1.7px;
-      line-height: 1.25;
-      text-transform: uppercase;
-      white-space: nowrap;
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 18px 0;
+      color: var(--muted);
+      font-size: 12px;
+      flex-wrap: wrap;
     }
 
-    @media (max-width: 390px) {
-      .page {
-        padding: 60px 16px 32px;
-      }
+    .bottom-cta {
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
 
+    @media (max-width: 360px) {
       .hero h1 {
-        letter-spacing: -1.6px;
+        font-size: 30px;
       }
 
-      .game-card,
-      .how-card {
-        padding-inline: 17px;
+      .trust {
+        gap: 8px;
+        font-size: 10.5px;
       }
 
-      .notification-inner {
-        font-size: 11.5px;
+      .stats {
+        gap: 10px;
+        font-size: 11px;
       }
 
-      .stats-card {
-        padding: 23px 5px 21px;
+      .brand-item {
+        width: 58px;
+        height: 58px;
+        border-radius: 14px;
       }
 
-      .stat-item {
-        padding-inline: 5px;
-      }
-
-      .stat-label {
-        font-size: 8px;
-        letter-spacing: 1.35px;
-      }
-    }
-
-    @media (max-width: 340px) {
-      .stat-value {
-        font-size: 20px;
-      }
-
-      .stat-label {
-        font-size: 7.5px;
-        letter-spacing: 1px;
+      .brand-x {
+        font-size: 14px;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="notification-bar" aria-live="polite">
-    <div class="notification-inner" id="notificationInner">
-
-
-      <span id="activityText">
-        Madison just earned <strong>$38.40</strong> — paid instantly
-      </span>
-    </div>
-  </div>
-
   <main class="page">
-    <section class="hero">
-      <div class="main-logo">
-        <img src="testerup logo.jpg" alt="Testerup logo" />
+    <header class="logo">
+      <div class="brand-item">
+        <img src="testerup logo.png" alt="Testerup Logo" />
       </div>
 
+      <div class="brand-x">×</div>
+
+      <div class="brand-item">
+        <img src="blockblast logo.png" alt="Block Blast Logo" />
+      </div>
+    </header>
+
+    <section class="hero">
       <h1>
-        Get paid to
-        <span>play games</span>
+        Get Paid For Testing
+        <span>Apps & Games</span>
       </h1>
 
-      <p class="hero-copy">
-        Earn real cash testing apps, playing games, and completing tasks.
+      <p>
+        Play games, complete simple offers, take surveys, and earn real rewards —
+        PayPal, gift cards and more.
       </p>
 
-      <div class="earning-pill">
-        <span class="live-dot"></span>
-        <span>2,245 people earning right now</span>
-      </div>
+      <div class="pill">● Real rewards — not game coins or boosters.</div>
 
-      <div class="store-row">
-        <button
-          class="store-button"
-          type="button"
-          onclick="goToOffer()"
-        >
-          <svg
-            class="apple-icon"
-            viewBox="0 0 24 29"
-            aria-hidden="true"
-          >
-            <path d="M19.67 15.36c-.03-3.23 2.64-4.8 2.76-4.87-1.51-2.2-3.85-2.5-4.68-2.52-1.97-.21-3.88 1.18-4.88 1.18-1.02 0-2.56-1.16-4.22-1.13-2.14.03-4.14 1.27-5.24 3.21-2.27 3.93-.58 9.7 1.6 12.88 1.09 1.56 2.36 3.3 4.02 3.24 1.62-.07 2.23-1.04 4.19-1.04 1.94 0 2.51 1.04 4.2 1 1.75-.03 2.85-1.57 3.9-3.15 1.26-1.79 1.76-3.55 1.78-3.64-.04-.01-3.4-1.3-3.43-5.16ZM16.46 5.88c.88-1.1 1.48-2.59 1.31-4.1-1.28.06-2.88.89-3.8 1.97-.82.96-1.55 2.51-1.36 3.96 1.45.11 2.9-.73 3.85-1.83Z"/>
-          </svg>
+      <button class="cta" onclick="goToOffer()">Download Now →</button>
 
-          <span class="store-label">
-            <small>Download on the</small>
-            <strong>App Store</strong>
-          </span>
-        </button>
+      <div class="trust">
+        <span>Free</span>
+        <span>Fast Rewards</span>
+        <span>Quick Signup</span>
       </div>
     </section>
 
-    <section class="content">
-      <article class="card game-card">
-        <div class="game-head">
-          <div class="game-logo">
-            <img
-              src="blockblast logo.png"
-              alt="Blockblast logo"
-            />
-          </div>
 
-          <div class="game-info">
-            <h2>Blockblast</h2>
+    <section class="steps-card">
+      <div class="steps-title">Your Earning Journey</div>
 
-            <div class="game-rating">
-              <span class="stars">★★★★★</span>
-              <span>4.8</span>
-              <span>·</span>
-              <span>Top Rated</span>
-            </div>
-
-            <div class="pay-rate">
-              Pay: up to $27/hr
-            </div>
-          </div>
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Download Testerup</h3>
+          <p>Available on iOS and iPad. Signup takes less than 60 seconds.</p>
         </div>
+      </div>
 
-        <div class="game-divider"></div>
-
-        <div class="eyebrow">
-          Featured task
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Play Games & Complete Offers</h3>
+          <p>Test apps, play games, answer surveys and unlock reward milestones.</p>
         </div>
+      </div>
 
-        <p class="game-description">
-          Play Blockblast and earn up to
-          <strong>$27/hr.</strong>
-          New tasks added daily.
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Cash Out Your Rewards</h3>
+          <p>Redeem through PayPal, Visa, Amazon gift cards and more.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="important-card">
+      <div class="badge">Important</div>
+      <div class="lock">🔒</div>
+      <div>
+        <small>Activation Required</small>
+        <p>
+          New users: Complete <span>2 quick offers</span> to unlock full access
+          and start earning.
         </p>
-      </article>
-
-      <article class="card how-card">
-        <div class="eyebrow">
-          How it works
-        </div>
-
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">1</div>
-
-            <p>
-              Sign up free — takes under 60 seconds
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">2</div>
-
-            <p>
-              Test apps &amp; play games on your phone
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">3</div>
-
-            <p>
-              Withdraw via Paypal, VISA or Crypto
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <section
-        class="stats-card"
-        aria-label="Testerup statistics"
-      >
-        <div class="stat-item">
-          <strong class="stat-value">$30M+</strong>
-          <span class="stat-label">Paid Out</span>
-        </div>
-
-        <div class="stat-item">
-          <strong class="stat-value">4.8★</strong>
-          <span class="stat-label">App Rating</span>
-        </div>
-
-        <div class="stat-item">
-          <strong class="stat-value">$0</strong>
-          <span class="stat-label">To Join</span>
-        </div>
-      </section>
-
-      <div class="bottom-store">
-        <button
-          class="store-button"
-          type="button"
-          onclick="goToOffer()"
-        >
-          <svg
-            class="apple-icon"
-            viewBox="0 0 24 29"
-            aria-hidden="true"
-          >
-            <path d="M19.67 15.36c-.03-3.23 2.64-4.8 2.76-4.87-1.51-2.2-3.85-2.5-4.68-2.52-1.97-.21-3.88 1.18-4.88 1.18-1.02 0-2.56-1.16-4.22-1.13-2.14.03-4.14 1.27-5.24 3.21-2.27 3.93-.58 9.7 1.6 12.88 1.09 1.56 2.36 3.3 4.02 3.24 1.62-.07 2.23-1.04 4.19-1.04 1.94 0 2.51 1.04 4.2 1 1.75-.03 2.85-1.57 3.9-3.15 1.26-1.79 1.76-3.55 1.78-3.64-.04-.01-3.4-1.3-3.43-5.16ZM16.46 5.88c.88-1.1 1.48-2.59 1.31-4.1-1.28.06-2.88.89-3.8 1.97-.82.96-1.55 2.51-1.36 3.96 1.45.11 2.9-.73 3.85-1.83Z"/>
-          </svg>
-
-          <span class="store-label">
-            <small>Download on the</small>
-            <strong>App Store</strong>
-          </span>
-        </button>
       </div>
     </section>
+
+    <div class="stats">
+      <span>10M+ Users</span>
+      <span>$50M+ Paid Out</span>
+      <span>🇺🇸 US</span>
+    </div>
+
+    <div class="bottom-cta">
+      <button class="cta" onclick="goToOffer()">Download Now →</button>
+    </div>
   </main>
 
   <script>
-    const femaleNames = [
-      "Madison",
-      "Emily",
-      "Olivia",
-      "Hannah",
-      "Isabella",
-      "Samantha",
-      "Sophia",
-      "Chloe",
-      "Kayla",
-      "Sydney",
-      "Destiny",
-      "Megan",
-      "Savannah",
-      "Ella",
-      "Rachel"
-    ];
+    const slider = document.getElementById("earnSlider");
+    const spendAmount = document.getElementById("spendAmount");
+    const earnAmount = document.getElementById("earnAmount");
 
-    const maleNames = [
-      "Tyler",
-      "Brandon",
-      "Jayden",
-      "Cameron"
-    ];
+    function updateEarnings() {
+      const spend = Number(slider.value);
+      const earn = spend * 8;
 
-    const activityTemplates = [
-      {
-        weight: 30,
-        build: (name, amount) =>
-          `${name} just earned <strong>$${amount}</strong> — paid instantly`
-      },
-      {
-        weight: 30,
-        build: (name, amount) =>
-          `${name} cashed out <strong>$${amount}</strong> — PayPal`
-      },
-      {
-        weight: 12,
-        build: (name, amount) =>
-          `${name} just earned <strong>$${amount}</strong> — Blockblast high score bonus`
-      },
-      {
-        weight: 10,
-        build: (name, amount) =>
-          `${name} claimed a <strong>$${amount}</strong> signup bonus`
-      },
-      {
-        weight: 9,
-        build: (name, amount) =>
-          `${name} withdrew <strong>$${amount}</strong> to Visa`
-      },
-      {
-        weight: 9,
-        build: (name, amount) =>
-          `${name} just hit a <strong>$${amount}</strong> milestone`
-      }
-    ];
-
-    let previousName = "";
-    let previousTemplateIndex = -1;
-
-    const randomFrom = (items) => {
-      return items[Math.floor(Math.random() * items.length)];
-    };
-
-    function chooseName() {
-      const pool = Math.random() < 0.8
-        ? femaleNames
-        : maleNames;
-
-      let name = randomFrom(pool);
-
-      while (
-        name === previousName &&
-        pool.length > 1
-      ) {
-        name = randomFrom(pool);
-      }
-
-      previousName = name;
-      return name;
+      spendAmount.textContent = `$${spend}`;
+      earnAmount.textContent = `$${earn}`;
     }
 
-    function chooseTemplateIndex() {
-      const totalWeight = activityTemplates.reduce(
-        (sum, item) => sum + item.weight,
-        0
-      );
-
-      let roll = Math.random() * totalWeight;
-      let selectedIndex = 0;
-
-      for (
-        let index = 0;
-        index < activityTemplates.length;
-        index++
-      ) {
-        roll -= activityTemplates[index].weight;
-
-        if (roll <= 0) {
-          selectedIndex = index;
-          break;
-        }
-      }
-
-      if (selectedIndex === previousTemplateIndex) {
-        selectedIndex =
-          (selectedIndex + 1) %
-          activityTemplates.length;
-      }
-
-      previousTemplateIndex = selectedIndex;
-      return selectedIndex;
-    }
-
-    function randomAmount() {
-      return (Math.random() * 20 + 30).toFixed(2);
-    }
-
-    function rotateActivity() {
-      const inner =
-        document.getElementById("notificationInner");
-
-      const text =
-        document.getElementById("activityText");
-
-      inner.classList.add("is-leaving");
-
-      setTimeout(() => {
-        const template =
-          activityTemplates[chooseTemplateIndex()];
-
-        text.innerHTML = template.build(
-          chooseName(),
-          randomAmount()
-        );
-
-        inner.classList.remove("is-leaving");
-        inner.classList.add("is-entering");
-
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            inner.classList.remove("is-entering");
-          });
-        });
-      }, 280);
-    }
-
-    setInterval(rotateActivity, 4000);
+    slider.addEventListener("input", updateEarnings);
+    updateEarnings();
 
     function getIncomingSource() {
-      const params =
-        new URLSearchParams(window.location.search);
-
+      const params = new URLSearchParams(window.location.search);
       return params.get("source");
     }
 
     function buildOutgoingLink() {
-      const base =
-        "https://giftclick.org/aff_c?offer_id=4615&aff_id=150406";
-
+      const baseLink = "https://giftclick.org/aff_c?offer_id=4615&aff_id=150406";
       const source = getIncomingSource();
 
-      return source
-        ? base + "&source=" + encodeURIComponent(source)
-        : base;
+      if (!source) {
+        return baseLink;
+      }
+
+      const separator = baseLink.includes("?") ? "&" : "?";
+      return baseLink + separator + "source=" + encodeURIComponent(source);
     }
 
     function goToOffer() {
