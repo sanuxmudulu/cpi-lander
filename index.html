@@ -1,11 +1,66 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Testerup</title>
 
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;
+    var ttq=w[t]=w[t]||[];
+
+    ttq.methods=[
+      "page","track","identify","instances","debug","on","off","once",
+      "ready","alias","group","enableCookie","disableCookie","holdConsent",
+      "revokeConsent","grantConsent"
+    ];
+
+    ttq.setAndDefer=function(t,e){
+      t[e]=function(){
+        t.push([e].concat(Array.prototype.slice.call(arguments,0)))
+      }
+    };
+
+    for(var i=0;i<ttq.methods.length;i++){
+      ttq.setAndDefer(ttq,ttq.methods[i]);
+    }
+
+    ttq.instance=function(t){
+      for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++){
+        ttq.setAndDefer(e,ttq.methods[n]);
+      }
+      return e;
+    };
+
+    ttq.load=function(e,n){
+      var r="https://analytics.tiktok.com/i18n/pixel/events.js",
+          o=n&&n.partner;
+
+      ttq._i=ttq._i||{};
+      ttq._i[e]=[];
+      ttq._i[e]._u=r;
+      ttq._t=ttq._t||{};
+      ttq._t[e]=+new Date;
+      ttq._o=ttq._o||{};
+      ttq._o[e]=n||{};
+
+      n=document.createElement("script");
+      n.type="text/javascript";
+      n.async=true;
+      n.src=r+"?sdkid="+e+"&lib="+t;
+
+      e=document.getElementsByTagName("script")[0];
+      e.parentNode.insertBefore(n,e);
+    };
+
+    ttq.load("D9K1M7RC77UCPIKUS5PG");
+    ttq.page();
+  }(window, document, "ttq");
+  </script>
+  <!-- TikTok Pixel Code End -->
+    
   <style>
     :root {
       --red-main: #ff1f3d;
@@ -523,40 +578,59 @@
   </main>
 
   <script>
-    const slider = document.getElementById("earnSlider");
-    const spendAmount = document.getElementById("spendAmount");
-    const earnAmount = document.getElementById("earnAmount");
+  function getIncomingSource() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("source");
+  }
 
-    function updateEarnings() {
-      const spend = Number(slider.value);
-      const earn = spend * 8;
+  function buildOutgoingLink() {
+    const baseLink =
+      "https://giftclick.org/aff_c?offer_id=4615&aff_id=150406";
 
-      spendAmount.textContent = `$${spend}`;
-      earnAmount.textContent = `$${earn}`;
+    const source = getIncomingSource();
+
+    if (!source) {
+      return baseLink;
     }
 
-    slider.addEventListener("input", updateEarnings);
-    updateEarnings();
+    const separator = baseLink.includes("?") ? "&" : "?";
 
-    function getIncomingSource() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("source");
+    return (
+      baseLink +
+      separator +
+      "source=" +
+      encodeURIComponent(source)
+    );
+  }
+
+  let offerRedirectStarted = false;
+
+  function goToOffer() {
+    // Prevent accidental double-clicks from firing twice.
+    if (offerRedirectStarted) {
+      return;
     }
-    function buildOutgoingLink() {
-      const baseLink = "https://giftclick.org/aff_c?offer_id=4615&aff_id=150406";
-      const source = getIncomingSource();
 
-      if (!source) {
-        return baseLink;
-      }
+    offerRedirectStarted = true;
 
-      const separator = baseLink.includes("?") ? "&" : "?";
-      return baseLink + separator + "source=" + encodeURIComponent(source);
+    const outgoingLink = buildOutgoingLink();
+
+    // Fire TikTok's Click Button event.
+    if (
+      window.ttq &&
+      typeof window.ttq.track === "function"
+    ) {
+      ttq.track("ClickButton", {
+        content_name: "Testerup Download CTA"
+      });
     }
 
-    function goToOffer() {
-      window.location.href = buildOutgoingLink();
-    }
-  </script>
+    // Brief delay gives the browser time to dispatch the Pixel event
+    // before leaving for the affiliate offer.
+    setTimeout(function () {
+      window.location.href = outgoingLink;
+    }, 350);
+  }
+</script>
 </body>
 </html>
