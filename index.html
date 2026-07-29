@@ -717,7 +717,7 @@
 
     <div class="section-label">PICK YOUR FIRST GAME</div>
 
-    <a href="https://giftclick.org/aff_c?tl_id=6f06a7f1" class="game-card popular affiliate-link" target="_blank" rel="noopener noreferrer">
+    <a href="https://giftclick.org/aff_c?tl_id=6f06a7f1" class="game-card popular affiliate-link">
       <div>
         <div class="game-card-title-row">
           <span class="game-title">Puzzle Games</span>
@@ -733,7 +733,7 @@
       </div>
     </a>
 
-    <a href="https://giftclick.org/aff_c?tl_id=6f06a7f1" class="game-card affiliate-link" target="_blank" rel="noopener noreferrer">
+    <a href="https://giftclick.org/aff_c?tl_id=6f06a7f1" class="game-card affiliate-link">
       <div>
         <div class="game-card-title-row">
           <span class="game-title">Action Games</span>
@@ -748,7 +748,7 @@
       </div>
     </a>
 
-    <a href="https://giftclick.org/aff_c?tl_id=6f06a7f1" class="game-card affiliate-link" target="_blank" rel="noopener noreferrer">
+    <a href="https://giftclick.org/aff_c?tl_id=6f06a7f1" class="game-card affiliate-link">
       <div>
         <div class="game-card-title-row">
           <span class="game-title">100+ more games</span>
@@ -814,8 +814,8 @@
   </main>
 
   <div class="sticky-bar" id="sticky-bar">
-    <a href="https://giftclick.org/aff_c?tl_id=6f06a7f1" class="sticky-cta affiliate-link" id="sticky-cta" target="_blank" rel="noopener noreferrer">
-      Play a game &amp; get stated
+    <a href="https://giftclick.org/aff_c?tl_id=6f06a7f1" class="sticky-cta affiliate-link" id="sticky-cta">
+      Play a game &amp; get started
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
     </a>
   </div>
@@ -890,7 +890,7 @@
 
     document.getElementById("modal-continue").addEventListener("click", function () {
       if (pendingAffiliateUrl) {
-        window.open(pendingAffiliateUrl, "_blank", "noopener,noreferrer");
+        window.location.href = pendingAffiliateUrl;
       }
       closeAgeModal();
     });
