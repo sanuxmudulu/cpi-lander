@@ -75,14 +75,14 @@
       color:var(--text);
       font-family:Arial, Helvetica, sans-serif;
       -webkit-font-smoothing:antialiased;
-      padding-bottom:132px;
+      padding-bottom:104px;
     }
     button, a { font:inherit; }
     a { color:inherit; text-decoration:none; }
 
     .site {
       width:100%;
-      max-width:540px;
+      max-width:390px;
       margin:0 auto;
       position:relative;
       overflow:hidden;
@@ -92,20 +92,20 @@
       position:sticky;
       top:0;
       z-index:80;
-      height:66px;
+      height:50px;
       background:#151615;
-      border-top:12px solid #082b20;
+      border-top:8px solid #082b20;
       border-bottom:1px solid #194a39;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:0 16px;
+      padding:0 10px;
       text-align:center;
     }
     .notification {
-      font-size:16px;
+      font-size:12px;
       font-weight:700;
-      line-height:1.25;
+      line-height:1.2;
       opacity:1;
       transform:translateY(0);
       transition:opacity .2s ease, transform .2s ease;
@@ -116,75 +116,75 @@
     }
     .country {
       color:#bebebe;
-      font-size:10px;
-      margin-right:6px;
+      font-size:8px;
+      margin-right:5px;
       vertical-align:middle;
       font-weight:700;
     }
     .amount { color:#23e889; }
 
-    main { padding:18px 20px 22px; }
+    main { padding:14px 14px 18px; }
 
     .hero-card,
     .offer-card {
       background:linear-gradient(180deg,#171918,#121413);
       border:1px solid var(--line);
-      border-radius:24px;
+      border-radius:18px;
       box-shadow:0 18px 40px rgba(0,0,0,.34);
     }
 
     .hero-card {
       text-align:center;
-      padding:39px 24px 32px;
+      padding:29px 20px 22px;
     }
 
     .app-logo {
-      width:116px;
-      height:116px;
-      border-radius:25px;
-      margin:0 auto 22px;
+      width:86px;
+      height:86px;
+      border-radius:18px;
+      margin:0 auto 17px;
       position:relative;
       display:grid;
       place-items:center;
-      box-shadow:0 0 38px rgba(0,237,133,.22);
+      box-shadow:0 0 34px rgba(0,237,133,.26);
     }
 
     .app-logo::before {
       content:"";
       position:absolute;
-      width:155px;
-      height:85px;
+      width:190px;
+      height:110px;
       left:50%;
-      top:-48px;
+      top:-66px;
       transform:translateX(-50%);
-      background:radial-gradient(ellipse at center, rgba(0,237,133,.28) 0%, rgba(0,237,133,.12) 38%, rgba(0,237,133,0) 74%);
-      filter:blur(8px);
+      background:radial-gradient(ellipse at center, rgba(0,237,133,.38) 0%, rgba(0,237,133,.18) 38%, rgba(0,237,133,.05) 62%, rgba(0,237,133,0) 80%);
+      filter:blur(10px);
       pointer-events:none;
       z-index:0;
     }
 
     .app-logo img {
-      width:116px;
-      height:116px;
-      border-radius:25px;
+      width:86px;
+      height:86px;
+      border-radius:18px;
       object-fit:cover;
       position:relative;
       z-index:1;
       border:1px solid rgba(255,255,255,.15);
-      box-shadow:0 0 24px rgba(0,237,133,.18);
+      box-shadow:0 0 22px rgba(0,237,133,.22);
     }
 
     .store-pill {
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
+      gap:6px;
       border:1px solid #007a4b;
       border-radius:999px;
-      padding:8px 16px;
-      margin-bottom:25px;
+      padding:6px 12px;
+      margin-bottom:13px;
       color:#e8fff5;
-      font-size:16px;
+      font-size:12px;
       background:rgba(0,80,50,.14);
     }
     .stars { color:var(--green); letter-spacing:-1px; font-weight:900; }
@@ -192,35 +192,35 @@
     .dotsep { color:#76817b; }
 
     h1 {
-      font-size:39px;
+      font-size:29px;
       line-height:1.12;
-      letter-spacing:-1.3px;
-      margin-bottom:18px;
+      letter-spacing:-.8px;
+      margin-bottom:13px;
     }
     h1 span { color:var(--green); display:block; }
 
     .lead {
-      max-width:360px;
-      margin:0 auto 24px;
-      font-size:20px;
-      line-height:1.42;
+      max-width:300px;
+      margin:0 auto 18px;
+      font-size:14px;
+      line-height:1.5;
       color:#b8bcc1;
     }
 
     .live-pill {
       display:inline-flex;
       align-items:center;
-      gap:9px;
+      gap:7px;
       border:1px solid #17613f;
       border-radius:999px;
-      padding:10px 16px;
+      padding:7px 11px;
       color:#dffff0;
-      font-size:16px;
+      font-size:12px;
       font-weight:700;
       background:#10251c;
     }
     .pulse {
-      width:9px; height:9px; border-radius:50%;
+      width:7px; height:7px; border-radius:50%;
       background:var(--green);
       box-shadow:0 0 10px var(--green);
       animation:pulse 1.3s infinite;
@@ -231,73 +231,73 @@
     }
 
     .offer-card {
-      margin-top:18px;
-      padding:24px 25px 30px;
+      margin-top:14px;
+      padding:18px 16px 21px;
     }
     .game-head {
       display:flex;
       align-items:flex-start;
-      gap:17px;
-      padding-bottom:26px;
+      gap:8px;
+      padding-bottom:18px;
       border-bottom:1px solid #2d302f;
     }
     .game-icon {
-      width:93px; height:93px;
-      border-radius:22px;
+      width:62px; height:62px;
+      border-radius:14px;
       object-fit:cover;
       flex:0 0 auto;
     }
     .game-meta { padding-top:4px; }
     .game-meta h2 {
-      font-size:24px;
-      margin-bottom:8px;
+      font-size:17px;
+      margin-bottom:5px;
       letter-spacing:-.5px;
     }
     .rating-line {
-      font-size:14px;
+      font-size:10px;
       color:#c5c8c7;
-      margin-bottom:9px;
+      margin-bottom:6px;
     }
     .rate {
-      font-size:20px;
+      font-size:10px;
       font-weight:800;
       color:var(--green);
     }
 
     .how {
-      margin-top:29px;
+      margin-top:20px;
       color:#8c9590;
-      letter-spacing:1.4px;
-      font-size:14px;
+      letter-spacing:1.1px;
+      font-size:10px;
       font-weight:800;
     }
-    .steps { margin-top:18px; display:grid; gap:17px; }
+    .steps { margin-top:13px; display:grid; gap:8px; }
     .step {
       display:flex;
       align-items:center;
-      gap:16px;
-      font-size:18px;
+      gap:7px;
+      font-size:12px;
       font-weight:700;
       line-height:1.3;
     }
     .num {
-      width:35px; height:35px;
-      border-radius:10px;
+      width:24px; height:24px;
+      border-radius:7px;
       background:#073c2a;
       border:1px solid #0c7650;
       color:var(--green);
       display:grid;
       place-items:center;
       flex:0 0 auto;
-      font-size:16px;
+      font-size:11px;
     }
 
     .stats {
-      margin-top:18px;
+      margin-top:14px;
       background:#111216;
       border:1px solid #282d34;
-      border-radius:20px;
-      padding:24px 10px;
+      border-radius:14px;
+      padding:16px 8px;
       display:grid;
       grid-template-columns:repeat(3,1fr);
       text-align:center;
@@ -305,29 +305,29 @@
     .stat + .stat { border-left:1px solid #2b2f34; }
     .stat b {
       display:block;
-      font-size:23px;
-      margin-bottom:8px;
+      font-size:16px;
+      margin-bottom:5px;
       white-space:nowrap;
     }
     .stat span {
       display:block;
-      font-size:12px;
+      font-size:8px;
       color:#87909e;
       letter-spacing:.5px;
     }
 
     .legal {
-      padding:27px 14px 15px;
+      padding:19px 11px 10px;
       text-align:center;
       color:#7f8783;
-      font-size:14px;
-      line-height:1.55;
+      font-size:10px;
+      line-height:1.5;
     }
     .links {
       text-align:center;
       color:#808785;
-      font-size:14px;
-      padding:17px 0 2px;
+      font-size:10px;
+      padding:11px 0 1px;
     }
     .links i {
       font-style:normal;
@@ -341,32 +341,32 @@
       z-index:90;
       background:rgba(11,13,14,.97);
       border-top:1px solid #272b2f;
-      padding:13px 18px calc(16px + env(safe-area-inset-bottom));
+      padding:8px 13px calc(10px + env(safe-area-inset-bottom));
       box-shadow:0 -12px 32px rgba(0,0,0,.5);
     }
     .sticky-inner {
-      max-width:504px;
+      max-width:364px;
       margin:0 auto;
     }
     .available {
       text-align:center;
       color:#b2b6ba;
-      font-size:14px;
-      margin-bottom:12px;
+      font-size:10px;
+      margin-bottom:8px;
     }
-    .available .mini-dot { color:var(--green); font-size:18px; vertical-align:-1px; margin-right:5px; }
+    .available .mini-dot { color:var(--green); font-size:14px; vertical-align:-1px; margin-right:5px; }
     .buttons {
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:12px;
+      gap:8px;
     }
     .store-btn {
-      height:68px;
-      border-radius:17px;
+      height:50px;
+      border-radius:12px;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:11px;
+      gap:7px;
       cursor:pointer;
       border:1px solid #3a3f47;
       background:#16171d;
@@ -376,34 +376,26 @@
       border-color:#00db79;
       background:linear-gradient(135deg,#00f08b,#00d477);
       color:#00170d;
-      box-shadow:0 0 24px rgba(0,237,133,.25);
+      box-shadow:0 0 20px rgba(0,237,133,.25);
     }
-    .store-btn svg { width:27px; height:31px; flex:0 0 auto; }
+    .store-btn svg { width:20px; height:23px; flex:0 0 auto; }
     .btn-text {
       text-align:left;
-      font-size:10px;
-      line-height:1.05;
+      font-size:8px;
+      line-height:1.0;
     }
     .btn-text strong {
       display:block;
-      font-size:19px;
+      font-size:13px;
       margin-top:2px;
       line-height:1;
     }
 
     @media (max-width:420px) {
-      main { padding-left:12px; padding-right:12px; }
-      .hero-card { padding:30px 16px 27px; }
-      h1 { font-size:34px; }
-      .lead { font-size:18px; }
-      .offer-card { padding:21px 18px 26px; }
-      .game-icon { width:80px; height:80px; }
-      .game-meta h2 { font-size:21px; }
-      .step { font-size:16px; }
-      .stat b { font-size:19px; }
-      .store-btn { height:62px; gap:7px; }
-      .store-btn svg { width:23px; }
-      .btn-text strong { font-size:16px; }
+      .site { max-width:390px; }
+      main { padding:14px 14px 18px; }
+      .hero-card { padding:29px 20px 22px; }
+      .offer-card { padding:18px 16px 21px; }
     }
   </style>
 </head>
@@ -439,7 +431,7 @@
 
       <section class="offer-card">
         <div class="game-head">
-          <img class="game-icon" src="fc logo.jpg">
+          <img class="game-icon" src="gardenscapes.png">
           <div class="game-meta">
             <h2>Gardenscapes</h2>
             <div class="rating-line"><span class="stars">★★★★★</span> 4.8 · Najwyżej oceniane</div>
