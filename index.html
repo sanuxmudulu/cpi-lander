@@ -687,18 +687,22 @@
       window.scrollTo({ top: 0, behavior: "auto" });
     });
 
-    const AFFILIATE_URL = "https://giftclick.org/aff_c?tl_id=6f06a7f1";
+    const AFFILIATE_URL = "https://www.stw4c9hx.com/DFBHL1/3TJ7N7/";
 
-    const pageParams = new URLSearchParams(window.location.search);
-    const source = pageParams.get("source");
+const pageParams = new URLSearchParams(window.location.search);
+const source = pageParams.get("source");
 
-    function appendSource(baseUrl) {
-      const url = new URL(baseUrl);
-      if (source) url.searchParams.set("source", source);
-      return url.toString();
-    }
+function appendSource(baseUrl) {
+  const url = new URL(baseUrl);
 
-    const finalAffiliateUrl = appendSource(AFFILIATE_URL);
+  if (source) {
+    url.searchParams.set("source_id", source);
+  }
+
+  return url.toString();
+}
+
+const finalAffiliateUrl = appendSource(AFFILIATE_URL);
 
     const agePopup = document.getElementById("age-popup");
     const agePopupClose = document.getElementById("age-popup-close");
