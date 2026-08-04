@@ -1,636 +1,672 @@
-  <!DOCTYPE html>
-<html lang="sv">
+<!DOCTYPE html>
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Testerup</title>
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Freecash — Geld mit Spielen verdienen</title>
 
-  <!-- TikTok Pixel Code Start -->
-  <script>
-  !function (w, d, t) {
-    w.TiktokAnalyticsObject=t;
-    var ttq=w[t]=w[t]||[];
-
-    ttq.methods=[
-      "page","track","identify","instances","debug","on","off","once",
-      "ready","alias","group","enableCookie","disableCookie","holdConsent",
-      "revokeConsent","grantConsent"
-    ];
-
-    ttq.setAndDefer=function(t,e){
-      t[e]=function(){
-        t.push([e].concat(Array.prototype.slice.call(arguments,0)))
-      }
-    };
-
-    for(var i=0;i<ttq.methods.length;i++){
-      ttq.setAndDefer(ttq,ttq.methods[i]);
-    }
-
-    ttq.instance=function(t){
-      for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++){
-        ttq.setAndDefer(e,ttq.methods[n]);
-      }
-      return e;
-    };
-
-    ttq.load=function(e,n){
-      var r="https://analytics.tiktok.com/i18n/pixel/events.js",
-          o=n&&n.partner;
-
-      ttq._i=ttq._i||{};
-      ttq._i[e]=[];
-      ttq._i[e]._u=r;
-      ttq._t=ttq._t||{};
-      ttq._t[e]=+new Date;
-      ttq._o=ttq._o||{};
-      ttq._o[e]=n||{};
-
-      n=document.createElement("script");
-      n.type="text/javascript";
-      n.async=true;
-      n.src=r+"?sdkid="+e+"&lib="+t;
-
-      e=document.getElementsByTagName("script")[0];
-      e.parentNode.insertBefore(n,e);
-    };
-
-    ttq.load("D9MA0DRC77U26FTDLQJG");
-    ttq.page();
-  }(window, document, "ttq");
-  </script>
-  <!-- TikTok Pixel Code End -->
-    
   <style>
     :root {
-      --red-main: #ff1f3d;
-      --red-2: #e50914;
-      --red-3: #ff4b5c;
-      --red-soft: #ffb3bb;
-      --bg: #050505;
-      --card: #0d0d0d;
-      --card-2: #141414;
-      --border: rgba(255, 31, 61, 0.30);
-      --text: #ffffff;
-      --muted: #b8b8b8;
-      --gold: #f4c552;
-      --gradient: linear-gradient(90deg, #e50914 0%, #ff1f3d 52%, #ff4b5c 100%);
+      --bg:#090c0b;
+      --panel:#141615;
+      --panel2:#181a19;
+      --line:#303432;
+      --text:#f7f7f7;
+      --muted:#a8ada9;
+      --green:#00ed85;
+      --green2:#00ca70;
+      --green-dark:#063d2b;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { background:var(--bg); }
     body {
+      min-height:100vh;
       background:
-        radial-gradient(circle at 50% 16%, rgba(255, 31, 61, 0.14), transparent 32%),
-        radial-gradient(circle at 20% 36%, rgba(229, 9, 20, 0.08), transparent 26%),
-        radial-gradient(circle at 85% 28%, rgba(255, 75, 92, 0.08), transparent 24%),
-        var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      overflow-x: hidden;
+        radial-gradient(circle at 50% -5%, rgba(0,238,133,.12), transparent 27%),
+        linear-gradient(#0b0e0d, #080a09 70%);
+      color:var(--text);
+      font-family:Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      padding-bottom:104px;
+    }
+    button, a { font:inherit; }
+    a { color:inherit; text-decoration:none; }
+
+    .site {
+      width:100%;
+      max-width:390px;
+      margin:0 auto;
+      position:relative;
+      overflow:hidden;
     }
 
-    .page {
-      width: 100%;
-      max-width: 430px;
-      min-height: 100vh;
-      padding: 24px 16px 28px;
+    .notif-wrap {
+      position:sticky;
+      top:0;
+      z-index:80;
+      height:50px;
+      background:#151615;
+      border-top:8px solid #082b20;
+      border-bottom:1px solid #194a39;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 10px;
+      text-align:center;
+    }
+    .notification {
+      font-size:12.5px;
+      font-weight:700;
+      line-height:1.2;
+      opacity:1;
+      transform:translateY(0);
+      transition:opacity .2s ease, transform .2s ease;
+    }
+    .notification.changing {
+      opacity:0;
+      transform:translateY(-4px);
+    }
+    .country {
+      color:#bebebe;
+      font-size:8px;
+      margin-right:5px;
+      vertical-align:middle;
+      font-weight:700;
+    }
+    .amount { color:#23e889; }
+
+    main { padding:14px 14px 18px; }
+
+    .hero-card,
+    .offer-card {
+      background:linear-gradient(180deg,#171918,#121413);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(0,0,0,.34);
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 0;
-      margin-bottom: 6px;
+    .hero-card {
+      text-align:center;
+      padding:29px 20px 22px;
     }
 
-    .brand-item {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 75, 92, 0.22);
-  box-shadow:
-    0 0 8px rgba(255, 31, 61, 0.18),
-    0 0 14px rgba(255, 31, 61, 0.10);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.brand-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-}
-
-    .brand-x {
-      font-size: 16px;
-      font-weight: 900;
-      color: #ffffff;
-      opacity: 0.9;
-      line-height: 1;
-      transform: translateY(-1px);
+    .app-logo {
+      width:86px;
+      height:86px;
+      border-radius:18px;
+      margin:0 auto 17px;
+      position:relative;
+      display:grid;
+      place-items:center;
+      box-shadow:0 0 34px rgba(0,237,133,.26);
     }
 
-    .hero {
-      text-align: center;
-      padding: 8px 0 18px;
-      position: relative;
+    .app-logo::before {
+      content:"";
+      position:absolute;
+      width:190px;
+      height:110px;
+      left:50%;
+      top:-66px;
+      transform:translateX(-50%);
+      background:radial-gradient(ellipse at center, rgba(0,237,133,.38) 0%, rgba(0,237,133,.18) 38%, rgba(0,237,133,.05) 62%, rgba(0,237,133,0) 80%);
+      filter:blur(10px);
+      pointer-events:none;
+      z-index:0;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 92%;
-      height: 120px;
-      left: 50%;
-      top: 18px;
-      transform: translateX(-50%);
-      background: radial-gradient(circle, rgba(255, 31, 61, 0.17), transparent 68%);
-      filter: blur(18px);
-      pointer-events: none;
-      z-index: -1;
+    .app-logo img {
+      width:86px;
+      height:86px;
+      border-radius:18px;
+      object-fit:cover;
+      position:relative;
+      z-index:1;
+      border:1px solid rgba(255,255,255,.15);
+      box-shadow:0 0 22px rgba(0,237,133,.22);
     }
 
-    .hero h1 {
-      font-size: 34px;
-      line-height: 1.06;
-      letter-spacing: -1.4px;
-      font-weight: 950;
-      text-shadow:
-        0 0 16px rgba(255, 31, 61, 0.18),
-        0 0 28px rgba(255, 31, 61, 0.14);
+    .store-pill {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      border:1px solid #007a4b;
+      border-radius:999px;
+      padding:6px 12px;
+      margin-bottom:13px;
+      color:#e8fff5;
+      font-size:12px;
+      background:rgba(0,80,50,.14);
+    }
+    .stars { color:var(--green); letter-spacing:-1px; font-weight:900; }
+    .store-pill b { color:var(--green); }
+    .dotsep { color:#76817b; }
+
+    h1 {
+      font-size:30px;
+      line-height:1.12;
+      letter-spacing:-.8px;
+      margin-bottom:13px;
+    }
+    h1 span { color:var(--green); display:block; }
+
+    .lead {
+      max-width:300px;
+      margin:0 auto 18px;
+      font-size:14.5px;
+      line-height:1.5;
+      color:#b8bcc1;
     }
 
-    .hero h1 span {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      display: block;
+    .live-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      border:1px solid #17613f;
+      border-radius:999px;
+      padding:7px 11px;
+      color:#dffff0;
+      font-size:12.5px;
+      font-weight:700;
+      background:#10251c;
+    }
+    .pulse {
+      width:7px; height:7px; border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 10px var(--green);
+      animation:pulse 1.3s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:.55; transform:scale(.85); }
+      50% { opacity:1; transform:scale(1.15); }
     }
 
-    .hero p {
-      margin: 14px auto 12px;
-      max-width: 360px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.45;
+    .offer-card {
+      margin-top:14px;
+      padding:18px 16px 21px;
+    }
+    .game-head {
+      display:flex;
+      align-items:flex-start;
+      gap:8px;
+      padding-bottom:18px;
+      border-bottom:1px solid #2d302f;
+    }
+    .game-icon {
+      width:62px; height:62px;
+      border-radius:14px;
+      object-fit:cover;
+      flex:0 0 auto;
+    }
+    .game-meta { padding-top:4px; }
+    .game-meta h2 {
+      font-size:17.5px;
+      margin-bottom:5px;
+      letter-spacing:-.5px;
+    }
+    .rating-line {
+      font-size:10.5px;
+      color:#c5c8c7;
+      margin-bottom:6px;
+    }
+    .rate {
+      font-size:10px;
+      font-weight:800;
+      color:var(--green);
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 8px 15px;
-      border-radius: 999px;
-      background: rgba(255, 31, 61, 0.13);
-      border: 1px solid var(--border);
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 800;
-      margin-top: 4px;
-      box-shadow: 0 0 14px rgba(255, 31, 61, 0.13);
+    .how {
+      margin-top:20px;
+      color:#8c9590;
+      letter-spacing:1.1px;
+      font-size:10px;
+      font-weight:800;
     }
-
-    .cta {
-      width: 100%;
-      border: none;
-      margin-top: 22px;
-      padding: 18px 20px;
-      border-radius: 15px;
-      background: var(--gradient);
-      color: #ffffff;
-      font-size: 17px;
-      font-weight: 950;
-      cursor: pointer;
-      box-shadow:
-        0 0 22px rgba(255, 31, 61, 0.40),
-        0 12px 28px rgba(255, 31, 61, 0.17);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .cta:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 0 30px rgba(255, 31, 61, 0.52),
-        0 16px 34px rgba(255, 31, 61, 0.22);
-    }
-
-    .trust {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 11.5px;
-      flex-wrap: wrap;
-    }
-
-    .trust span::before {
-      content: "✓ ";
-      color: var(--red-3);
-      font-weight: 900;
-    }
-
-    .earn-card,
-    .steps-card,
-    .important-card {
-      background: linear-gradient(180deg, rgba(20, 20, 20, 0.98), rgba(7, 7, 7, 0.98));
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 0 26px rgba(255, 31, 61, 0.09);
-    }
-
-    .earn-card {
-      padding: 24px 18px;
-      margin-top: 16px;
-      text-align: center;
-    }
-
-    .earn-card h2 {
-      font-size: 19px;
-      line-height: 1.25;
-      margin-bottom: 6px;
-    }
-
-    .earn-card h2 span {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .earn-card p {
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.4;
-      max-width: 320px;
-      margin: 0 auto 18px;
-    }
-
-    .earn-boxes {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 22px;
-    }
-
-    .earn-box {
-      border: 1px solid rgba(255, 31, 61, 0.26);
-      background: #080808;
-      border-radius: 12px;
-      padding: 17px 10px;
-    }
-
-    .earn-box small {
-      display: block;
-      color: #8d8d8d;
-      font-size: 10px;
-      letter-spacing: 2px;
-      font-weight: 800;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-    }
-
-    .earn-box strong {
-      font-size: 25px;
-      line-height: 1;
-      color: #ffffff;
-    }
-
-    .earn-box.highlight {
-      border-color: rgba(255, 75, 92, 0.54);
-      box-shadow: inset 0 0 18px rgba(255, 31, 61, 0.08);
-    }
-
-    .earn-box.highlight strong {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .slider-wrap {
-      padding: 0 4px;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--red-main);
-      cursor: pointer;
-    }
-
-    .slider-values {
-      display: flex;
-      justify-content: space-between;
-      color: #8d8d8d;
-      font-size: 11px;
-      margin-top: 5px;
-    }
-
-    .steps-card {
-      margin-top: 18px;
-      overflow: hidden;
-    }
-
-    .steps-title {
-      padding: 18px 18px 8px;
-      color: #ffffff;
-      font-size: 12px;
-      letter-spacing: 2.2px;
-      text-align: center;
-      font-weight: 950;
-      text-transform: uppercase;
-    }
-
+    .steps { margin-top:13px; display:grid; gap:8px; }
     .step {
-      display: grid;
-      grid-template-columns: 42px 1fr;
-      gap: 10px;
-      padding: 17px 18px;
-      border-top: 1px solid rgba(255, 31, 61, 0.13);
+      display:flex;
+      align-items:center;
+      gap:7px;
+      font-size:12px;
+      font-weight:700;
+      line-height:1.3;
     }
-
     .num {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: var(--gradient);
-      color: #ffffff;
-      font-weight: 950;
-      box-shadow: 0 0 14px rgba(255, 31, 61, 0.36);
-      margin-top: 2px;
-    }
-
-    .step h3 {
-      font-size: 15px;
-      margin-bottom: 5px;
-    }
-
-    .step p {
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.45;
-    }
-
-    .important-card {
-      margin-top: 16px;
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 32px 1fr;
-      gap: 12px;
-      position: relative;
-      border-color: rgba(255, 75, 92, 0.32);
-      background:
-        radial-gradient(circle at 88% 0%, rgba(255, 31, 61, 0.15), transparent 40%),
-        linear-gradient(180deg, rgba(20, 11, 12, 0.98), rgba(8, 8, 8, 0.98));
-    }
-
-    .badge {
-      position: absolute;
-      top: 0;
-      right: 18px;
-      transform: translateY(-50%);
-      background: linear-gradient(90deg, #e50914, #ff1f3d);
-      color: #ffffff;
-      font-size: 10px;
-      letter-spacing: 1.7px;
-      font-weight: 950;
-      padding: 7px 12px;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 0 14px rgba(255, 31, 61, 0.26);
-      text-transform: uppercase;
-    }
-
-    .lock {
-      font-size: 23px;
-      margin-top: 4px;
-      filter: drop-shadow(0 0 6px rgba(255, 31, 61, 0.26));
-    }
-
-    .important-card small {
-      color: #ffffff;
-      font-size: 10.5px;
-      font-weight: 950;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-    }
-
-    .important-card p {
-      margin-top: 6px;
-      color: #ffffff;
-      font-size: 14px;
-      line-height: 1.4;
-    }
-
-    .important-card p span {
-      color: #ff4b5c;
-      font-weight: 950;
+      width:24px; height:24px;
+      border-radius:7px;
+      background:#073c2a;
+      border:1px solid #0c7650;
+      color:var(--green);
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      font-size:11px;
     }
 
     .stats {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      margin: 18px 0;
-      color: var(--muted);
-      font-size: 12px;
-      flex-wrap: wrap;
+      margin-top:14px;
+      background:#111216;
+      border:1px solid #282d34;
+      border-radius:14px;
+      padding:16px 8px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      text-align:center;
+    }
+    .stat + .stat { border-left:1px solid #2b2f34; }
+    .stat b {
+      display:block;
+      font-size:16.5px;
+      margin-bottom:5px;
+      white-space:nowrap;
+    }
+    .stat span {
+      display:block;
+      font-size:8.5px;
+      color:#87909e;
+      letter-spacing:.5px;
     }
 
-    .bottom-cta {
-      margin-top: 8px;
-      margin-bottom: 4px;
+    .legal {
+      padding:19px 11px 10px;
+      text-align:center;
+      color:#7f8783;
+      font-size:10.5px;
+      line-height:1.5;
+    }
+    .links {
+      text-align:center;
+      color:#808785;
+      font-size:10.5px;
+      padding:11px 0 1px;
+    }
+    .links i {
+      font-style:normal;
+      color:#3f4542;
+      padding:0 8px;
     }
 
-    @media (max-width: 360px) {
-      .hero h1 {
-        font-size: 30px;
-      }
-
-      .trust {
-        gap: 8px;
-        font-size: 10.5px;
-      }
-
-      .stats {
-        gap: 10px;
-        font-size: 11px;
-      }
-
-      .brand-item {
-        width: 58px;
-        height: 58px;
-        border-radius: 14px;
-      }
-
-      .brand-x {
-        font-size: 14px;
-      }
+    .sticky {
+      position:fixed;
+      left:0; right:0; bottom:0;
+      z-index:90;
+      background:rgba(11,13,14,.97);
+      border-top:1px solid #272b2f;
+      padding:8px 13px calc(10px + env(safe-area-inset-bottom));
+      box-shadow:0 -12px 32px rgba(0,0,0,.5);
     }
+    .sticky-inner {
+      max-width:364px;
+      margin:0 auto;
+    }
+    .available {
+      text-align:center;
+      color:#b2b6ba;
+      font-size:10.5px;
+      margin-bottom:8px;
+    }
+    .available .mini-dot { color:var(--green); font-size:14px; vertical-align:-1px; margin-right:5px; }
+    .buttons {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+    .store-btn {
+      height:50px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      cursor:pointer;
+      border:1px solid #3a3f47;
+      background:#16171d;
+      color:#fff;
+    }
+    .store-btn.google {
+      border-color:#00db79;
+      background:linear-gradient(135deg,#00f08b,#00d477);
+      color:#00170d;
+      box-shadow:0 0 20px rgba(0,237,133,.25);
+    }
+    .store-btn svg { width:20px; height:23px; flex:0 0 auto; }
+    .btn-text {
+      text-align:left;
+      font-size:8px;
+      line-height:1.0;
+    }
+    .btn-text strong {
+      display:block;
+      font-size:13.5px;
+      margin-top:2px;
+      line-height:1;
+    }
+
+    @media (max-width:420px) {
+      .site { max-width:390px; }
+      main { padding:14px 14px 18px; }
+      .hero-card { padding:29px 20px 22px; }
+      .offer-card { padding:18px 16px 21px; }
+    }
+
+    /* 21+ confirmation popup */
+    .age-popup {
+      position:fixed;
+      inset:0;
+      z-index:300;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:22px 17px;
+      background:rgba(0,0,0,.78);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:opacity .22s ease, visibility .22s ease;
+    }
+
+    .age-popup.is-open {
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+
+    .age-popup-card {
+      position:relative;
+      width:100%;
+      max-width:360px;
+      padding:29px 22px 20px;
+      text-align:center;
+      background:
+        radial-gradient(circle at 50% 110%, rgba(0,237,133,.12), transparent 37%),
+        #0d1112;
+      border:1px solid #253033;
+      border-radius:20px;
+      box-shadow:0 24px 70px rgba(0,0,0,.72), 0 10px 26px rgba(0,237,133,.08);
+      transform:translateY(12px) scale(.98);
+      transition:transform .22s ease;
+    }
+
+    .age-popup.is-open .age-popup-card {
+      transform:translateY(0) scale(1);
+    }
+
+    .age-popup-close {
+      position:absolute;
+      top:12px;
+      right:14px;
+      width:32px;
+      height:32px;
+      border:0;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#252a2c;
+      color:#92999b;
+      font-size:23px;
+      line-height:1;
+      cursor:pointer;
+    }
+
+    .age-popup-kicker {
+      margin-bottom:15px;
+      color:var(--green);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:1.7px;
+    }
+
+    .age-popup-title {
+      margin:0 auto 15px;
+      max-width:300px;
+      font-size:25px;
+      line-height:1.14;
+      letter-spacing:-.7px;
+      font-weight:900;
+    }
+
+    .age-popup-title span {
+      color:var(--green);
+    }
+
+    .age-popup-copy {
+      max-width:310px;
+      margin:0 auto 40px;
+      color:#929798;
+      font-size:15px;
+      line-height:1.42;
+    }
+
+    .age-popup-cta {
+      width:100%;
+      min-height:57px;
+      border:0;
+      border-radius:999px;
+      background:linear-gradient(135deg,#00f08b,#00d477);
+      color:#00170d;
+      font-size:16px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 0 24px rgba(0,237,133,.25);
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+
+    .age-popup-cta:active {
+      transform:scale(.985);
+      box-shadow:0 0 15px rgba(0,237,133,.2);
+    }
+
+    body.popup-open {
+      overflow:hidden;
+    }
+
   </style>
 </head>
 
 <body>
-  <main class="page">
-    <header class="logo">
-      <div class="brand-item">
-        <img src="testerup logo.jpg" alt="Testerup-logotyp" />
+  <div class="site">
+    <div class="notif-wrap" aria-live="polite">
+      <div class="notification" id="notification"></div>
+    </div>
+
+    <main>
+      <section class="hero-card">
+        <div class="app-logo" aria-label="Freecash">
+          <img src="fc logo.png" alt="Freecash logo" />
+        </div>
+
+        <div class="store-pill">
+          <span class="stars">★★★★★</span>
+          <b>4.7</b>
+          <span class="dotsep">·</span>
+          <b>App Store</b>
+          <span>(50.000+ Bewertungen)</span>
+        </div>
+
+        <h1>Mit Games <span>Geld verdienen</span></h1>
+        <p class="lead">Verdiene echtes Geld, indem du Spiele spielst, Aufgaben erledigst und Apps testest. Auszahlung jederzeit – ohne Mindestbetrag.</p>
+
+        <div class="live-pill">
+          <span class="pulse"></span>
+          <span><strong>1,886</strong>&nbsp; Personen verdienen gerade jetzt</span>
+        </div>
+      </section>
+
+      <section class="offer-card">
+        <div class="game-head">
+          <img class="game-icon" src="gardenscapes.png">
+          <div class="game-meta">
+            <h2>Gardenscapes</h2>
+            <div class="rating-line"><span class="stars">★★★★★</span> 4.8 · Bestbewertet</div>
+            <div class="rate">Verdienst: 25 €/Std.</div>
+          </div>
+        </div>
+
+        <div class="how">SO FUNKTIONIERT ES</div>
+        <div class="steps">
+          <div class="step"><span class="num">1</span><span>Registriere dich bei Freecash (wähle 21+)</span></div>
+          <div class="step"><span class="num">2</span><span>Spiele Spiele und erledige Aufgaben</span></div>
+          <div class="step"><span class="num">3</span><span>Lass dir über PayPal, Visa oder Krypto auszahlen</span></div>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat"><b>200 Mio. €+</b><span>AUSGEZAHLT</span></div>
+        <div class="stat"><b>4.7★</b><span>APP-BEWERTUNG</span></div>
+        <div class="stat"><b>0 €</b><span>ANMELDEBONUS</span></div>
+      </section>
+
+      <p class="legal">Verfügbarkeit, Belohnungen und Teilnahmeberechtigung können je nach Nutzer, Standort und Aufgabe variieren. Ergebnisse sind nicht garantiert und hängen vom individuellen Einsatz ab. Die Einnahmen unterscheiden sich je nach Angebot.</p>
+
+      <div class="links">
+        <a href="#">Datenschutzerklärung</a><i>·</i><a href="#">Nutzungsbedingungen</a>
       </div>
+    </main>
+  </div>
 
-      <div class="brand-x">×</div>
 
-      <div class="brand-item">
-        <img src="subway surfers logo.jpg" alt="Subway Surfers-logotyp" />
-      </div>
-    </header>
-
-    <section class="hero">
-      <h1>
-        Få betalt för att testa
-        <span>Appar och spel</span>
-      </h1>
-
-      <p>
-        Spela spel, slutför enkla erbjudanden, svara på undersökningar och tjäna riktiga belöningar —
-        PayPal, presentkort och mer.
+  <section
+    class="age-popup"
+    id="age-popup"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="age-popup-title"
+    aria-hidden="true"
+  >
+    <div class="age-popup-card">
+      <button type="button" class="age-popup-close" id="age-popup-close" aria-label="Schließen">×</button>
+      <div class="age-popup-kicker">SCHNELLER HINWEIS</div>
+      <h2 class="age-popup-title" id="age-popup-title">
+        Wähle bei der<br>Registrierung <span>21+</span>
+      </h2>
+      <p class="age-popup-copy">
+        Dadurch werden die bestbezahlten Spieleangebote auf Freecash freigeschaltet. Überspringe diesen Schritt nicht.
       </p>
-
-      <div class="pill">● Riktiga belöningar — inte spelmynt eller boosters.</div>
-
-      <button class="cta" onclick="goToOffer()">Ladda ner nu →</button>
-
-      <div class="trust">
-        <span>Gratis</span>
-        <span>Snabba belöningar</span>
-        <span>Snabb registrering</span>
-      </div>
-    </section>
-
-
-    <section class="steps-card">
-      <div class="steps-title">Så börjar du tjäna</div>
-
-      <div class="step">
-        <div class="num">1</div>
-        <div>
-          <h3>Ladda ner Testerup</h3>
-          <p>Tillgänglig för iOS och iPad. Registreringen tar mindre än 60 sekunder.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="num">2</div>
-        <div>
-          <h3>Spela spel och slutför erbjudanden</h3>
-          <p>Testa appar, spela spel, svara på undersökningar och lås upp belöningsnivåer.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="num">3</div>
-        <div>
-          <h3>Ta ut dina belöningar</h3>
-          <p>Lös in via PayPal, Visa, Amazon-presentkort och mer.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="important-card">
-      <div class="badge">Viktigt</div>
-      <div class="lock">🔒</div>
-      <div>
-        <small>Aktivering krävs</small>
-        <p>
-          Nya användare: Slutför <span>2 snabba erbjudanden</span> för att låsa upp full åtkomst
-          och börja tjäna.
-        </p>
-      </div>
-    </section>
-
-    <div class="stats">
-      <span>10 miljoner+ användare</span>
-      <span>Över 50 miljoner USD utbetalt</span>
-      <span>🇺🇸 US</span>
+      <button type="button" class="age-popup-cta" id="age-popup-cta">
+        Verstanden →
+      </button>
     </div>
+  </section>
 
-    <div class="bottom-cta">
-      <button class="cta" onclick="goToOffer()">Ladda ner nu →</button>
+  <div class="sticky">
+    <div class="sticky-inner">
+      <div class="available"><span class="mini-dot">•</span>Jetzt verfügbar für iOS und Android</div>
+      <div class="buttons">
+        <button type="button" class="store-btn affiliate-link" aria-label="Laden im App Store">
+          <svg viewBox="0 0 24 29" fill="currentColor" aria-hidden="true">
+            <path d="M19.7 15.4c0-4 3.3-5.9 3.5-6-1.9-2.8-4.9-3.2-6-3.2-2.5-.3-5 1.5-6.3 1.5-1.3 0-3.4-1.5-5.6-1.4-2.9 0-5.6 1.7-7.1 4.3-3.1 5.3-.8 13.1 2.2 17.4 1.5 2.1 3.2 4.5 5.5 4.4 2.2-.1 3-1.4 5.7-1.4 2.6 0 3.4 1.4 5.7 1.3 2.4 0 3.9-2.1 5.3-4.3 1.7-2.4 2.4-4.8 2.4-4.9-.1 0-5.3-2-5.3-7.7z" transform="scale(.72) translate(2 -1)"/>
+            <path d="M15.6 3.6c1.2-1.5 2-3.5 1.8-5.5-1.8.1-4 1.2-5.3 2.7-1.1 1.3-2.1 3.4-1.8 5.3 2 .2 4.1-1 5.3-2.5z" transform="scale(.72) translate(2 2)"/>
+          </svg>
+          <span class="btn-text">Laden im<strong>App Store</strong></span>
+        </button>
+
+        <button type="button" class="store-btn google affiliate-link" aria-label="Laden bei Google Play">
+          <svg viewBox="0 0 32 36" aria-hidden="true">
+            <path fill="#00a173" d="M2 2l18 16L2 34z"/>
+            <path fill="#003d2b" d="M20 18l5-4 5 3c1 .7 1 1.8 0 2.5l-5 3.1z"/>
+            <path fill="#004f39" d="M2 2l23 12-5 4z"/>
+            <path fill="#007c58" d="M2 34l23-11.4-5-4.6z"/>
+          </svg>
+          <span class="btn-text">Laden bei<strong>Google Play</strong></span>
+        </button>
+      </div>
     </div>
-  </main>
+  </div>
 
   <script>
-  function getIncomingSource() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("source");
+    const AFFILIATE_URL = "https://giftclick.org/aff_c?tl_id=6f06a7f1";
+
+const pageParams = new URLSearchParams(window.location.search);
+const source = pageParams.get("source");
+
+function appendSource(baseUrl) {
+  const url = new URL(baseUrl);
+
+  if (source) {
+    url.searchParams.set("source", source);
   }
 
-  function buildOutgoingLink() {
-    const baseLink =
-      "https://giftclick.org/aff_c?offer_id=4615&aff_id=150406";
+  return url.toString();
+}
 
-    const source = getIncomingSource();
+const finalAffiliateUrl = appendSource(AFFILIATE_URL);
 
-    if (!source) {
-      return baseLink;
+    const agePopup = document.getElementById("age-popup");
+    const agePopupClose = document.getElementById("age-popup-close");
+    const agePopupCta = document.getElementById("age-popup-cta");
+
+    function openAgePopup() {
+      agePopup.classList.add("is-open");
+      agePopup.setAttribute("aria-hidden", "false");
+      document.body.classList.add("popup-open");
+      agePopupCta.focus();
     }
 
-    const separator = baseLink.includes("?") ? "&" : "?";
-
-    return (
-      baseLink +
-      separator +
-      "source=" +
-      encodeURIComponent(source)
-    );
-  }
-
-  let offerRedirectStarted = false;
-
-  function goToOffer() {
-    // Prevent accidental double-clicks from firing twice.
-    if (offerRedirectStarted) {
-      return;
+    function closeAgePopup() {
+      agePopup.classList.remove("is-open");
+      agePopup.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("popup-open");
     }
 
-    offerRedirectStarted = true;
+    document.querySelectorAll(".affiliate-link").forEach(function (cta) {
+      cta.addEventListener("click", openAgePopup);
+    });
 
-    const outgoingLink = buildOutgoingLink();
+    agePopupCta.addEventListener("click", function () {
+      window.location.assign(finalAffiliateUrl);
+    });
 
-    // Fire TikTok's Click Button event.
-    if (
-      window.ttq &&
-      typeof window.ttq.track === "function"
-    ) {
-      ttq.track("ClickButton", {
-        content_name: "Testerup Download CTA"
-      });
+    agePopupClose.addEventListener("click", closeAgePopup);
+
+    agePopup.addEventListener("click", function (event) {
+      if (event.target === agePopup) closeAgePopup();
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && agePopup.classList.contains("is-open")) {
+        closeAgePopup();
+      }
+    });
+
+    const notifications = [
+  ["Lukas M.", "39.80 €"],
+  ["Julia K.", "53.45 €"],
+  ["Michael S.", "80.00 €"],
+  ["Anna W.", "66.40 €"],
+  ["Katharina H.", "40.20 €"],
+  ["Daniel B.", "54.70 €"],
+  ["Florian R.", "42.35 €"],
+  ["Lisa N.", "78.50 €"],
+  ["Tobias L.", "39.15 €"],
+  ["Lena F.", "55.90 €"],
+  ["Thomas T.", "41.60 €"],
+  ["Sarah G.", "67.25 €"]
+];
+
+    const notificationEl = document.getElementById("notification");
+    let notificationIndex = 0;
+
+    function renderNotification() {
+      const item = notifications[notificationIndex];
+      notificationEl.innerHTML =
+        '<span class="country">AT</span>' +
+        item[0] + ' hat gerade verdient <span class="amount">' +
+        item[1] + '</span> — sofort ausgezahlt';
+      notificationIndex = (notificationIndex + 1) % notifications.length;
     }
 
-    // Brief delay gives the browser time to dispatch the Pixel event
-    // before leaving for the affiliate offer.
-    setTimeout(function () {
-      window.location.href = outgoingLink;
-    }, 350);
-  }
-</script>
+    renderNotification();
+
+    setInterval(function () {
+      notificationEl.classList.add("changing");
+      setTimeout(function () {
+        renderNotification();
+        notificationEl.classList.remove("changing");
+      }, 200);
+    }, 2800);
+  </script>
 </body>
 </html>
