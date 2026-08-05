@@ -538,9 +538,9 @@
   >
     <div class="age-popup-card">
       <button type="button" class="age-popup-close" id="age-popup-close" aria-label="Cerrar">×</button>
-      <div class="age-popup-kicker">AVISO RÁPIDO</div>
+      <div class="age-popup-kicker">CONSEJO RÁPIDO</div>
       <h2 class="age-popup-title" id="age-popup-title">
-        Durante el registro<br>elige <span>21+</span>
+        Al registrarte, <br>selecciona <span>21+</span>
       </h2>
       <p class="age-popup-copy">
         Así desbloquearás las ofertas de juegos mejor pagadas en Freecash. No te saltes este paso.
