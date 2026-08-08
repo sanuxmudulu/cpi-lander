@@ -12,7 +12,6 @@
 
   <title>$750 Target Coupon</title>
 
-  <!-- Clean, modern font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -22,29 +21,21 @@
   >
 
   <style>
+
     :root {
       --red: #cc0000;
-      --red-dark: #a90000;
+      --red-dark: #b00000;
 
-      --black: #161616;
-      --text: #292929;
+      --black: #191919;
+      --text: #333333;
 
-      --muted: #737373;
-      --muted-light: #969696;
-
-      --surface: #f8f8f8;
-      --surface-2: #fbfbfb;
-
-      --border: #e7e7e7;
+      --gray: #777777;
+      --light-gray: #f7f7f7;
+      --border: #e6e6e6;
 
       --green: #22a447;
-
-      --shadow:
-        0 12px 30px rgba(0, 0, 0, 0.07);
-
-      --shadow-soft:
-        0 5px 16px rgba(0, 0, 0, 0.055);
     }
+
 
     * {
       margin: 0;
@@ -52,96 +43,105 @@
       box-sizing: border-box;
     }
 
+
     html {
       -webkit-text-size-adjust: 100%;
-      scroll-behavior: smooth;
     }
 
+
     body {
-      font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      min-height: 100vh;
+
+      font-family:
+        "DM Sans",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
         sans-serif;
 
-      background: #ffffff;
+      background: #f4f4f4;
       color: var(--text);
-
-      min-height: 100vh;
 
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    button,
-    a,
-    input {
-      font: inherit;
-    }
 
     a {
+      text-decoration: none;
       -webkit-tap-highlight-color: transparent;
     }
+
 
     .page {
       width: 100%;
       max-width: 430px;
 
-      margin: 0 auto;
-
       min-height: 100vh;
 
-      padding:
-        max(31px, env(safe-area-inset-top))
-        20px
-        calc(40px + env(safe-area-inset-bottom));
+      margin: 0 auto;
 
       background: #ffffff;
+
+      padding:
+        max(32px, env(safe-area-inset-top))
+        20px
+        calc(35px + env(safe-area-inset-bottom));
+
+      box-shadow:
+        0 0 40px rgba(0, 0, 0, 0.055);
     }
 
 
-    /* =====================================================
-       ACTIVITY POPUP
-       ===================================================== */
+    /* ==========================================================
+       NOTIFICATION
+       ========================================================== */
 
     .notification {
       position: fixed;
 
-      top: max(18px, env(safe-area-inset-top));
+      top: max(54px, env(safe-area-inset-top));
       left: 50%;
-
-      width: calc(100% - 32px);
-      max-width: 398px;
-
-      z-index: 9999;
 
       transform:
         translateX(-50%)
-        translateY(-16px)
+        translateY(-14px)
         scale(0.98);
+
+      z-index: 9999;
+
+      width: calc(100% - 44px);
+      max-width: 385px;
+
+      min-height: 57px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 9px 12px;
+
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      border-radius: 11px;
+
+      background: rgba(255, 255, 255, 0.97);
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.16);
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
 
       opacity: 0;
       visibility: hidden;
 
-      display: flex;
-      align-items: center;
-      gap: 11px;
-
-      padding: 11px 13px;
-
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 14px;
-
-      background: rgba(255, 255, 255, 0.96);
-
-      box-shadow:
-        0 14px 40px rgba(0, 0, 0, 0.14);
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
       transition:
-        opacity 260ms ease,
-        transform 260ms ease,
-        visibility 260ms ease;
+        opacity 250ms ease,
+        transform 250ms ease,
+        visibility 250ms ease;
     }
+
 
     .notification.show {
       opacity: 1;
@@ -153,11 +153,12 @@
         scale(1);
     }
 
-    .notification-logo {
-      width: 38px;
-      height: 38px;
 
-      flex: 0 0 38px;
+    .notification-logo {
+      width: 31px;
+      height: 31px;
+
+      flex: 0 0 31px;
 
       display: flex;
       align-items: center;
@@ -166,64 +167,70 @@
       border-radius: 50%;
 
       background: #ffffff;
-
-      border: 1px solid #eeeeee;
     }
 
+
     .notification-logo img {
-      width: 31px;
-      height: 31px;
+      width: 29px;
+      height: 29px;
 
       object-fit: contain;
     }
 
-    .notification-copy {
+
+    .notification-content {
       min-width: 0;
       flex: 1;
     }
 
-    .notification-kicker {
-      font-size: 10px;
-      line-height: 1;
+
+    .notification-title {
+      font-size: 11px;
+      line-height: 1.1;
 
       font-weight: 700;
 
-      color: #858585;
+      color: #393939;
 
-      text-transform: uppercase;
-
-      letter-spacing: 0.055em;
-
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
-    .notification-text {
-      font-size: 12px;
-      line-height: 1.34;
 
-      font-weight: 500;
+    .notification-message {
+      font-size: 9.5px;
+      line-height: 1.25;
 
-      color: #484848;
+      font-weight: 400;
+
+      color: #777777;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .notification-text .money {
+
+    .notification-message .money {
       color: var(--green);
       font-weight: 700;
     }
 
 
-    /* =====================================================
+
+    /* ==========================================================
        HERO
-       ===================================================== */
+       ========================================================== */
 
     .hero {
-      padding-top: 17px;
       text-align: center;
+
+      padding-top: 15px;
     }
 
-    .brand-logo-wrap {
-      width: 78px;
-      height: 78px;
+
+    .logo-shell {
+      width: 76px;
+      height: 76px;
 
       margin: 0 auto 17px;
 
@@ -236,20 +243,22 @@
       background: #ffffff;
 
       box-shadow:
-        0 9px 28px rgba(0, 0, 0, 0.085);
+        0 9px 27px rgba(0, 0, 0, 0.08);
     }
 
-    .brand-logo {
-      display: block;
 
-      width: 66px;
-      height: 66px;
+    .logo-shell img {
+      width: 65px;
+      height: 65px;
 
       object-fit: contain;
     }
 
+
     .headline {
-      font-size: 28px;
+      margin: 0;
+
+      font-size: 27px;
       line-height: 1.08;
 
       letter-spacing: -0.045em;
@@ -257,145 +266,155 @@
       font-weight: 800;
 
       color: #191919;
-
-      margin-bottom: 10px;
     }
+
 
     .headline .target {
       color: var(--red);
     }
 
-    .hero-subtext {
-      max-width: 310px;
 
-      margin: 0 auto;
+    .hero-subtitle {
+      max-width: 305px;
+
+      margin: 12px auto 0;
+
+      color: #747474;
 
       font-size: 13px;
       line-height: 1.55;
 
       font-weight: 400;
-
-      color: #7a7a7a;
     }
 
 
-    /* =====================================================
-       MAIN FLOW
-       ===================================================== */
 
-    .main-flow {
-      margin-top: 27px;
-    }
+    /* ==========================================================
+       STEPS
+       ========================================================== */
 
     .steps {
-      padding: 6px 3px;
+      margin-top: 34px;
+
+      padding: 0 5px;
     }
+
 
     .step {
       display: grid;
 
-      grid-template-columns: 34px 1fr;
-
-      align-items: start;
+      grid-template-columns: 36px 1fr;
 
       min-height: 55px;
     }
+
 
     .step:last-child {
       min-height: 38px;
     }
 
-    .step-left {
+
+    .step-rail {
       position: relative;
 
       display: flex;
       justify-content: center;
-
-      height: 100%;
     }
 
-    .step-left::after {
+
+    .step-rail::after {
       content: "";
 
       position: absolute;
 
       top: 29px;
-      bottom: -1px;
+      bottom: -2px;
 
       width: 1px;
 
       background: #e6e6e6;
     }
 
-    .step:last-child .step-left::after {
+
+    .step:last-child .step-rail::after {
       display: none;
     }
 
-    .step-number {
-      width: 26px;
-      height: 26px;
 
-      border-radius: 50%;
+    .step-number {
+      position: relative;
+      z-index: 2;
+
+      width: 27px;
+      height: 27px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      position: relative;
-      z-index: 2;
+      border-radius: 50%;
 
-      background: #1e1e1e;
+      background: #1d1d1f;
       color: #ffffff;
 
       font-size: 11px;
       font-weight: 700;
 
       box-shadow:
-        0 2px 5px rgba(0, 0, 0, 0.15);
+        0 2px 6px rgba(0, 0, 0, 0.16);
     }
 
-    .step-content {
-      padding: 3px 0 15px 10px;
+
+    .step-copy {
+      padding:
+        3px
+        0
+        15px
+        11px;
     }
 
-    .step-title {
+
+    .step-text {
       font-size: 14px;
       line-height: 1.35;
 
       font-weight: 500;
 
-      letter-spacing: -0.01em;
+      color: #2e2e2e;
 
-      color: #333333;
+      letter-spacing: -0.01em;
     }
 
-    .step-note {
-      display: inline-block;
+
+    .important {
+      display: block;
 
       margin-top: 2px;
 
       font-size: 11px;
-      line-height: 1.2;
+      line-height: 1.1;
 
       font-weight: 700;
 
       font-style: italic;
 
-      color: #3e3e3e;
+      color: #333333;
     }
 
 
-    /* =====================================================
+
+    /* ==========================================================
        CTA
-       ===================================================== */
+       ========================================================== */
 
-    .cta-wrap {
-      margin-top: 21px;
+    .cta-area {
+      margin-top: 22px;
     }
+
 
     .cta {
       width: 100%;
-      min-height: 56px;
+      height: 56px;
 
       display: flex;
       align-items: center;
@@ -403,12 +422,10 @@
 
       gap: 8px;
 
-      text-decoration: none;
+      border-radius: 999px;
 
       background: var(--red);
       color: #ffffff;
-
-      border-radius: 999px;
 
       font-size: 15px;
       line-height: 1;
@@ -418,62 +435,64 @@
       letter-spacing: -0.015em;
 
       box-shadow:
-        0 12px 24px rgba(204, 0, 0, 0.22);
+        0 12px 25px rgba(204, 0, 0, 0.22);
 
       transition:
-        transform 150ms ease,
         background 150ms ease,
+        transform 150ms ease,
         box-shadow 150ms ease;
     }
 
+
     .cta:hover {
-      background: #bd0000;
-
-      box-shadow:
-        0 14px 27px rgba(204, 0, 0, 0.25);
-    }
-
-    .cta:active {
-      transform: scale(0.985);
-
       background: var(--red-dark);
     }
 
-    .cta-arrow {
-      transform: translateY(-0.5px);
 
+    .cta:active {
+      transform: scale(0.985);
+    }
+
+
+    .cta-arrow {
       font-size: 17px;
 
-      transition: transform 150ms ease;
+      transition:
+        transform 150ms ease;
     }
+
 
     .cta:hover .cta-arrow {
-      transform: translate(2px, -0.5px);
+      transform: translateX(2px);
     }
 
 
-    /* =====================================================
-       STATS
-       ===================================================== */
 
-    .stats {
-      margin-top: 13px;
+    /* ==========================================================
+       METRICS
+       ========================================================== */
+
+    .metrics {
+      margin-top: 14px;
+
+      width: 100%;
+
+      min-height: 75px;
 
       display: grid;
       grid-template-columns: repeat(3, 1fr);
 
-      border: 1px solid var(--border);
+      border: 1px solid #e1e1e1;
       border-radius: 18px;
 
-      background: var(--surface-2);
+      background: #fafafa;
 
       overflow: hidden;
     }
 
-    .stat {
-      position: relative;
 
-      min-height: 76px;
+    .metric {
+      position: relative;
 
       display: flex;
       flex-direction: column;
@@ -481,12 +500,13 @@
       align-items: center;
       justify-content: center;
 
-      padding: 11px 6px;
-
       text-align: center;
+
+      padding: 10px 4px;
     }
 
-    .stat:not(:last-child)::after {
+
+    .metric:not(:last-child)::after {
       content: "";
 
       position: absolute;
@@ -494,220 +514,101 @@
       right: 0;
 
       width: 1px;
-      height: 36px;
+      height: 38px;
 
-      background: #e1e1e1;
+      background: #dddddd;
     }
 
-    .stat-label {
-      font-size: 8.5px;
-      line-height: 1.2;
 
-      letter-spacing: 0.07em;
+    .metric-label {
+      margin-bottom: 6px;
+
+      font-size: 8px;
+      line-height: 1.2;
 
       font-weight: 700;
 
+      letter-spacing: 0.07em;
+
       text-transform: uppercase;
 
-      color: #858585;
-
-      margin-bottom: 6px;
+      color: #7c7c7c;
     }
 
-    .stat-value {
+
+    .metric-value {
       font-size: 17px;
       line-height: 1;
 
-      letter-spacing: -0.025em;
-
       font-weight: 800;
 
-      color: #1a1a1a;
+      letter-spacing: -0.03em;
+
+      color: #171717;
     }
 
-    .stat-value.time {
+
+    .metric-value.time {
       font-size: 15px;
     }
 
 
-    /* =====================================================
-       BOTTOM SECTION
-       ===================================================== */
 
-    .bottom-section {
-      margin-top: 34px;
+    /* ==========================================================
+       SUCCESS STORIES
+       ========================================================== */
+
+    .stories {
+      margin-top: 20px;
     }
 
-    .section-eyebrow {
+
+    .stories-title {
       text-align: center;
 
-      font-size: 10px;
+      margin-bottom: 10px;
 
-      font-weight: 700;
-
-      letter-spacing: 0.09em;
-
-      text-transform: uppercase;
-
-      color: var(--red);
-
-      margin-bottom: 7px;
-    }
-
-    .section-title {
-      text-align: center;
-
-      font-size: 21px;
-      line-height: 1.16;
-
-      letter-spacing: -0.035em;
-
-      font-weight: 700;
-
-      color: #1e1e1e;
-
-      margin-bottom: 9px;
-    }
-
-    .section-description {
-      max-width: 320px;
-
-      margin: 0 auto 21px;
-
-      text-align: center;
-
-      font-size: 12.5px;
-      line-height: 1.55;
-
-      color: #858585;
-    }
-
-
-    /* =====================================================
-       INFO CARDS
-       ===================================================== */
-
-    .info-grid {
-      display: grid;
-
-      gap: 10px;
-    }
-
-    .info-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-
-      padding: 15px;
-
-      border: 1px solid var(--border);
-      border-radius: 17px;
-
-      background: #ffffff;
-
-      box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.025);
-    }
-
-    .info-icon {
-      width: 37px;
-      height: 37px;
-
-      flex: 0 0 37px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 12px;
-
-      background: #fff2f2;
-      color: var(--red);
-
-      font-size: 16px;
-    }
-
-    .info-content {
-      padding-top: 1px;
-    }
-
-    .info-title {
-      font-size: 13px;
-      line-height: 1.25;
-
-      font-weight: 700;
-
-      letter-spacing: -0.01em;
-
-      color: #303030;
-
-      margin-bottom: 4px;
-    }
-
-    .info-copy {
-      font-size: 11.5px;
-      line-height: 1.5;
-
-      color: #7f7f7f;
-    }
-
-
-    /* =====================================================
-       QUALIFICATION BOX
-       ===================================================== */
-
-    .qualification {
-      margin-top: 21px;
-
-      padding: 19px;
-
-      border-radius: 18px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #1d1d1f,
-          #111111
-        );
-
-      color: #ffffff;
-
-      box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.13);
-    }
-
-    .qualification-title {
-      font-size: 16px;
+      font-size: 11px;
       line-height: 1.2;
 
       font-weight: 700;
 
-      letter-spacing: -0.02em;
-
-      margin-bottom: 11px;
+      color: #444444;
     }
 
-    .qualification-list {
-      display: grid;
-      gap: 9px;
+
+    .story-card {
+      width: 100%;
+
+      padding: 11px 12px 10px;
+
+      margin-bottom: 8px;
+
+      border: 1px solid #e6e6e6;
+      border-radius: 13px;
+
+      background: #ffffff;
+
+      box-shadow:
+        0 2px 7px rgba(0, 0, 0, 0.035);
     }
 
-    .qualification-item {
+
+    .story-header {
       display: flex;
       align-items: center;
-      gap: 9px;
 
-      font-size: 11.5px;
-      line-height: 1.35;
+      gap: 8px;
 
-      color: #d5d5d5;
+      margin-bottom: 7px;
     }
 
-    .check {
-      width: 18px;
-      height: 18px;
 
-      flex: 0 0 18px;
+    .avatar {
+      width: 27px;
+      height: 27px;
+
+      flex: 0 0 27px;
 
       display: flex;
       align-items: center;
@@ -715,71 +616,111 @@
 
       border-radius: 50%;
 
-      background: rgba(255, 255, 255, 0.1);
+      background:
+        linear-gradient(
+          145deg,
+          #eeeeee,
+          #f8f8f8
+        );
+
+      color: #333333;
 
       font-size: 10px;
-
-      color: #ffffff;
+      font-weight: 700;
     }
 
 
-    /* =====================================================
-       SECOND CTA
-       ===================================================== */
-
-    .secondary-cta {
-      margin-top: 15px;
-    }
-
-    .secondary-cta .cta {
-      min-height: 52px;
-
-      box-shadow:
-        0 9px 20px rgba(204, 0, 0, 0.18);
+    .story-user {
+      min-width: 0;
     }
 
 
-    /* =====================================================
+    .story-username {
+      font-size: 9.5px;
+      line-height: 1.15;
+
+      font-weight: 700;
+
+      color: #444444;
+    }
+
+
+    .story-time {
+      margin-top: 2px;
+
+      font-size: 8px;
+      line-height: 1.1;
+
+      font-weight: 400;
+
+      color: #9b9b9b;
+    }
+
+
+    .story-copy {
+      font-size: 10.5px;
+      line-height: 1.45;
+
+      font-weight: 400;
+
+      color: #464646;
+    }
+
+
+    .story-copy strong {
+      font-weight: 700;
+
+      color: #252525;
+    }
+
+
+    .story-reactions {
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      margin-top: 7px;
+
+      font-size: 8.5px;
+
+      color: #999999;
+    }
+
+
+    .reaction-heart {
+      color: var(--red);
+    }
+
+
+    .reaction-comment {
+      color: #979797;
+    }
+
+
+
+    /* ==========================================================
        DISCLAIMER
-       ===================================================== */
+       ========================================================== */
 
     .disclaimer {
-      max-width: 355px;
+      max-width: 345px;
 
-      margin: 25px auto 0;
+      margin: 18px auto 0;
 
       text-align: center;
 
-      font-size: 9px;
-      line-height: 1.55;
+      font-size: 8px;
+      line-height: 1.45;
 
-      color: #a0a0a0;
+      color: #aaaaaa;
     }
 
 
-    /* =====================================================
-       DESKTOP
-       ===================================================== */
 
-    @media (min-width: 650px) {
-
-      body {
-        background: #f4f4f4;
-      }
-
-      .page {
-        background: #ffffff;
-
-        box-shadow:
-          0 0 38px rgba(0, 0, 0, 0.055);
-      }
-
-    }
-
-
-    /* =====================================================
-       VERY SMALL PHONES
-       ===================================================== */
+    /* ==========================================================
+       SMALL PHONES
+       ========================================================== */
 
     @media (max-width: 350px) {
 
@@ -788,19 +729,23 @@
         padding-right: 15px;
       }
 
+
       .headline {
         font-size: 25px;
       }
 
-      .stat-label {
-        font-size: 7.5px;
+
+      .metric-label {
+        font-size: 7px;
       }
 
-      .stat-value {
+
+      .metric-value {
         font-size: 15px;
       }
 
     }
+
   </style>
 </head>
 
@@ -808,9 +753,9 @@
 <body>
 
 
-  <!-- =====================================================
-       POPUP
-       ===================================================== -->
+  <!-- ========================================================
+       RECENT ACTIVITY POPUP
+       ======================================================== -->
 
   <div
     class="notification"
@@ -821,21 +766,21 @@
 
       <img
         src="target logo.png"
-        alt=""
+        alt="Target"
       >
 
     </div>
 
 
-    <div class="notification-copy">
+    <div class="notification-content">
 
-      <div class="notification-kicker">
-        Example activity
+      <div class="notification-title">
+        Recent Claim
       </div>
 
       <div
-        class="notification-text"
-        id="notificationText"
+        class="notification-message"
+        id="notificationMessage"
       ></div>
 
     </div>
@@ -844,9 +789,9 @@
 
 
 
-  <!-- =====================================================
+  <!-- ========================================================
        PAGE
-       ===================================================== -->
+       ======================================================== -->
 
   <main class="page">
 
@@ -855,23 +800,28 @@
 
     <section class="hero">
 
-      <div class="brand-logo-wrap">
+      <div class="logo-shell">
 
         <img
           src="target logo.png"
           alt="Target"
-          class="brand-logo"
         >
 
       </div>
 
 
       <h1 class="headline">
-        $750 <span class="target">Target</span> Coupon
+
+        $750
+        <span class="target">
+          Target
+        </span>
+        Coupon
+
       </h1>
 
 
-      <p class="hero-subtext">
+      <p class="hero-subtitle">
         Follow the steps below to continue to the promotional offer.
       </p>
 
@@ -879,331 +829,348 @@
 
 
 
-    <!-- =====================================================
+    <!-- ========================================================
          STEPS
-         ===================================================== -->
+         ======================================================== -->
 
-    <section class="main-flow">
-
-      <div class="steps">
+    <section class="steps">
 
 
-        <div class="step">
+      <div class="step">
 
-          <div class="step-left">
-            <div class="step-number">1</div>
-          </div>
+        <div class="step-rail">
 
-          <div class="step-content">
-
-            <div class="step-title">
-              Click the button below
-            </div>
-
+          <div class="step-number">
+            1
           </div>
 
         </div>
 
 
+        <div class="step-copy">
 
-        <div class="step">
-
-          <div class="step-left">
-            <div class="step-number">2</div>
-          </div>
-
-          <div class="step-content">
-
-            <div class="step-title">
-              Enter your email &amp; info
-            </div>
-
+          <div class="step-text">
+            Click the button below
           </div>
 
         </div>
-
-
-
-        <div class="step">
-
-          <div class="step-left">
-            <div class="step-number">3</div>
-          </div>
-
-          <div class="step-content">
-
-            <div class="step-title">
-              Complete 3-5 deals
-            </div>
-
-            <span class="step-note">
-              (IMPORTANT)
-            </span>
-
-          </div>
-
-        </div>
-
-
-
-        <div class="step">
-
-          <div class="step-left">
-            <div class="step-number">4</div>
-          </div>
-
-          <div class="step-content">
-
-            <div class="step-title">
-              Claim reward &amp; repeat!
-            </div>
-
-          </div>
-
-        </div>
-
 
       </div>
 
 
 
-      <!-- CTA -->
+      <div class="step">
 
-      <div class="cta-wrap">
+        <div class="step-rail">
 
-        <a
-          class="cta affiliate-link"
-          href="https://giftclick.org/aff_c?offer_id=1178&aff_id=150406"
-        >
-          Get Yours
+          <div class="step-number">
+            2
+          </div>
 
-          <span class="cta-arrow">
-            →
+        </div>
+
+
+        <div class="step-copy">
+
+          <div class="step-text">
+            Enter your email &amp; info
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="step">
+
+        <div class="step-rail">
+
+          <div class="step-number">
+            3
+          </div>
+
+        </div>
+
+
+        <div class="step-copy">
+
+          <div class="step-text">
+            Complete 3-5 deals
+          </div>
+
+          <span class="important">
+            (IMPORTANT)
           </span>
-        </a>
+
+        </div>
 
       </div>
 
 
 
-      <!-- STATS -->
+      <div class="step">
 
-      <div class="stats">
+        <div class="step-rail">
 
-
-        <div class="stat">
-
-          <div class="stat-label">
-            Active Users
-          </div>
-
-          <div class="stat-value">
-            2,290
+          <div class="step-number">
+            4
           </div>
 
         </div>
 
 
+        <div class="step-copy">
 
-        <div class="stat">
-
-          <div class="stat-label">
-            Claimed Today
-          </div>
-
-          <div class="stat-value">
-            1,184
+          <div class="step-text">
+            Claim reward &amp; repeat!
           </div>
 
         </div>
-
-
-
-        <div class="stat">
-
-          <div class="stat-label">
-            Avg Completion Time
-          </div>
-
-          <div class="stat-value time">
-            &lt;5 min
-          </div>
-
-        </div>
-
 
       </div>
+
 
     </section>
 
 
 
-    <!-- =====================================================
-         BOTTOM SECTION
-         ===================================================== -->
+    <!-- ========================================================
+         CTA
+         ======================================================== -->
 
-    <section class="bottom-section">
+    <div class="cta-area">
 
-      <div class="section-eyebrow">
-        Before you continue
-      </div>
+      <a
+        class="cta affiliate-link"
+        href="https://giftclick.org/aff_c?offer_id=1178&aff_id=150406"
+      >
 
-      <h2 class="section-title">
-        How the offer works
-      </h2>
+        Get Yours
 
-      <p class="section-description">
-        Complete the required promotional steps on the next page to determine
-        whether you qualify for the reward.
-      </p>
+        <span class="cta-arrow">
+          →
+        </span>
 
+      </a>
 
-
-      <div class="info-grid">
+    </div>
 
 
-        <div class="info-card">
 
-          <div class="info-icon">
-            ✓
-          </div>
+    <!-- ========================================================
+         METRICS
+         ======================================================== -->
 
-          <div class="info-content">
+    <section class="metrics">
 
-            <div class="info-title">
-              Complete the required deals
-            </div>
 
-            <div class="info-copy">
-              The promotional provider may require multiple qualifying deals
-              before a reward becomes available.
-            </div>
+      <div class="metric">
 
-          </div>
-
+        <div class="metric-label">
+          Active Users
         </div>
 
-
-
-        <div class="info-card">
-
-          <div class="info-icon">
-            ↗
-          </div>
-
-          <div class="info-content">
-
-            <div class="info-title">
-              Continue on the offer page
-            </div>
-
-            <div class="info-copy">
-              Tapping the button sends you to the external promotional
-              provider where eligibility and requirements are shown.
-            </div>
-
-          </div>
-
-        </div>
-
-
-
-        <div class="info-card">
-
-          <div class="info-icon">
-            ★
-          </div>
-
-          <div class="info-content">
-
-            <div class="info-title">
-              Check the requirements carefully
-            </div>
-
-            <div class="info-copy">
-              Reward value, availability and completion requirements can vary
-              depending on eligibility and offer terms.
-            </div>
-
-          </div>
-
-        </div>
-
-
-      </div>
-
-
-
-      <!-- DARK QUALIFICATION BOX -->
-
-      <div class="qualification">
-
-        <div class="qualification-title">
-          Quick checklist
-        </div>
-
-
-        <div class="qualification-list">
-
-
-          <div class="qualification-item">
-
-            <span class="check">✓</span>
-
-            <span>
-              Have a valid email address ready
-            </span>
-
-          </div>
-
-
-          <div class="qualification-item">
-
-            <span class="check">✓</span>
-
-            <span>
-              Follow each required promotional step
-            </span>
-
-          </div>
-
-
-          <div class="qualification-item">
-
-            <span class="check">✓</span>
-
-            <span>
-              Review eligibility and reward terms before completing offers
-            </span>
-
-          </div>
-
-
+        <div class="metric-value">
+          2,290
         </div>
 
       </div>
 
 
 
-      <!-- SECOND CTA -->
+      <div class="metric">
 
-      <div class="secondary-cta">
+        <div class="metric-label">
+          Claimed Today
+        </div>
 
-        <a
-          class="cta affiliate-link"
-          href="https://giftclick.org/aff_c?offer_id=1178&aff_id=150406"
-        >
+        <div class="metric-value">
+          1,184
+        </div>
 
-          Continue to Offer
+      </div>
 
-          <span class="cta-arrow">
-            →
+
+
+      <div class="metric">
+
+        <div class="metric-label">
+          Avg Completion Time
+        </div>
+
+        <div class="metric-value time">
+          &lt;5 min
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- ========================================================
+         RECENT SUCCESS STORIES
+         ======================================================== -->
+
+    <section class="stories">
+
+      <div class="stories-title">
+        Recent Success Stories
+      </div>
+
+
+      <!-- STORY 1 -->
+
+      <article class="story-card">
+
+        <div class="story-header">
+
+          <div class="avatar">
+            S
+          </div>
+
+
+          <div class="story-user">
+
+            <div class="story-username">
+              @sarah_achiever
+            </div>
+
+            <div class="story-time">
+              2h ago
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="story-copy">
+
+          Example customer story for a completed promotional offer.
+          Replace this section with
+          <strong>verified customer feedback.</strong>
+
+        </div>
+
+
+        <div class="story-reactions">
+
+          <span class="reaction-heart">
+            ♥ 89
           </span>
 
-        </a>
+          <span class="reaction-comment">
+            ○ 23
+          </span>
 
-      </div>
+        </div>
 
+      </article>
+
+
+
+      <!-- STORY 2 -->
+
+      <article class="story-card">
+
+        <div class="story-header">
+
+          <div class="avatar">
+            E
+          </div>
+
+
+          <div class="story-user">
+
+            <div class="story-username">
+              @emma_davis
+            </div>
+
+            <div class="story-time">
+              5h ago
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="story-copy">
+
+          Example customer feedback can appear here once verified.
+          Add the customer's actual experience and
+          <strong>reward details.</strong>
+
+        </div>
+
+
+        <div class="story-reactions">
+
+          <span class="reaction-heart">
+            ♥ 156
+          </span>
+
+          <span class="reaction-comment">
+            ○ 34
+          </span>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- STORY 3 -->
+
+      <article class="story-card">
+
+        <div class="story-header">
+
+          <div class="avatar">
+            M
+          </div>
+
+
+          <div class="story-user">
+
+            <div class="story-username">
+              @mikejohnson_22
+            </div>
+
+            <div class="story-time">
+              1d ago
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="story-copy">
+
+          Example customer story for completed promotional deals.
+          Replace this with
+          <strong>real customer activity.</strong>
+
+        </div>
+
+
+        <div class="story-reactions">
+
+          <span class="reaction-heart">
+            ♥ 47
+          </span>
+
+          <span class="reaction-comment">
+            ○ 12
+          </span>
+
+        </div>
+
+      </article>
 
     </section>
 
@@ -1215,8 +1182,8 @@
 
       Target is a registered trademark of its respective owner.
       This website is not sponsored, endorsed by, or affiliated with Target.
-      Reward availability, qualification requirements and promotional terms
-      are determined by the third-party offer provider.
+      Eligibility, reward availability and promotional requirements are
+      determined by the third-party offer provider.
 
     </div>
 
@@ -1227,31 +1194,34 @@
 
   <script>
 
-    /* =====================================================
+    /* ========================================================
        AFFILIATE URL
-       ===================================================== */
+       ======================================================== */
 
     const BASE_AFFILIATE_URL =
       "https://giftclick.org/aff_c?offer_id=1178&aff_id=150406";
 
 
-    /* =====================================================
+    /* ========================================================
        HARD-CODED SOURCE PARAMETER FORWARDING
 
-       LANDING PAGE:
-       ?source=VALUE
+       Landing page:
 
-       becomes:
+       yoursite.com/?source=abc123
 
-       &source=VALUE
-       on the affiliate URL.
-       ===================================================== */
+       CTA becomes:
 
-    const incomingParams =
-      new URLSearchParams(window.location.search);
+       giftclick.org/aff_c?offer_id=1178&aff_id=150406&source=abc123
+       ======================================================== */
 
-    const sourceValue =
-      incomingParams.get("source");
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const source =
+      params.get("source");
 
 
     let finalAffiliateUrl =
@@ -1259,37 +1229,31 @@
 
 
     if (
-      sourceValue !== null &&
-      sourceValue.trim() !== ""
+      source !== null &&
+      source.trim() !== ""
     ) {
 
       finalAffiliateUrl =
         "https://giftclick.org/aff_c?offer_id=1178&aff_id=150406&source=" +
-        encodeURIComponent(sourceValue);
+        encodeURIComponent(source);
 
     }
 
-
-    /* Apply it to EVERY CTA on the page */
 
     document
       .querySelectorAll(".affiliate-link")
       .forEach(function(link) {
 
-        link.href = finalAffiliateUrl;
+        link.href =
+          finalAffiliateUrl;
 
       });
 
 
 
-    /* =====================================================
+    /* ========================================================
        NOTIFICATIONS
-
-       The wording below is exactly the wording supplied.
-
-       These are displayed under an "Example activity" label
-       rather than represented as verified live claims.
-       ===================================================== */
+       ======================================================== */
 
     const notifications = [
 
@@ -1336,48 +1300,50 @@
     ];
 
 
-    const notificationElement =
-      document.getElementById("notification");
+    const notification =
+      document.getElementById(
+        "notification"
+      );
 
-    const notificationText =
-      document.getElementById("notificationText");
+
+    const notificationMessage =
+      document.getElementById(
+        "notificationMessage"
+      );
 
 
-    let notificationIndex = 0;
-
-    let notificationHideTimer;
+    let currentNotification = 0;
 
 
     function showNotification() {
 
-      notificationText.innerHTML =
-        notifications[notificationIndex];
+      notificationMessage.innerHTML =
+        notifications[currentNotification];
 
 
-      notificationElement.classList.add("show");
+      currentNotification =
+        (
+          currentNotification + 1
+        ) % notifications.length;
 
 
-      notificationIndex =
-        (notificationIndex + 1) %
-        notifications.length;
+      notification.classList.add(
+        "show"
+      );
 
 
-      clearTimeout(notificationHideTimer);
+      setTimeout(function() {
 
+        notification.classList.remove(
+          "show"
+        );
 
-      notificationHideTimer =
-        setTimeout(function() {
-
-          notificationElement.classList.remove("show");
-
-        }, 4200);
+      }, 4200);
 
     }
 
 
-    /*
-      First notification after page load.
-    */
+    /* First popup */
 
     setTimeout(
       showNotification,
@@ -1385,9 +1351,7 @@
     );
 
 
-    /*
-      New notification every 12 seconds.
-    */
+    /* Following popups */
 
     setInterval(
       showNotification,
