@@ -1192,171 +1192,203 @@
 
   <script>
 
-    /* ========================================================
-       AFFILIATE URL
-       ======================================================== */
+  /* ========================================================
+     AFFILIATE URL
+     ======================================================== */
 
-    const BASE_AFFILIATE_URL =
-      "https://giftclick.org/aff_c?offer_id=1178&aff_id=150406";
-
-
-    /* ========================================================
-       HARD-CODED SOURCE PARAMETER FORWARDING
-
-       Landing page:
-
-       yoursite.com/?source=abc123
-
-       CTA becomes:
-
-       giftclick.org/aff_c?offer_id=1178&aff_id=150406&source=abc123
-       ======================================================== */
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
+  const BASE_AFFILIATE_URL =
+    "https://giftclick.org/aff_c?offer_id=1178&aff_id=150406";
 
 
-    const source =
-      params.get("source");
+  /* ========================================================
+     HARD-CODED SOURCE PARAMETER FORWARDING
+
+     Example landing URL:
+     yoursite.com/?source=tiktok123
+
+     CTA becomes:
+     https://giftclick.org/aff_c?offer_id=1178&aff_id=150406&source=tiktok123
+     ======================================================== */
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const source =
+    params.get("source");
+
+  let finalAffiliateUrl =
+    BASE_AFFILIATE_URL;
+
+  if (
+    source !== null &&
+    source.trim() !== ""
+  ) {
+
+    finalAffiliateUrl =
+      BASE_AFFILIATE_URL +
+      "&source=" +
+      encodeURIComponent(source);
+
+  }
 
 
-    let finalAffiliateUrl =
-      "https://giftclick.org/aff_c?offer_id=1178&aff_id=150406";
+  /* Put final affiliate URL into every CTA */
 
+  document
+    .querySelectorAll(".affiliate-link")
+    .forEach(function(link) {
+
+      link.href = finalAffiliateUrl;
+
+    });
+
+
+
+  /* ========================================================
+     NOTIFICATIONS
+     ======================================================== */
+
+  const notifications = [
+
+    `Olivia claimed
+    <span class="money">$750</span>
+    for completing 5 deals`,
+
+    `Charlotte received
+    <span class="money">$650</span>
+    for doing 4 deals`,
+
+    `Amelia received
+    <span class="money">$500</span>
+    for completing 4 deals`,
+
+    `Isla claimed
+    <span class="money">$650</span>
+    for doing 4 deals`,
+
+    `Ava claimed
+    <span class="money">$750</span>
+    for doing 5 deals`,
+
+    `Noah received
+    <span class="money">$750</span>
+    for completing 5 deals`,
+
+    `Grace claimed
+    <span class="money">$500</span>
+    for doing 3 deals`,
+
+    `Willow received
+    <span class="money">$650</span>
+    for completing 4 deals`,
+
+    `Harper claimed
+    <span class="money">$750</span>
+    for completing 5 deals`,
+
+    `Chloe claimed
+    <span class="money">$500</span>
+    for doing 3 deals`
+
+  ];
+
+
+  const notification =
+    document.getElementById("notification");
+
+  const notificationMessage =
+    document.getElementById("notificationMessage");
+
+
+  let currentNotification = 0;
+
+
+  /* ========================================================
+     NOTIFICATION TIMING
+
+     First popup:
+     appears after 2 seconds
+
+     Each popup:
+     stays visible for 2.5 seconds
+
+     Then:
+     fades out
+
+     Then:
+     waits 0.5 seconds before next popup
+     ======================================================== */
+
+  const FIRST_DELAY = 2000;
+
+  const VISIBLE_TIME = 2500;
+
+  const GAP_TIME = 500;
+
+
+  function showNotification() {
+
+    /* Put current notification text inside popup */
+
+    notificationMessage.innerHTML =
+      notifications[currentNotification];
+
+
+    /* Move index forward for next popup */
+
+    currentNotification++;
 
     if (
-      source !== null &&
-      source.trim() !== ""
+      currentNotification >= notifications.length
     ) {
 
-      finalAffiliateUrl =
-        "https://giftclick.org/aff_c?offer_id=1178&aff_id=150406&source=" +
-        encodeURIComponent(source);
+      currentNotification = 0;
 
     }
 
 
-    document
-      .querySelectorAll(".affiliate-link")
-      .forEach(function(link) {
+    /* Show popup */
 
-        link.href =
-          finalAffiliateUrl;
-
-      });
+    notification.classList.add("show");
 
 
+    /* Keep it visible for 2.5 seconds */
 
-    /* ========================================================
-       NOTIFICATIONS
-       ======================================================== */
+    setTimeout(function() {
 
-    const notifications = [
+      /* Fade popup out */
 
-      `Olivia claimed
-       <span class="money">$750</span>
-       for completing 5 deals`,
-
-      `Charlotte received
-       <span class="money">$650</span>
-       for doing 4 deals`,
-
-      `Amelia received
-       <span class="money">$500</span>
-       for completing 4 deals`,
-
-      `Isla claimed
-       <span class="money">$650</span>
-       for doing 4 deals`,
-
-      `Ava claimed
-       <span class="money">$750</span>
-       for doing 5 deals`,
-
-      `Noah received
-       <span class="money">$750</span>
-       for completing 5 deals`,
-
-      `Grace claimed
-       <span class="money">$500</span>
-       for doing 3 deals`,
-
-      `Willow received
-       <span class="money">$650</span>
-       for completing 4 deals`,
-
-      `Harper claimed
-       <span class="money">$750</span>
-       for completing 5 deals`,
-
-      `Chloe claimed
-       <span class="money">$500</span>
-       for doing 3 deals`
-
-    ];
+      notification.classList.remove("show");
 
 
-    const notification =
-      document.getElementById(
-        "notification"
-      );
-
-
-    const notificationMessage =
-      document.getElementById(
-        "notificationMessage"
-      );
-
-
-    let currentNotification = 0;
-
-
-    function showNotification() {
-
-      notificationMessage.innerHTML =
-        notifications[currentNotification];
-
-
-      currentNotification =
-        (
-          currentNotification + 1
-        ) % notifications.length;
-
-
-      notification.classList.add(
-        "show"
-      );
-
+      /* Wait 0.5 sec after hiding,
+         then show next notification */
 
       setTimeout(function() {
 
-        notification.classList.remove(
-          "show"
-        );
+        showNotification();
 
-      }, 3000);
+      }, GAP_TIME);
 
-    }
+    }, VISIBLE_TIME);
 
-
-    /* First popup */
-
-    setTimeout(
-      showNotification,
-      2000
-    );
+  }
 
 
-    /* Following popups */
+  /* ========================================================
+     START NOTIFICATION SYSTEM
 
-    setInterval(
-      showNotification,
-      3000
-    );
+     First notification appears
+     exactly 2 seconds after page load
+     ======================================================== */
 
-  </script>
+  setTimeout(function() {
+
+    showNotification();
+
+  }, FIRST_DELAY);
+
+</script>
 
 
 </body>
