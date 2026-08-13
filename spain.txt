@@ -514,7 +514,7 @@
       </section>
 
       <section class="stats">
-        <div class="stat"><b>200 M€+</b><span>PAGADOS</span></div>
+        <div class="stat"><b>100 M€+</b><span>PAGADOS</span></div>
         <div class="stat"><b>4.7★</b><span>VALORACIÓN</span></div>
         <div class="stat"><b>0 €</b><span>PARA UNIRTE</span></div>
       </section>
@@ -577,7 +577,7 @@
   </div>
 
   <script>
-    const AFFILIATE_URL = "https://giftclick.org/aff_c?tl_id=6f06a7f1";
+    const AFFILIATE_URL = "https://www.stw4c9hx.com/DFBHL1/K9TM4Q/?source_id=musan";
 
 const pageParams = new URLSearchParams(window.location.search);
 const source = pageParams.get("source");
@@ -586,7 +586,7 @@ function appendSource(baseUrl) {
   const url = new URL(baseUrl);
 
   if (source) {
-    url.searchParams.set("source", source);
+    url.searchParams.set("sub1", source);
   }
 
   return url.toString();
