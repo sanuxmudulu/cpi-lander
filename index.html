@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="nl">
 <head>
   <meta charset="UTF-8" />
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   />
-  <title>Freecash — ゲームで稼ごう</title>
+
+  <title>Freecash — Verdien geld met gamen</title>
 
   <style>
     :root {
@@ -41,16 +43,7 @@
         ),
         linear-gradient(#0b0e0d, #080a09 70%);
       color:var(--text);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Hiragino Kaku Gothic ProN",
-        "Hiragino Sans",
-        "Yu Gothic",
-        "Meiryo",
-        Arial,
-        Helvetica,
-        sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
       -webkit-font-smoothing:antialiased;
       padding-bottom:104px;
     }
@@ -73,8 +66,6 @@
       overflow:hidden;
     }
 
-    /* Notification */
-
     .notif-wrap {
       position:sticky;
       top:0;
@@ -96,9 +87,7 @@
       line-height:1.2;
       opacity:1;
       transform:translateY(0);
-      transition:
-        opacity .4s ease,
-        transform .4s ease;
+      transition:opacity .4s ease, transform .4s ease;
     }
 
     .notification.changing {
@@ -128,8 +117,6 @@
       border-radius:18px;
       box-shadow:0 18px 40px rgba(0,0,0,.34);
     }
-
-    /* Hero */
 
     .hero-card {
       text-align:center;
@@ -261,8 +248,6 @@
       }
     }
 
-    /* Offer card */
-
     .offer-card {
       margin-top:14px;
       padding:18px 16px 21px;
@@ -342,8 +327,6 @@
       font-size:11px;
     }
 
-    /* Stats */
-
     .stats {
       margin-top:14px;
       background:#111216;
@@ -373,8 +356,6 @@
       letter-spacing:.5px;
     }
 
-    /* Legal */
-
     .legal {
       padding:19px 11px 10px;
       text-align:center;
@@ -395,8 +376,6 @@
       color:#3f4542;
       padding:0 8px;
     }
-
-    /* Sticky store buttons */
 
     .sticky {
       position:fixed;
@@ -506,9 +485,7 @@
       opacity:0;
       visibility:hidden;
       pointer-events:none;
-      transition:
-        opacity .22s ease,
-        visibility .22s ease;
+      transition:opacity .22s ease, visibility .22s ease;
     }
 
     .age-popup.is-open {
@@ -600,9 +577,7 @@
       font-weight:900;
       cursor:pointer;
       box-shadow:0 0 24px rgba(0,237,133,.25);
-      transition:
-        transform .15s ease,
-        box-shadow .15s ease;
+      transition:transform .15s ease, box-shadow .15s ease;
     }
 
     .age-popup-cta:active {
@@ -613,13 +588,189 @@
     body.popup-open {
       overflow:hidden;
     }
+
+    /* Pre-lander */
+
+    .prelander {
+      position:fixed;
+      inset:0;
+      z-index:1000;
+      min-height:100svh;
+      background:#000;
+      color:#fff;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:
+        calc(16vh + env(safe-area-inset-top))
+        22px
+        calc(28px + env(safe-area-inset-bottom));
+      opacity:1;
+      visibility:visible;
+      transition:opacity .28s ease, visibility .28s ease;
+    }
+
+    .prelander.is-hidden {
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .prelander-inner {
+      width:100%;
+      max-width:470px;
+      text-align:center;
+    }
+
+    .prelander-title {
+      margin:0;
+      color:#fff;
+      font-size:clamp(34px,9vw,50px);
+      line-height:1.08;
+      letter-spacing:-1.5px;
+      font-weight:900;
+    }
+
+    .prelander-copy {
+      max-width:460px;
+      margin:38px auto 0;
+      color:#bcbcbc;
+      font-size:clamp(18px,5vw,25px);
+      line-height:1.38;
+      font-weight:500;
+    }
+
+    .prelander-arrows {
+      width:56px;
+      margin:56px auto 38px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      animation:prelanderBounce 1.15s ease-in-out infinite;
+    }
+
+    .prelander-arrow {
+      width:26px;
+      height:26px;
+      border-right:6px solid #0e4055;
+      border-bottom:6px solid #0e4055;
+      transform:rotate(45deg);
+    }
+
+    .prelander-arrow:nth-child(2) {
+      border-color:#1a6b8c;
+    }
+
+    .prelander-arrow:nth-child(3) {
+      border-color:#29a8dd;
+    }
+
+    @keyframes prelanderBounce {
+      0%,
+      100% {
+        transform:translateY(-5px);
+      }
+
+      50% {
+        transform:translateY(9px);
+      }
+    }
+
+    .prelander-cta {
+      width:100%;
+      min-height:90px;
+      border:0;
+      border-radius:12px;
+      background:#df3f37;
+      color:#fff;
+      font-size:clamp(21px,5.7vw,28px);
+      font-weight:900;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:0 14px 28px rgba(223,63,55,.22);
+      transition:transform .14s ease, filter .14s ease;
+    }
+
+    .prelander-cta:active {
+      transform:scale(.985);
+      filter:brightness(.95);
+    }
+
+    body.prelander-open {
+      overflow:hidden;
+    }
+
+    @media (max-height:700px) {
+      .prelander {
+        padding-top:11vh;
+      }
+
+      .prelander-copy {
+        margin-top:28px;
+      }
+
+      .prelander-arrows {
+        margin-top:38px;
+        margin-bottom:28px;
+      }
+
+      .prelander-cta {
+        min-height:76px;
+      }
+    }
+
   </style>
 </head>
 
-<body>
+<body class="prelander-open">
+
+  <section
+    class="prelander"
+    id="prelander"
+    aria-label="Openen in browser"
+  >
+
+    <div class="prelander-inner">
+
+      <h1 class="prelander-title">
+        Openen in browser
+      </h1>
+
+      <p class="prelander-copy">
+        Open deze pagina in je browser<br>
+        om verder te gaan.
+      </p>
+
+      <div
+        class="prelander-arrows"
+        aria-hidden="true"
+      >
+        <span class="prelander-arrow"></span>
+        <span class="prelander-arrow"></span>
+        <span class="prelander-arrow"></span>
+      </div>
+
+      <button
+        type="button"
+        class="prelander-cta"
+        id="prelander-cta"
+      >
+        Nu openen
+      </button>
+
+    </div>
+
+  </section>
+
+
   <div class="site">
 
-    <div class="notif-wrap" aria-live="polite">
+    <div
+      class="notif-wrap"
+      aria-live="polite"
+    >
       <div
         class="notification"
         id="notification"
@@ -636,7 +787,7 @@
           aria-label="Freecash"
         >
           <img
-            src="fc logo.png"
+            src="fc logo.jpg"
             alt="Freecash logo"
           />
         </div>
@@ -654,25 +805,28 @@
             ·
           </span>
 
-          <b>App Store</b>
+          <b>
+            App Store
+          </b>
 
           <span>
-            （50,000件以上のレビュー）
+            (meer dan 50.000 beoordelingen)
           </span>
 
         </div>
 
 
         <h1>
-          ゲームをプレイして
-          <span>お金を稼ごう</span>
+          Verdien geld
+          <span>met gamen</span>
         </h1>
 
 
         <p class="lead">
-          ゲームをプレイしたり、タスクを完了したり、
-          アプリを試したりして本物のお金を稼げます。
-          最低出金額なしで、いつでも報酬を受け取れます。
+          Verdien echt geld door games te spelen,
+          taken uit te voeren en apps uit te proberen.
+          Laat je verdiensten op elk moment uitbetalen
+          — zonder minimumbedrag.
         </p>
 
 
@@ -681,8 +835,8 @@
           <span class="pulse"></span>
 
           <span>
-            <strong>1,849</strong>&nbsp;
-            人が現在お金を稼いでいます
+            <strong>1.849</strong>&nbsp;
+            mensen verdienen nu geld
           </span>
 
         </div>
@@ -707,14 +861,17 @@
             </h2>
 
             <div class="rating-line">
+
               <span class="stars">
                 ★★★★★
               </span>
-              4.8 · 高評価
+
+              4.8 · Hoog beoordeeld
+
             </div>
 
             <div class="rate">
-              稼げる金額：1時間あたり105€
+              Verdiensten: 105 €/uur
             </div>
 
           </div>
@@ -723,33 +880,48 @@
 
 
         <div class="how">
-          使い方
+          ZO WERKT HET
         </div>
 
 
         <div class="steps">
 
           <div class="step">
-            <span class="num">1</span>
-            <span>
-              Freecash に登録する（21歳以上を選択）
+
+            <span class="num">
+              1
             </span>
+
+            <span>
+              Meld je aan bij Freecash (kies 21+)
+            </span>
+
           </div>
 
 
           <div class="step">
-            <span class="num">2</span>
-            <span>
-              ゲームをプレイしてタスクを完了する
+
+            <span class="num">
+              2
             </span>
+
+            <span>
+              Speel games en voltooi taken
+            </span>
+
           </div>
 
 
           <div class="step">
-            <span class="num">3</span>
-            <span>
-              PayPal、Visa、または暗号資産で報酬を受け取る
+
+            <span class="num">
+              3
             </span>
+
+            <span>
+              Laat je geld uitbetalen via PayPal, Visa of crypto
+            </span>
+
           </div>
 
         </div>
@@ -760,41 +932,43 @@
       <section class="stats">
 
         <div class="stat">
-          <b>1億€+</b>
-          <span>支払い実績</span>
+          <b>100 M€+</b>
+          <span>UITBETAALD</span>
         </div>
 
         <div class="stat">
           <b>4.7★</b>
-          <span>ユーザー評価</span>
+          <span>BEOORDELING</span>
         </div>
 
         <div class="stat">
           <b>0 €</b>
-          <span>参加費無料</span>
+          <span>OM MEE TE DOEN</span>
         </div>
 
       </section>
 
 
       <p class="legal">
-        利用可能なオファー、報酬、および条件は、
-        ユーザー、地域、完了したタスクによって異なる場合があります。
-        結果を保証するものではなく、報酬は参加状況や
-        オファー内容によって変動します。
+        Beschikbaarheid, beloningen en vereisten kunnen verschillen
+        per gebruiker, locatie en voltooide taak.
+        Resultaten zijn niet gegarandeerd en zijn afhankelijk van
+        individuele deelname. Verdiensten verschillen per aanbod.
       </p>
 
 
       <div class="links">
+
         <a href="#">
-          プライバシーポリシー
+          Privacybeleid
         </a>
 
         <i>·</i>
 
         <a href="#">
-          利用規約
+          Algemene voorwaarden
         </a>
+
       </div>
 
     </main>
@@ -817,14 +991,14 @@
         type="button"
         class="age-popup-close"
         id="age-popup-close"
-        aria-label="閉じる"
+        aria-label="Sluiten"
       >
         ×
       </button>
 
 
       <div class="age-popup-kicker">
-        ちょっとしたヒント
+        KORTE TIP
       </div>
 
 
@@ -832,14 +1006,15 @@
         class="age-popup-title"
         id="age-popup-title"
       >
-        登録時に<br>
-        <span>「21歳以上」</span>を選択してください
+        Kies bij het aanmelden<br>
+        <span>21+</span>
       </h2>
 
 
       <p class="age-popup-copy">
-        これでFreecashの最も高額なゲームオファーが利用できるようになります。
-        このステップはスキップしないでください。
+        Zo krijg je toegang tot de best betalende
+        game-aanbiedingen op Freecash.
+        Sla deze stap niet over.
       </p>
 
 
@@ -848,7 +1023,7 @@
         class="age-popup-cta"
         id="age-popup-cta"
       >
-        了解しました →
+        BEGREPEN →
       </button>
 
     </div>
@@ -862,7 +1037,7 @@
 
       <div class="available">
         <span class="mini-dot">•</span>
-        iOS と Android で利用可能
+        Nu beschikbaar voor iOS en Android
       </div>
 
 
@@ -871,7 +1046,7 @@
         <button
           type="button"
           class="store-btn affiliate-link"
-          aria-label="App Storeでダウンロード"
+          aria-label="Download in de App Store"
         >
 
           <svg
@@ -894,7 +1069,7 @@
 
 
           <span class="btn-text">
-            ダウンロード
+            Download in
             <strong>App Store</strong>
           </span>
 
@@ -904,7 +1079,7 @@
         <button
           type="button"
           class="store-btn google affiliate-link"
-          aria-label="Google Playでダウンロード"
+          aria-label="Download via Google Play"
         >
 
           <svg
@@ -936,7 +1111,7 @@
 
 
           <span class="btn-text">
-            ダウンロード
+            Download via
             <strong>Google Play</strong>
           </span>
 
@@ -950,8 +1125,39 @@
 
 
   <script>
+
+    const prelander =
+      document.getElementById("prelander");
+
+    const prelanderCta =
+      document.getElementById("prelander-cta");
+
+
+    prelanderCta.addEventListener(
+      "click",
+      function () {
+
+        prelander.classList.add("is-hidden");
+
+        document.body.classList.remove(
+          "prelander-open"
+        );
+
+        window.scrollTo(0, 0);
+
+
+        setTimeout(function () {
+
+          prelander.style.display = "none";
+
+        }, 300);
+
+      }
+    );
+
+
     const AFFILIATE_URL =
-      "https://www.stw4c9hx.com/DFBHL1/X22RCQ/?source_id=musan";
+      "https://www.stw4c9hx.com/DFBHL1/K9TM4Q/?source_id=musan";
 
 
     const pageParams =
@@ -1082,7 +1288,9 @@
       function (event) {
 
         if (event.target === agePopup) {
+
           closeAgePopup();
+
         }
 
       }
@@ -1099,7 +1307,9 @@
             "is-open"
           )
         ) {
+
           closeAgePopup();
+
         }
 
       }
@@ -1107,18 +1317,18 @@
 
 
     const notifications = [
-      ["さくら M.", "7,317円"],
-      ["ゆい S.", "9,827円"],
-      ["あかり K.", "14,708円"],
-      ["あおい B.", "12,208円"],
-      ["みお W.", "7,391円"],
-      ["りん H.", "10,056円"],
-      ["ひなた F.", "7,786円"],
-      ["めい S.", "14,432円"],
-      ["ゆな M.", "7,198円"],
-      ["はると B.", "10,277円"],
-      ["れん K.", "7,648円"],
-      ["そうた S.", "12,364円"]
+      ["Emma S.", "39,80 €"],
+      ["Sophie M.", "53,45 €"],
+      ["Julia K.", "80,00 €"],
+      ["Lisa B.", "66,40 €"],
+      ["Sanne W.", "40,20 €"],
+      ["Laura H.", "54,70 €"],
+      ["Daan F.", "42,35 €"],
+      ["Thomas S.", "78,50 €"],
+      ["Tim M.", "39,15 €"],
+      ["Lars B.", "55,90 €"],
+      ["Bram K.", "41,60 €"],
+      ["Sem S.", "67,25 €"]
     ];
 
 
@@ -1140,11 +1350,11 @@
 
 
       notificationEl.innerHTML =
-        '<span class="country">🇯🇵</span>' +
+        '<span class="country">🇳🇱</span>' +
         item[0] +
-        ' さんが今 <span class="amount">' +
+        ' heeft zojuist <span class="amount">' +
         item[1] +
-        '</span> を獲得しました — 即時出金可能';
+        '</span> verdiend — direct uitbetaald';
 
 
       notificationIndex =
