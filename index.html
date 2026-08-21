@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
 
@@ -8,7 +8,7 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   />
 
-  <title>Freecash — Verdien geld met gamen</title>
+  <title>Freecash — Earn money playing games</title>
 
   <style>
     :root {
@@ -589,11 +589,181 @@
       overflow:hidden;
     }
 
+    /* Pre-lander */
+
+    .prelander {
+      position:fixed;
+      inset:0;
+      z-index:1000;
+      min-height:100svh;
+      background:#000;
+      color:#fff;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:
+        calc(16vh + env(safe-area-inset-top))
+        22px
+        calc(28px + env(safe-area-inset-bottom));
+      opacity:1;
+      visibility:visible;
+      transition:opacity .28s ease, visibility .28s ease;
+    }
+
+    .prelander.is-hidden {
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .prelander-inner {
+      width:100%;
+      max-width:470px;
+      text-align:center;
+    }
+
+    .prelander-title {
+      margin:0;
+      color:#fff;
+      font-size:clamp(34px,9vw,50px);
+      line-height:1.08;
+      letter-spacing:-1.5px;
+      font-weight:900;
+    }
+
+    .prelander-copy {
+      max-width:460px;
+      margin:38px auto 0;
+      color:#bcbcbc;
+      font-size:clamp(18px,5vw,25px);
+      line-height:1.38;
+      font-weight:500;
+    }
+
+    .prelander-arrows {
+      width:56px;
+      margin:56px auto 38px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      animation:prelanderBounce 1.15s ease-in-out infinite;
+    }
+
+    .prelander-arrow {
+      width:26px;
+      height:26px;
+      border-right:6px solid #0e4055;
+      border-bottom:6px solid #0e4055;
+      transform:rotate(45deg);
+    }
+
+    .prelander-arrow:nth-child(2) {
+      border-color:#1a6b8c;
+    }
+
+    .prelander-arrow:nth-child(3) {
+      border-color:#29a8dd;
+    }
+
+    @keyframes prelanderBounce {
+      0%,
+      100% {
+        transform:translateY(-5px);
+      }
+
+      50% {
+        transform:translateY(9px);
+      }
+    }
+
+    .prelander-cta {
+      width:100%;
+      min-height:90px;
+      border:0;
+      border-radius:12px;
+      background:#df3f37;
+      color:#fff;
+      font-size:clamp(21px,5.7vw,28px);
+      font-weight:900;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:0 14px 28px rgba(223,63,55,.22);
+      transition:transform .14s ease, filter .14s ease;
+    }
+
+    .prelander-cta:active {
+      transform:scale(.985);
+      filter:brightness(.95);
+    }
+
+    body.prelander-open {
+      overflow:hidden;
+    }
+
+    @media (max-height:700px) {
+      .prelander {
+        padding-top:11vh;
+      }
+
+      .prelander-copy {
+        margin-top:28px;
+      }
+
+      .prelander-arrows {
+        margin-top:38px;
+        margin-bottom:28px;
+      }
+
+      .prelander-cta {
+        min-height:76px;
+      }
+    }
 
   </style>
 </head>
 
-<body>
+<body class="prelander-open">
+
+  <section
+    class="prelander"
+    id="prelander"
+    aria-label="Open in browser"
+  >
+
+    <div class="prelander-inner">
+
+      <h1 class="prelander-title">
+        Open in browser
+      </h1>
+
+      <p class="prelander-copy">
+        Open this page in your browser<br>
+        to continue.
+      </p>
+
+      <div
+        class="prelander-arrows"
+        aria-hidden="true"
+      >
+        <span class="prelander-arrow"></span>
+        <span class="prelander-arrow"></span>
+        <span class="prelander-arrow"></span>
+      </div>
+
+      <button
+        type="button"
+        class="prelander-cta"
+        id="prelander-cta"
+      >
+        Open now
+      </button>
+
+    </div>
+
+  </section>
+
 
   <div class="site">
 
@@ -617,7 +787,7 @@
           aria-label="Freecash"
         >
           <img
-            src="fc logo.png"
+            src="fc logo.jpg"
             alt="Freecash logo"
           />
         </div>
@@ -640,23 +810,23 @@
           </b>
 
           <span>
-            (meer dan 50.000 beoordelingen)
+            (over 50,000 ratings)
           </span>
 
         </div>
 
 
         <h1>
-          Verdien geld
-          <span>met gamen</span>
+          Earn money
+          <span>playing games</span>
         </h1>
 
 
         <p class="lead">
-          Verdien echt geld door games te spelen,
-          taken uit te voeren en apps uit te proberen.
-          Laat je verdiensten op elk moment uitbetalen
-          — zonder minimumbedrag.
+          Earn real money by playing games,
+          completing tasks and trying out apps.
+          Cash out your earnings at any time
+          — with no minimum amount.
         </p>
 
 
@@ -666,7 +836,7 @@
 
           <span>
             <strong>1.849</strong>&nbsp;
-            mensen verdienen nu geld
+            people are earning money now
           </span>
 
         </div>
@@ -696,12 +866,12 @@
                 ★★★★★
               </span>
 
-              4.8 · Hoog beoordeeld
+              4.8 · Highly rated
 
             </div>
 
             <div class="rate">
-              Verdiensten: 105 €/uur
+              Earnings: £105/hour
             </div>
 
           </div>
@@ -710,7 +880,7 @@
 
 
         <div class="how">
-          ZO WERKT HET
+          HOW IT WORKS
         </div>
 
 
@@ -723,7 +893,7 @@
             </span>
 
             <span>
-              Meld je aan bij Freecash (kies 21+)
+              Sign up to Freecash (choose 21+)
             </span>
 
           </div>
@@ -736,7 +906,7 @@
             </span>
 
             <span>
-              Speel games en voltooi taken
+              Play games and complete tasks
             </span>
 
           </div>
@@ -749,7 +919,7 @@
             </span>
 
             <span>
-              Laat je geld uitbetalen via PayPal, Visa of crypto
+              Cash out via PayPal, Visa or crypto
             </span>
 
           </div>
@@ -762,41 +932,41 @@
       <section class="stats">
 
         <div class="stat">
-          <b>100 M€+</b>
-          <span>UITBETAALD</span>
+          <b>£100M+</b>
+          <span>PAID OUT</span>
         </div>
 
         <div class="stat">
           <b>4.7★</b>
-          <span>BEOORDELING</span>
+          <span>RATING</span>
         </div>
 
         <div class="stat">
-          <b>0 €</b>
-          <span>OM MEE TE DOEN</span>
+          <b>£0</b>
+          <span>TO JOIN</span>
         </div>
 
       </section>
 
 
       <p class="legal">
-        Beschikbaarheid, beloningen en vereisten kunnen verschillen
-        per gebruiker, locatie en voltooide taak.
-        Resultaten zijn niet gegarandeerd en zijn afhankelijk van
-        individuele deelname. Verdiensten verschillen per aanbod.
+        Availability, rewards and requirements may vary
+        by user, location and completed task.
+        Results are not guaranteed and depend on
+        individual participation. Earnings vary by offer.
       </p>
 
 
       <div class="links">
 
         <a href="#">
-          Privacybeleid
+          Privacy Policy
         </a>
 
         <i>·</i>
 
         <a href="#">
-          Algemene voorwaarden
+          Terms & Conditions
         </a>
 
       </div>
@@ -821,14 +991,14 @@
         type="button"
         class="age-popup-close"
         id="age-popup-close"
-        aria-label="Sluiten"
+        aria-label="Close"
       >
         ×
       </button>
 
 
       <div class="age-popup-kicker">
-        KORTE TIP
+        QUICK TIP
       </div>
 
 
@@ -836,15 +1006,15 @@
         class="age-popup-title"
         id="age-popup-title"
       >
-        Kies bij het aanmelden<br>
+        When signing up, choose<br>
         <span>21+</span>
       </h2>
 
 
       <p class="age-popup-copy">
-        Zo krijg je toegang tot de best betalende
-        game-aanbiedingen op Freecash.
-        Sla deze stap niet over.
+        This gives you access to the highest-paying
+        game offers on Freecash.
+        Don’t skip this step.
       </p>
 
 
@@ -853,7 +1023,7 @@
         class="age-popup-cta"
         id="age-popup-cta"
       >
-        Begrepen →
+        GOT IT →
       </button>
 
     </div>
@@ -867,7 +1037,7 @@
 
       <div class="available">
         <span class="mini-dot">•</span>
-        Nu beschikbaar voor iOS en Android
+        Now available on iOS and Android
       </div>
 
 
@@ -876,7 +1046,7 @@
         <button
           type="button"
           class="store-btn affiliate-link"
-          aria-label="Download in de App Store"
+          aria-label="Download on the App Store"
         >
 
           <svg
@@ -909,7 +1079,7 @@
         <button
           type="button"
           class="store-btn google affiliate-link"
-          aria-label="Download via Google Play"
+          aria-label="Get it on Google Play"
         >
 
           <svg
@@ -955,6 +1125,36 @@
 
 
   <script>
+
+    const prelander =
+      document.getElementById("prelander");
+
+    const prelanderCta =
+      document.getElementById("prelander-cta");
+
+
+    prelanderCta.addEventListener(
+      "click",
+      function () {
+
+        prelander.classList.add("is-hidden");
+
+        document.body.classList.remove(
+          "prelander-open"
+        );
+
+        window.scrollTo(0, 0);
+
+
+        setTimeout(function () {
+
+          prelander.style.display = "none";
+
+        }, 300);
+
+      }
+    );
+
 
     const AFFILIATE_URL =
       "https://www.stw4c9hx.com/DD2WZS/X22RCQ/?source_id=kryzxr";
@@ -1117,18 +1317,18 @@
 
 
     const notifications = [
-      ["Daan V.", "39,80 €"],
-      ["Sanne D.", "53,45 €"],
-      ["Jesse B.", "80,00 €"],
-      ["Lotte V.", "66,40 €"],
-      ["Sophie J.", "40,20 €"],
-      ["Bram M.", "54,70 €"],
-      ["Noa K.", "42,35 €"],
-      ["Thomas R.", "78,50 €"],
-      ["Lisa S.", "39,15 €"],
-      ["Tim H.", "55,90 €"],
-      ["Fleur P.", "41,60 €"],
-      ["Sem W.", "67,25 €"]
+      ["Emma S.", "39,8£0"],
+      ["Sophie M.", "£53.45"],
+      ["Julia K.", "80,0£0"],
+      ["Lisa B.", "66,4£0"],
+      ["Sanne W.", "40,2£0"],
+      ["Laura H.", "54,7£0"],
+      ["Daniel F.", "£42.35"],
+      ["Thomas S.", "78,5£0"],
+      ["Tim M.", "£39.15"],
+      ["Lars B.", "55,9£0"],
+      ["Bram K.", "41,6£0"],
+      ["Sam S.", "£67.25"]
     ];
 
 
@@ -1150,11 +1350,11 @@
 
 
       notificationEl.innerHTML =
-        '<span class="country">🇳🇱</span>' +
+        '<span class="country">🇬🇧</span>' +
         item[0] +
-        ' heeft zojuist <span class="amount">' +
+        ' has just earned <span class="amount">' +
         item[1] +
-        '</span> verdiend — direct uitbetaald';
+        '</span> — paid out instantly';
 
 
       notificationIndex =
